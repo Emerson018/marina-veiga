@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-forest: #223829;
+    --color-forest-deep: #1A2B20;
+    --color-forest-card: #263E2E;
+    --color-rose-antique: #D49FAB;
+    --color-rose-light: #F2DCE1;
+  }
+
+  html {
+    color-scheme: dark;
+    background-color: #223829;
+    color: #F2DCE1;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #223829;
+    color: #F2DCE1;
+    font-family: var(--font-montserrat), sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #D49FAB;
+    color: #1A2B20;
+  }
+
+  /* Web Interface Guidelines: Visible, intentional focus rings */
+  :focus-visible {
+    outline: 2px solid #D49FAB;
+    outline-offset: 3px;
+  }
+
+  /* Prevent double-tap zoom delay on interactive elements */
+  button,
+  a,
+  input,
+  summary {
+    touch-action: manipulation;
+  }
+}
