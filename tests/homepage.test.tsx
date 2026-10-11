@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import HomePage from "@/app/page";
 
 describe("HomePage Integration", () => {
-  it("renders header, hero section, about manifesto, and catalog", () => {
+  it("renders all sections from header down through faq", () => {
     render(<HomePage />);
     expect(screen.getByRole("banner")).toBeInTheDocument();
     expect(
@@ -14,6 +14,15 @@ describe("HomePage Integration", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: /Serviços & Experiências de Imagem/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /O Dossiê de Estilo/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Como Funciona a Consultoria/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Tire Suas Dúvidas/i })
     ).toBeInTheDocument();
   });
 });

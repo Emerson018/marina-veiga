@@ -2,6 +2,9 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AboutManifesto from "@/components/AboutManifesto";
 import CatalogGrid from "@/components/CatalogGrid";
+import DossierShowcase from "@/components/DossierShowcase";
+import ProcessSteps from "@/components/ProcessSteps";
+import FaqSection from "@/components/FaqSection";
 
 export default function HomePage() {
   return (
@@ -11,6 +14,9 @@ export default function HomePage() {
         <Hero />
         <AboutManifesto />
         <CatalogGrid />
+        <DossierShowcase />
+        <ProcessSteps />
+        <FaqSection />
       </main>
     </>
   );

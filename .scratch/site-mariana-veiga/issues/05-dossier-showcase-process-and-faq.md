@@ -4,10 +4,11 @@
 
 **Blocked by:** 04: Vitrine interativa de serviços com cards editoriais e conversão para WhatsApp
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] Seção de destaque do Dossiê de Estilo com apresentação visual imersiva e detalhamento do que a cliente recebe.
-- [ ] Seção "Como Funciona" estruturada em 3 passos com numeração elegante e clara explicação do atendimento híbrido (online + presencial).
-- [ ] FAQ interativo em acordeão com controle semântico de expansão/recolhimento e atributos `aria-expanded` corretos.
-- [ ] FAQ respondendo sobre modalidade online vs presencial, duração da consultoria, formato de entrega do dossiê e formas de agendamento.
-- [ ] Transições de acordeão suaves animando apenas `opacity` e `transform` respeitando `prefers-reduced-motion`.
+- [x] Seção de destaque do Dossiê de Estilo com apresentação visual imersiva e detalhamento do que a cliente recebe.
+- [x] Seção "Como Funciona" estruturada em 3 passos com numeração elegante e clara explicação do atendimento híbrido (online + presencial).
+- [x] FAQ interativo em acordeão com controle semântico de expansão/recolhimento e atributos `aria-expanded` corretos.
+- [x] FAQ respondendo sobre modalidade online vs presencial, duração da consultoria, formato de entrega do dossiê e formas de agendamento.
+- [x] Transições de acordeão suaves animando apenas `opacity` e `transform` respeitando `prefers-reduced-motion`.
+
