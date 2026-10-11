@@ -4,9 +4,10 @@
 
 **Blocked by:** 01: Setup do projeto Next.js, tema Tailwind e tipografia editorial
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] Arquivo de dados de serviços exportando a lista tipada dos 5 serviços da consultoria.
-- [ ] Cada serviço inclui identificador, título, subtítulo, entregáveis inclusos, valor placeholder formatado e mensagem pré-definida de WhatsApp.
-- [ ] Utilitário de WhatsApp gera URLs válidas com número de telefone e texto codificado via `encodeURIComponent`.
-- [ ] Testes unitários validando a geração correta das URLs de WhatsApp para cada um dos 5 serviços.
+- [x] Arquivo de dados de serviços exportando a lista tipada dos 5 serviços da consultoria.
+- [x] Cada serviço inclui identificador, título, subtítulo, entregáveis inclusos, valor placeholder formatado e mensagem pré-definida de WhatsApp.
+- [x] Utilitário de WhatsApp gera URLs válidas com número de telefone e texto codificado via `encodeURIComponent`.
+- [x] Testes unitários validando a geração correta das URLs de WhatsApp para cada um dos 5 serviços.
+
