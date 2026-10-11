@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AboutManifesto from "@/components/AboutManifesto";
+import CatalogGrid from "@/components/CatalogGrid";
 
 export default function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default function HomePage() {
       <main id="main-content" className="flex-1">
         <Hero />
         <AboutManifesto />
+        <CatalogGrid />
       </main>
     </>
   );
