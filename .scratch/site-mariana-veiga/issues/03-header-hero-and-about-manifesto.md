@@ -4,10 +4,11 @@
 
 **Blocked by:** 01: Setup do projeto Next.js, tema Tailwind e tipografia editorial
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] Header fixo/transparente com logo tipográfico em fonte *Italiana* e links de navegação acessíveis.
-- [ ] Hero Section impactante com tipografia editorial, respiro generoso e botão primário direcionando para a vitrine de serviços.
-- [ ] Seção "Sobre a Consultora" com manifesto sobre imagem estratégica, elegância discreta e autoridade corporativa.
-- [ ] Elementos de imagem com dimensões explícitas (`width` e `height`) e `priority` na imagem do Hero.
-- [ ] Navegação 100% responsiva para desktop e mobile com menu acessível.
+- [x] Header fixo/transparente com logo tipográfico em fonte *Italiana* e links de navegação acessíveis.
+- [x] Hero Section impactante com tipografia editorial, respiro generoso e botão primário direcionando para a vitrine de serviços.
+- [x] Seção "Sobre a Consultora" com manifesto sobre imagem estratégica, elegância discreta e autoridade corporativa.
+- [x] Elementos de imagem com dimensões explícitas (`width` e `height`) e `priority` na imagem do Hero.
+- [x] Navegação 100% responsiva para desktop e mobile com menu acessível.
+
