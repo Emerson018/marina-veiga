@@ -1,6 +1,7 @@
 # Spec: Catálogo Digital Mariana Veiga Consultoria
 
-Status: ready-for-agent
+Status: resolved
+
 
 ## Problem Statement
 
