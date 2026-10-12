@@ -42,7 +42,7 @@ export default function ProcessSteps() {
           </span>
           <h2
             id="process-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4 text-balance"
           >
             Como Funciona a Consultoria
           </h2>

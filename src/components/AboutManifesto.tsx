@@ -37,7 +37,7 @@ export default function AboutManifesto() {
           </span>
           <h2
             id="about-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-6 text-balance"
           >
             A imagem não é sobre aparência. É sobre posicionamento.
           </h2>

@@ -34,7 +34,7 @@ export default function Hero() {
 
           <h1
             id="hero-title"
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display text-rose-antique tracking-wide leading-[1.08] mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display text-rose-antique tracking-wide leading-[1.08] mb-6 text-balance"
           >
             Elegância Estratégica & Autoridade Feminina
           </h1>

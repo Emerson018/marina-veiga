@@ -1,20 +1,13 @@
 import Link from "next/link";
 import { MessageCircle, ArrowUp } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
+import { NAV_LINKS } from "@/data/navigation";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const whatsAppUrl = generateWhatsAppUrl(
     "Olá Mariana! Gostaria de falar sobre a consultoria de imagem."
   );
-
-  const footerLinks = [
-    { label: "Catálogo", href: "#catalogo" },
-    { label: "Sobre Mariana", href: "#sobre" },
-    { label: "Dossiê de Estilo", href: "#dossie" },
-    { label: "Metodologia", href: "#metodologia" },
-    { label: "FAQ", href: "#faq" },
-  ];
 
   return (
     <footer
@@ -54,7 +47,7 @@ export default function Footer() {
               Navegação
             </span>
             <ul className="space-y-2.5" role="list">
-              {footerLinks.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

@@ -4,17 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, Menu, X } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
+import { NAV_LINKS } from "@/data/navigation";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { label: "Catálogo", href: "#catalogo" },
-    { label: "Sobre", href: "#sobre" },
-    { label: "Dossiê", href: "#dossie" },
-    { label: "Metodologia", href: "#metodologia" },
-    { label: "FAQ", href: "#faq" },
-  ];
 
   const whatsAppUrl = generateWhatsAppUrl(
     "Olá Mariana! Gostaria de conversar sobre a consultoria de imagem."
@@ -42,7 +35,7 @@ export default function Header() {
           className="hidden md:flex items-center gap-8"
           aria-label="Navegação principal"
         >
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -87,7 +80,7 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-forest-deep/95 border-b border-rose-border px-6 py-6 animate-fadeIn">
           <nav className="flex flex-col gap-5" aria-label="Navegação mobile">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

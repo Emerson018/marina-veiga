@@ -30,7 +30,7 @@ describe("Ticket 06: FloatingWhatsApp and Footer components", () => {
     it("has anchor links to all page sections", () => {
       render(<Footer />);
       expect(screen.getByRole("link", { name: /Catálogo/i })).toHaveAttribute("href", "#catalogo");
-      expect(screen.getByRole("link", { name: /Sobre Mariana/i })).toHaveAttribute("href", "#sobre");
+      expect(screen.getByRole("link", { name: /Sobre/i })).toHaveAttribute("href", "#sobre");
       expect(screen.getByRole("link", { name: /Dossiê/i })).toHaveAttribute("href", "#dossie");
       expect(screen.getByRole("link", { name: /Metodologia/i })).toHaveAttribute("href", "#metodologia");
       expect(screen.getByRole("link", { name: /FAQ/i })).toHaveAttribute("href", "#faq");

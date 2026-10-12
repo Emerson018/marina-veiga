@@ -63,7 +63,7 @@ export default function FaqSection() {
           </span>
           <h2
             id="faq-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4 text-balance"
           >
             Tire Suas Dúvidas
           </h2>
@@ -73,7 +73,7 @@ export default function FaqSection() {
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-4" role="tablist">
+        <div className="space-y-4">
           {faqs.map((faq) => {
             const isOpen = openId === faq.id;
             return (

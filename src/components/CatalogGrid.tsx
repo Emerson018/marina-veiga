@@ -1,7 +1,12 @@
 import { SERVICES } from "@/data/services";
+import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import ServiceCard from "./ServiceCard";
 
 export default function CatalogGrid() {
+  const corporateWhatsAppUrl = generateWhatsAppUrl(
+    "Olá Mariana! Gostaria de conversar sobre uma proposta corporativa personalizada."
+  );
+
   return (
     <section
       id="catalogo"
@@ -16,7 +21,7 @@ export default function CatalogGrid() {
           </span>
           <h2
             id="catalog-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4 text-balance"
           >
             Serviços & Experiências de Imagem
           </h2>
@@ -43,7 +48,7 @@ export default function CatalogGrid() {
             dress code corporativo e consultoria para equipes.
           </p>
           <a
-            href="https://wa.me/5511999999999?text=Ol%C3%A1%20Mariana!%20Gostaria%20de%20conversar%20sobre%20uma%20demanda%20corporativa%20personalizada."
+            href={corporateWhatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs uppercase tracking-widest text-rose-antique hover:text-rose-light underline underline-offset-4 font-medium transition-colors"

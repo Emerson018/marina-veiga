@@ -70,7 +70,7 @@ export default function DossierShowcase() {
 
             <h2
               id="dossier-heading"
-              className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-6 text-balance"
             >
               O Dossiê de Estilo: Seu Guia Perpétuo
             </h2>
