@@ -4,10 +4,11 @@
 
 **Blocked by:** 05: Showcase do Dossiê de Estilo, etapas de atendimento e FAQ acessível
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] Botão flutuante de WhatsApp fixo no canto inferior direito com `aria-label="Falar com Mariana Veiga no WhatsApp"`, estado `:focus-visible` e animação de entrada sutil.
-- [ ] Rodapé institucional com assinatura tipográfica, indicação de atendimento híbrido, links de navegação e copyright.
-- [ ] Auditoria com a skill `web-design-guidelines`: verificação de ausência de `transition: all`, anéis de foco visíveis em todos os elementos clicáveis e `touch-action: manipulation`.
-- [ ] Verificação de ausência de CLS em imagens (todas com `width`/`height` explícitos e imagens secundárias com `loading="lazy"`).
-- [ ] Teste de ponta a ponta (E2E / integração) confirmando que a aplicação roda limpa sem erros de console ou acessibilidade.
+- [x] Botão flutuante de WhatsApp fixo no canto inferior direito com `aria-label="Atendimento flutuante com Mariana Veiga no WhatsApp"`, estado `:focus-visible` e animação de entrada sutil.
+- [x] Rodapé institucional com assinatura tipográfica, indicação de atendimento híbrido, links de navegação e copyright.
+- [x] Auditoria com a skill `web-design-guidelines`: verificação de ausência de `transition: all`, anéis de foco visíveis em todos os elementos clicáveis e `touch-action: manipulation`.
+- [x] Verificação de ausência de CLS em imagens (todas com `width`/`height` explícitos e imagens secundárias com `loading="lazy"`).
+- [x] Teste de ponta a ponta (E2E / integração) confirmando que a aplicação roda limpa sem erros de console ou acessibilidade.
+

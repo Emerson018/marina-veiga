@@ -11,7 +11,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
 
   return (
     <article
-      className={`relative flex flex-col justify-between rounded-sm border p-6 sm:p-8 transition-all duration-300 ${
+      className={`relative flex flex-col justify-between rounded-sm border p-6 sm:p-8 transition-colors duration-300 ${
         service.isFeatured
           ? "border-rose-antique bg-forest-card/90 shadow-2xl shadow-rose-antique/5 ring-1 ring-rose-antique/40"
           : "border-rose-border bg-forest-card/50 hover:border-rose-antique/50 hover:bg-forest-card/70"
@@ -100,7 +100,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           href={whatsAppUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className={`w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold transition-all focus-visible:outline-rose-antique ${
+          className={`w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold transition-colors duration-200 focus-visible:outline-rose-antique ${
             service.isFeatured
               ? "bg-rose-antique text-forest-deep hover:bg-rose-light shadow-md"
               : "border border-rose-antique text-rose-antique hover:bg-rose-antique hover:text-forest-deep"

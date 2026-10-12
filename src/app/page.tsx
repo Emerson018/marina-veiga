@@ -5,6 +5,8 @@ import CatalogGrid from "@/components/CatalogGrid";
 import DossierShowcase from "@/components/DossierShowcase";
 import ProcessSteps from "@/components/ProcessSteps";
 import FaqSection from "@/components/FaqSection";
+import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 export default function HomePage() {
   return (
@@ -18,6 +20,8 @@ export default function HomePage() {
         <ProcessSteps />
         <FaqSection />
       </main>
+      <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }

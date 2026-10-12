@@ -59,7 +59,7 @@ export default function AboutManifesto() {
                 alt="Mariana Veiga em ambiente de consultoria e alfaiataria"
                 fill
                 sizes="(max-width: 1024px) 100vw, 400px"
-                className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover object-center grayscale hover:grayscale-0 transition-[filter] duration-700"
               />
             </div>
             <div className="absolute -bottom-6 -right-4 hidden sm:block bg-forest-deep border border-rose-antique/40 p-4 rounded-sm shadow-xl max-w-xs">

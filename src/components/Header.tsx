@@ -60,7 +60,7 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm border border-rose-antique/60 text-rose-antique hover:bg-rose-antique hover:text-forest-deep text-xs uppercase tracking-widest transition-colors font-medium focus-visible:outline-rose-antique"
-            aria-label="Falar com Mariana Veiga no WhatsApp"
+            aria-label="Contato rápido no WhatsApp"
           >
             <MessageCircle className="w-4 h-4" aria-hidden="true" />
             <span>Contato</span>

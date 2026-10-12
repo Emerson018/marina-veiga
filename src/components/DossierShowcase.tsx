@@ -42,7 +42,7 @@ export default function DossierShowcase() {
                 alt="Amostra editorial do Dossiê de Estilo Mariana Veiga"
                 fill
                 sizes="(max-width: 1024px) 100vw, 450px"
-                className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover object-center grayscale hover:grayscale-0 transition-[filter] duration-700"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-transparent to-transparent pointer-events-none"

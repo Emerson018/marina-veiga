@@ -2,8 +2,8 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import HomePage from "@/app/page";
 
-describe("HomePage Integration", () => {
-  it("renders all sections from header down through faq", () => {
+describe("HomePage Full Integration", () => {
+  it("renders all sections from header down through footer and floating whatsapp", () => {
     render(<HomePage />);
     expect(screen.getByRole("banner")).toBeInTheDocument();
     expect(
@@ -23,6 +23,10 @@ describe("HomePage Integration", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: /Tire Suas Dúvidas/i })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /Atendimento flutuante com Mariana Veiga no WhatsApp/i })
     ).toBeInTheDocument();
   });
 });

@@ -104,7 +104,7 @@ export default function Hero() {
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 420px"
-                className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover object-top grayscale hover:grayscale-0 transition-[filter] duration-700"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-forest-deep/80 via-transparent to-transparent pointer-events-none"
