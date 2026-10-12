@@ -55,11 +55,11 @@ export default function AboutManifesto() {
           <div className="lg:col-span-5 relative">
             <div className="relative aspect-[3/4] w-full rounded-sm overflow-hidden border border-rose-border bg-forest-card/50 shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
-                alt="Mariana Veiga em ambiente de consultoria e alfaiataria"
+                src="/fotos/foto-2.png"
+                alt="Mariana Veiga - Consultora de Imagem e Estilo Pessoal"
                 fill
                 sizes="(max-width: 1024px) 100vw, 400px"
-                className="object-cover object-center grayscale hover:grayscale-0 transition-[filter] duration-700"
+                className="object-cover object-center hover:scale-[1.02] transition-transform duration-500"
               />
             </div>
             <div className="absolute -bottom-6 -right-4 hidden sm:block bg-forest-deep border border-rose-antique/40 p-4 rounded-sm shadow-xl max-w-xs">

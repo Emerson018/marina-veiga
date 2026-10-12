@@ -38,11 +38,11 @@ export default function DossierShowcase() {
           <div className="lg:col-span-5 relative order-2 lg:order-1">
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto rounded-sm overflow-hidden border border-rose-antique/50 bg-forest-card shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
-                alt="Amostra editorial do Dossiê de Estilo Mariana Veiga"
+                src="/fotos/foto-3.jpeg"
+                alt="Mariana Veiga em curadoria prática de roupas e alfaiataria"
                 fill
                 sizes="(max-width: 1024px) 100vw, 450px"
-                className="object-cover object-center grayscale hover:grayscale-0 transition-[filter] duration-700"
+                className="object-cover object-center hover:scale-[1.02] transition-transform duration-500"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-transparent to-transparent pointer-events-none"
@@ -53,7 +53,7 @@ export default function DossierShowcase() {
                   Exclusividade
                 </span>
                 <p className="font-display text-base text-rose-light">
-                  Edição Personalizada & Encadernação Artesanal
+                  Curadoria & Consultoria Prática Personalizada
                 </p>
               </div>
             </div>

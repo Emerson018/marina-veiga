@@ -99,12 +99,12 @@ export default function Hero() {
           <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-sm overflow-hidden p-2 border border-rose-border bg-forest-card/40 shadow-2xl">
             <div className="relative w-full h-full rounded-sm overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80"
+                src="/fotos/foto-1.png"
                 alt="Mariana Veiga - Consultora de Imagem e Dress Code Corporativo"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 420px"
-                className="object-cover object-top grayscale hover:grayscale-0 transition-[filter] duration-700"
+                className="object-cover object-top hover:scale-[1.02] transition-transform duration-500"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-forest-deep/80 via-transparent to-transparent pointer-events-none"
