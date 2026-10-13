@@ -22,16 +22,6 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         {/* Left Editorial Copy */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-rose-antique/30 bg-forest-card/60 mb-6">
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-rose-antique"
-              aria-hidden="true"
-            />
-            <span className="text-[11px] uppercase tracking-ultra text-rose-antique font-sans font-medium">
-              Consultoria de Imagem & Dress Code Executivo
-            </span>
-          </div>
-
           <h1
             id="hero-title"
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display text-rose-antique tracking-wide leading-[1.08] mb-6 text-balance"
