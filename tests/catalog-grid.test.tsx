@@ -4,14 +4,15 @@ import CatalogGrid from "@/components/CatalogGrid";
 import { SERVICES } from "@/data/services";
 
 describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
-  it("renders all 5 consultation services with titles and price", () => {
+  it("renders all 6 consultation services with titles, price, and installments", () => {
     render(<CatalogGrid />);
 
     for (const service of SERVICES) {
       expect(
-        screen.getByRole("heading", { name: new RegExp(service.title, "i") })
+        screen.getByRole("heading", { name: service.title })
       ).toBeInTheDocument();
       expect(screen.getByText(service.price)).toBeInTheDocument();
+      expect(screen.getByText(service.installments)).toBeInTheDocument();
     }
   });
 
@@ -20,7 +21,7 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
 
     for (const service of SERVICES) {
       const cta = screen.getByRole("link", {
-        name: new RegExp(`Conversar no WhatsApp sobre ${service.title}`, "i"),
+        name: `Conversar no WhatsApp sobre ${service.title}`,
       });
       expect(cta).toBeInTheDocument();
       expect(cta).toHaveAttribute("target", "_blank");

@@ -1,4 +1,4 @@
-import { Check, MessageCircle, Clock, MapPin } from "lucide-react";
+import { Check, MessageCircle, Clock, MapPin, CreditCard } from "lucide-react";
 import { Service } from "@/data/services";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 
@@ -82,7 +82,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
 
       {/* Pricing & CTA */}
       <div className="pt-6 border-t border-rose-border/60">
-        <div className="mb-5">
+        <div className="mb-5 space-y-1.5">
           <div className="flex items-baseline gap-2">
             <span className="text-xs uppercase tracking-widest text-rose-light/60 font-sans">
               Investimento:
@@ -91,7 +91,11 @@ export default function ServiceCard({ service }: ServiceCardProps) {
               {service.price}
             </span>
           </div>
-          <span className="text-xs text-rose-light/70 font-sans block mt-1">
+          <div className="flex items-center gap-1.5 text-xs text-rose-antique font-sans">
+            <CreditCard className="w-3.5 h-3.5 text-rose-antique shrink-0" aria-hidden="true" />
+            <span>{service.installments}</span>
+          </div>
+          <span className="text-xs text-rose-light/70 font-sans block">
             {service.paymentTerms}
           </span>
         </div>

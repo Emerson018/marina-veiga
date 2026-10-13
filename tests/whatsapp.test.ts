@@ -27,8 +27,8 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
     expect(url).toBe(`https://wa.me/${DEFAULT_WHATSAPP_NUMBER}`);
   });
 
-  it("contains exactly 5 consultation services with all required fields", () => {
-    expect(SERVICES).toHaveLength(5);
+  it("contains exactly 6 consultation services with all required fields", () => {
+    expect(SERVICES).toHaveLength(6);
 
     for (const service of SERVICES) {
       expect(service.id).toBeTruthy();
@@ -37,6 +37,7 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
       expect(service.description).toBeTruthy();
       expect(service.deliverables.length).toBeGreaterThan(0);
       expect(service.price).toMatch(/^R\$\s?[\d.,]+/);
+      expect(service.installments).toBeTruthy();
       expect(service.paymentTerms).toBeTruthy();
       expect(service.whatsappMessage).toBeTruthy();
 
@@ -45,12 +46,13 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
     }
   });
 
-  it("includes the 5 canonical services matching domain glossary", () => {
+  it("includes the 6 canonical services matching the updated catalog", () => {
     const titles = SERVICES.map((s) => s.title);
     expect(titles).toContain("Análise de Estilo & Biótipo");
-    expect(titles).toContain("Revitalização de Guarda-Roupa");
-    expect(titles).toContain("Personal Shopper");
-    expect(titles).toContain("Consultoria Completa 360°");
-    expect(titles).toContain("Dossiê de Estilo Exclusivo");
+    expect(titles).toContain("Closet Detox (4h)");
+    expect(titles).toContain("Closet Detox Online");
+    expect(titles).toContain("Personal Shopper (3h)");
+    expect(titles).toContain("Consultoria 360°");
+    expect(titles).toContain("Dossiê (só como complemento)");
   });
 });
