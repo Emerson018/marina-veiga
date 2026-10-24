@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
+import HeroBio from "./HeroBio";
 
 export default function Hero() {
   const whatsAppUrl = generateWhatsAppUrl(
@@ -24,14 +25,12 @@ export default function Hero() {
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           <h1
             id="hero-title"
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display text-rose-antique tracking-wide leading-[1.08] mb-6 text-balance"
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display text-rose-antique tracking-wide leading-[1.08] mb-4 text-balance"
           >
             Elegância Estratégica & Autoridade Feminina
           </h1>
 
-          <p className="text-base sm:text-lg text-rose-light/90 font-light leading-relaxed max-w-2xl mb-10">
-            Ajudo mulheres que lideram a construir uma imagem à altura do lugar que ocupam e do lugar aonde querem chegar. Quiet luxury, intenção em cada escolha e clareza para vestir sua ambição.
-          </p>
+          <HeroBio />
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
             <Link
