@@ -51,9 +51,11 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         >
           {service.title}
         </h3>
-        <p className="text-xs uppercase tracking-widest text-rose-antique/80 font-medium mb-4">
-          {service.tagline}
-        </p>
+        {service.tagline && (
+          <p className="text-xs uppercase tracking-widest text-rose-antique/80 font-medium mb-4">
+            {service.tagline}
+          </p>
+        )}
         <p className="text-sm text-rose-light/80 font-light leading-relaxed mb-6">
           {service.description}
         </p>

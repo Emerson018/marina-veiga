@@ -19,7 +19,7 @@ export const SERVICES: Service[] = [
     id: "analise-estilo-biotipo",
     title: "Análise de Estilo & Biótipo",
     badge: "Diagnóstico Fundamental",
-    tagline: "Juntas, descobrimos as proporções e a essência que fazem de você única, para escolher cortes, tecidos e caimentos que projetam sofisticação e confiança.",
+    tagline: "",
     description:
       "Juntas, descobrimos as proporções e a essência que fazem de você única, para escolher cortes, tecidos e caimentos que projetam sofisticação e confiança.",
     deliverables: [

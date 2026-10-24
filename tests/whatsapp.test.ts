@@ -33,7 +33,6 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
     for (const service of SERVICES) {
       expect(service.id).toBeTruthy();
       expect(service.title).toBeTruthy();
-      expect(service.tagline).toBeTruthy();
       expect(service.description).toBeTruthy();
       expect(service.deliverables.length).toBeGreaterThan(0);
       expect(service.price).toMatch(/^R\$\s?[\d.,]+/);
