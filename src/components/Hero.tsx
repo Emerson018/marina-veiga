@@ -89,7 +89,7 @@ export default function Hero() {
           <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-sm overflow-hidden p-2 border border-rose-border bg-forest-card/40 shadow-2xl">
             <div className="relative w-full h-full rounded-sm overflow-hidden">
               <Image
-                src="/fotos/foto-1.png"
+                src="/fotos/foto-1.jpg"
                 alt="Mariana Veiga - Consultora de Imagem e Dress Code Corporativo"
                 fill
                 priority

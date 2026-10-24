@@ -55,7 +55,7 @@ export default function AboutManifesto() {
           <div className="lg:col-span-5 relative">
             <div className="relative aspect-[3/4] w-full rounded-sm overflow-hidden border border-rose-border bg-forest-card/50 shadow-xl">
               <Image
-                src="/fotos/foto-2.png"
+                src="/fotos/foto-2.jpg"
                 alt="Mariana Veiga - Consultora de Imagem e Estilo Pessoal"
                 fill
                 sizes="(max-width: 1024px) 100vw, 400px"
