@@ -12,13 +12,17 @@ _Avoid_: Usuário, comprador, lead, consumidor
 Vitrine digital com apresentação editorial de serviços e pacotes com valores explícitos e conversão contextualizada.
 _Avoid_: Loja virtual, e-commerce, carrinho
 
+**Galeria Editorial de Serviços**:
+Experiência em carrossel interativo estilo alta-costura onde o serviço ativo fica em foco central ampliado e os adjacentes em prévia lateral translúcida, com expansão fluida de entregáveis no hover ou toque.
+_Avoid_: Banners rotativos, slides genéricos
+
 **Análise de Estilo & Biótipo**:
 Mapeamento estruturado das proporções corporais e da identidade visual da cliente para alinhamento de modelagens e silhuetas.
 _Avoid_: Tipificação, teste de corpo
 
-**Revitalização de Guarda-Roupa**:
-Serviço de triagem, organização estratégica e otimização das peças existentes no closet da cliente.
-_Avoid_: Limpeza de armário, faxina
+**Closet Detox**:
+Serviço presencial ou online de triagem consciente, organização estratégica e otimização das peças existentes no acervo da cliente.
+_Avoid_: Limpeza de armário, faxina, revitalização genérica
 
 **Personal Shopper**:
 Assessoria presencial ou guiada para aquisição cirúrgica de peças complementares ao guarda-roupa inteligente da cliente.
