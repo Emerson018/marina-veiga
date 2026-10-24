@@ -30,9 +30,7 @@ export default function Hero() {
           </h1>
 
           <p className="text-base sm:text-lg text-rose-light/90 font-light leading-relaxed max-w-2xl mb-10">
-            Para mulheres profissionais que lideram, influenciam e desejam
-            transformar seu estilo em um ativo de poder, autenticidade e quiet
-            luxury. Vista sua ambição com clareza e sem regras artificiais.
+            Ajudo mulheres que lideram a construir uma imagem à altura do lugar que ocupam e do lugar aonde querem chegar. Quiet luxury, intenção em cada escolha e clareza para vestir sua ambição.
           </p>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
