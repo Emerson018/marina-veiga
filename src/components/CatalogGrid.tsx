@@ -26,8 +26,7 @@ export default function CatalogGrid() {
             Serviços & Experiências de Imagem
           </h2>
           <p className="text-base sm:text-lg text-rose-light/80 font-light leading-relaxed">
-            Escolha o formato que melhor se alinha aos seus objetivos de carreira e
-            estilo de vida. Todos os pacotes contam com orientação direta de Mariana Veiga.
+            Cada mulher tem um momento e um objetivo diferentes. Escolha o formato que faz mais sentido para a sua carreira e para a sua rotina.
           </p>
         </div>
 
