@@ -38,24 +38,23 @@ export const SERVICES: Service[] = [
   },
   {
     id: "closet-detox-presencial",
-    title: "Closet Detox (4h)",
+    title: "Closet Detox",
     badge: "Presencial Imersivo",
-    tagline: "Triagem estratégica, otimização de peças e closet inteligente no seu espaço",
+    tagline: "Triagem estratégica e closet inteligente",
     description:
-      "Uma imersão presencial de 4 horas no seu armário para desapegar do que não representa sua melhor versão, multiplicar combinações de alto impacto e criar um guarda-roupa coeso e funcional.",
+      "Juntas, soltamos o que não representa a sua melhor versão e valorizamos o que faz sentido para você.",
     deliverables: [
-      "Triagem presencial criteriosa e consciente das peças existentes no acervo",
-      "Montagem e registro fotográfico de mais de 30 looks corporativos e casuais",
-      "Mapeamento estratégico de peças essenciais faltantes (shopping list)",
-      "Setorização visual e organização prática para o dia a dia",
+      "Triagem consciente das suas peças",
+      "Shopping list das peças essenciais",
+      "Organização visual do closet",
     ],
     price: "R$ 990",
     installments: "em até 4x de R$ 247,50 sem juros no cartão",
     paymentTerms: "ou R$ 890 à vista no Pix (com desconto)",
-    duration: "Sessão presencial imersiva de 4h",
+    duration: "Sessão imersiva de 4h",
     modality: "Presencial",
     whatsappMessage:
-      "Olá Mariana! Gostaria de agendar o Closet Detox presencial (4h).",
+      "Olá Mariana! Gostaria de agendar o Closet Detox presencial.",
   },
   {
     id: "closet-detox-online",

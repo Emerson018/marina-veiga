@@ -48,7 +48,7 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
   it("includes the 6 canonical services matching the updated catalog", () => {
     const titles = SERVICES.map((s) => s.title);
     expect(titles).toContain("Análise de Estilo & Biótipo");
-    expect(titles).toContain("Closet Detox (4h)");
+    expect(titles).toContain("Closet Detox");
     expect(titles).toContain("Closet Detox Online");
     expect(titles).toContain("Personal Shopper (3h)");
     expect(titles).toContain("Consultoria 360°");
