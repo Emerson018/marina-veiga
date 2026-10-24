@@ -42,7 +42,7 @@ export const SERVICES: Service[] = [
     badge: "Presencial Imersivo",
     tagline: "Triagem estratégica e closet inteligente",
     description:
-      "Juntas, soltamos o que não representa a sua melhor versão e valorizamos o que faz sentido para você.",
+      "Valorizar o que faz sentido para você, soltar o que não representa a sua melhor versão.",
     deliverables: [
       "Triagem consciente das suas peças",
       "Shopping list das peças essenciais",
