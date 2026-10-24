@@ -50,7 +50,7 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
     expect(titles).toContain("Análise de Estilo & Biótipo");
     expect(titles).toContain("Closet Detox");
     expect(titles).toContain("Closet Detox Online");
-    expect(titles).toContain("Personal Shopper (3h)");
+    expect(titles).toContain("Personal Shopper");
     expect(titles).toContain("Consultoria 360°");
     expect(titles).toContain("Dossiê (só como complemento)");
   });

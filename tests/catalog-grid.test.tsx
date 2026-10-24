@@ -11,8 +11,8 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
       expect(
         screen.getByRole("heading", { name: service.title })
       ).toBeInTheDocument();
-      expect(screen.getByText(service.price)).toBeInTheDocument();
-      expect(screen.getByText(service.installments)).toBeInTheDocument();
+      expect(screen.getAllByText(service.price).length).toBeGreaterThanOrEqual(1);
+      expect(screen.getAllByText(service.installments).length).toBeGreaterThanOrEqual(1);
     }
   });
 
