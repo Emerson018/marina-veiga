@@ -54,13 +54,14 @@ export default function CatalogGrid() {
     return diff;
   };
 
+  const navButtonClass =
+    "w-11 h-11 rounded-full border border-rose-border text-rose-antique hover:border-rose-antique hover:bg-forest-card/80 transition-[background-color,border-color,transform] duration-200 motion-reduce:transition-none flex items-center justify-center active:scale-95 focus-visible:outline-rose-antique shadow-sm";
+
   return (
     <section
       id="catalogo"
       aria-labelledby="catalog-heading"
       className="py-24 border-b border-rose-border/40 relative overflow-hidden"
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
       aria-roledescription="carrossel"
       aria-label="Catálogo de Serviços Mariana Veiga"
     >
@@ -83,9 +84,12 @@ export default function CatalogGrid() {
 
         {/* High-Fashion Spotlight Gallery Stage */}
         <div
-          className="relative w-full max-w-5xl mx-auto flex items-start justify-center min-h-[500px] sm:min-h-[560px] md:min-h-[600px] py-4"
+          className="relative w-full max-w-5xl mx-auto flex items-start justify-center min-h-[560px] sm:min-h-[600px] md:min-h-[640px] py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm"
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
+          aria-label="Galeria de serviços. Use as setas do teclado para navegar."
         >
           {SERVICES.map((service, index) => {
             const diff = getCardOffset(index, activeIndex, SERVICES.length);
@@ -107,7 +111,7 @@ export default function CatalogGrid() {
             return (
               <div
                 key={service.id}
-                className={`absolute top-0 w-full max-w-[340px] sm:max-w-[420px] md:max-w-[460px] transition-all duration-500 ease-out motion-reduce:transition-none ${transformClass}`}
+                className={`absolute top-0 w-full max-w-[340px] sm:max-w-[420px] md:max-w-[460px] transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${transformClass}`}
                 onClick={() => {
                   if (!isCenter) {
                     setActiveIndex(index);
@@ -142,7 +146,8 @@ export default function CatalogGrid() {
             <button
               onClick={prevSlide}
               aria-label="Serviço anterior"
-              className="w-11 h-11 rounded-full border border-rose-border text-rose-antique hover:border-rose-antique hover:bg-forest-card/80 transition-all flex items-center justify-center active:scale-95 focus-visible:outline-rose-antique shadow-sm"
+              className={navButtonClass}
+              style={{ touchAction: "manipulation" }}
             >
               <ChevronLeft className="w-5 h-5" aria-hidden="true" />
             </button>
@@ -159,31 +164,37 @@ export default function CatalogGrid() {
             <button
               onClick={nextSlide}
               aria-label="Próximo serviço"
-              className="w-11 h-11 rounded-full border border-rose-border text-rose-antique hover:border-rose-antique hover:bg-forest-card/80 transition-all flex items-center justify-center active:scale-95 focus-visible:outline-rose-antique shadow-sm"
+              className={navButtonClass}
+              style={{ touchAction: "manipulation" }}
             >
               <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
 
-          {/* Interactive Pill Dash Indicators */}
+          {/* Interactive Pill Dash Indicators with Accessible Touch Targets (min 44px) */}
           <div
-            className="flex items-center gap-2 pt-1"
+            className="flex items-center gap-1 pt-1"
             role="tablist"
             aria-label="Indicadores dos serviços"
           >
-            {SERVICES.map((s, idx) => (
+            {SERVICES.map((service, idx) => (
               <button
-                key={s.id}
+                key={service.id}
                 onClick={() => setActiveIndex(idx)}
                 role="tab"
                 aria-selected={idx === activeIndex}
-                aria-label={`Ver serviço ${idx + 1}: ${s.title}`}
-                className={`h-1.5 rounded-full transition-all duration-300 focus-visible:outline-rose-antique ${
-                  idx === activeIndex
-                    ? "w-8 bg-rose-antique"
-                    : "w-2.5 bg-rose-border hover:bg-rose-antique/60"
-                }`}
-              />
+                aria-label={`Ver serviço ${idx + 1}: ${service.title}`}
+                className="py-3 px-1.5 min-h-[44px] flex items-center justify-center focus-visible:outline-rose-antique"
+                style={{ touchAction: "manipulation" }}
+              >
+                <span
+                  className={`block h-1.5 rounded-full transition-[width,background-color] duration-300 motion-reduce:transition-none ${
+                    idx === activeIndex
+                      ? "w-8 bg-rose-antique"
+                      : "w-2.5 bg-rose-border hover:bg-rose-antique/60"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

@@ -21,7 +21,7 @@ export default function ServiceCard({
 
   return (
     <article
-      className={`group/card relative flex flex-col justify-between rounded-sm border p-6 sm:p-8 transition-all duration-300 ${
+      className={`group/card relative flex flex-col justify-between rounded-sm border p-6 sm:p-8 transition-[border-color,background-color,box-shadow] duration-300 motion-reduce:transition-none ${
         service.isFeatured
           ? "border-rose-antique bg-forest-card/95 shadow-2xl shadow-rose-antique/10 ring-1 ring-rose-antique/40"
           : "border-rose-border bg-forest-card/80 hover:border-rose-antique/60 hover:bg-forest-card shadow-xl"
@@ -97,30 +97,38 @@ export default function ServiceCard({
           </span>
         </div>
 
-        {/* Interactive Cue: Hover / Tap to reveal deliverables */}
-        <div
+        {/* Semantic Accessible Toggle Button: Hover / Tap to reveal deliverables */}
+        <button
+          type="button"
           onClick={(e) => {
             if (isActive && onToggleExpand) {
               e.stopPropagation();
               onToggleExpand();
             }
           }}
-          className={`flex items-center justify-between py-2 text-[11px] uppercase tracking-widest font-sans transition-colors cursor-pointer border-t border-rose-border/30 ${
-            isActive ? "text-rose-antique hover:text-rose-light" : "text-rose-antique/60"
+          disabled={!isActive}
+          aria-expanded={isExpanded}
+          aria-controls={`deliverables-${service.id}`}
+          className={`w-full flex items-center justify-between py-2.5 text-[11px] uppercase tracking-widest font-sans transition-colors border-t border-rose-border/30 focus-visible:outline-rose-antique ${
+            isActive
+              ? "text-rose-antique hover:text-rose-light cursor-pointer"
+              : "text-rose-antique/60 cursor-default"
           }`}
+          style={{ touchAction: "manipulation" }}
         >
           <span>{isExpanded ? "Ocultar entregáveis" : "Ver o que está incluso"}</span>
           <ChevronDown
-            className={`w-3.5 h-3.5 transition-transform duration-300 ${
+            className={`w-3.5 h-3.5 transition-transform duration-300 motion-reduce:transition-none ${
               isExpanded ? "rotate-180" : "group-hover/card:translate-y-0.5"
             }`}
             aria-hidden="true"
           />
-        </div>
+        </button>
 
         {/* Expandable Deliverables & CTA */}
         <div
-          className={`grid transition-all duration-500 ease-out motion-reduce:transition-none ${
+          id={`deliverables-${service.id}`}
+          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out motion-reduce:transition-none ${
             isExpanded
               ? "grid-rows-[1fr] opacity-100 mt-2"
               : "grid-rows-[0fr] opacity-0 group-hover/card:grid-rows-[1fr] group-hover/card:opacity-100 group-hover/card:mt-2 group-focus-within/card:grid-rows-[1fr] group-focus-within/card:opacity-100 group-focus-within/card:mt-2"
@@ -151,12 +159,13 @@ export default function ServiceCard({
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold transition-colors duration-200 focus-visible:outline-rose-antique ${
+              className={`w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold transition-[background-color,color] duration-200 focus-visible:outline-rose-antique ${
                 service.isFeatured
                   ? "bg-rose-antique text-forest-deep hover:bg-rose-light shadow-md"
                   : "border border-rose-antique text-rose-antique hover:bg-rose-antique hover:text-forest-deep"
               }`}
               aria-label={`Conversar no WhatsApp sobre ${service.title}`}
+              style={{ touchAction: "manipulation" }}
             >
               <MessageCircle className="w-4 h-4" aria-hidden="true" />
               <span>Quero Esta Consultoria</span>
