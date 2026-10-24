@@ -13,13 +13,13 @@ export default function AboutManifesto() {
       icon: Sparkles,
       title: "Quiet Luxury",
       description:
-        "Elegância sem excessos. Priorizamos caimentos impecáveis, tecidos nobres e peças atemporais com alto custo por uso.",
+        "Elegância sem excessos: caimentos impecáveis, tecidos nobres e peças atemporais com alto custo por uso.",
     },
     {
       icon: Compass,
       title: "Autonomia Perpétua",
       description:
-        "Você no controle absoluto do seu closet, escolhendo looks matinais com rapidez, intencionalidade e zero frustração.",
+        "Você no controle do seu closet, escolhendo looks pela manhã com rapidez, intenção e sem frustração.",
     },
   ];
 
@@ -42,10 +42,7 @@ export default function AboutManifesto() {
             A imagem não é sobre aparência. É sobre posicionamento.
           </h2>
           <p className="text-base sm:text-lg text-rose-light/90 font-light leading-relaxed">
-            No universo corporativo e nos negócios, sua presença comunica antes de
-            você proferir a primeira palavra. Meu trabalho consiste em traduzir
-            sua competência e ambição em uma linguagem visual coerente,
-            eliminando fórmulas prontas e tendências passageiras.
+            No universo corporativo e nos negócios, sua presença comunica antes mesmo de você dizer a primeira palavra. Meu trabalho é traduzir sua competência e sua ambição em uma linguagem visual coerente, sem fórmulas prontas e sem tendências passageiras.
           </p>
         </div>
 
@@ -76,14 +73,7 @@ export default function AboutManifesto() {
           <div className="lg:col-span-7 flex flex-col gap-6">
             <div className="space-y-4 text-sm sm:text-base text-rose-light/80 font-light leading-relaxed mb-6">
               <p>
-                A consultoria com Mariana Veiga não impõe restrições arbitrárias.
-                Construímos um guarda-roupa inteligente a partir da sua rotina real,
-                dos seus objetivos executivos e das suas proporções anatômicas.
-              </p>
-              <p>
-                Através do nosso modelo de atendimento híbrido, realizamos
-                diagnósticos aprofundados online e intervenções práticas presenciais,
-                culminando na entrega do seu Dossiê de Estilo exclusivo.
+                Formada em Design de Moda e com 4 anos de experiência em consultoria de estilo, construo com cada cliente um guarda-roupa inteligente, a partir da rotina real, dos objetivos profissionais e das proporções dela. Sem restrições arbitrárias.
               </p>
             </div>
 
