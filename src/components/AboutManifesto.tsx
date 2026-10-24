@@ -42,7 +42,7 @@ export default function AboutManifesto() {
             A imagem não é sobre aparência. É sobre posicionamento.
           </h2>
           <p className="text-base sm:text-lg text-rose-light/90 font-light leading-relaxed">
-            No universo corporativo e nos negócios, sua presença comunica antes mesmo de você dizer a primeira palavra. Meu trabalho é traduzir sua competência e sua ambição em uma linguagem visual coerente, sem fórmulas prontas e sem tendências passageiras.
+            No universo corporativo e nos negócios, sua presença comunica antes mesmo de você dizer uma palavra. Meu trabalho é traduzir sua competência e sua ambição em uma linguagem visual coerente, sem fórmulas prontas e sem tendências passageiras.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default function AboutManifesto() {
           <div className="lg:col-span-7 flex flex-col gap-6">
             <div className="space-y-4 text-sm sm:text-base text-rose-light/80 font-light leading-relaxed mb-6">
               <p>
-                Formada em Design de Moda e com 4 anos de experiência em consultoria de estilo, construo com cada cliente um guarda-roupa inteligente, a partir da rotina real, dos objetivos profissionais e das proporções dela. Sem restrições arbitrárias.
+                Formada em Design de Moda e com 4 anos de experiência em consultoria de estilo, construo com cada cliente um closet inteligente, a partir da rotina real, dos objetivos profissionais e das proporções dela. Sem restrições arbitrárias.
               </p>
             </div>
 
