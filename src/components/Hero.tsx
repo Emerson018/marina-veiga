@@ -96,10 +96,6 @@ export default function Hero() {
                 sizes="(max-width: 768px) 100vw, 420px"
                 className="object-cover object-top hover:scale-[1.02] transition-transform duration-500"
               />
-              <div
-                className="absolute inset-0 bg-gradient-to-t from-forest-deep/80 via-transparent to-transparent pointer-events-none"
-                aria-hidden="true"
-              />
             </div>
           </div>
         </div>
