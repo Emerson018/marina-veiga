@@ -61,7 +61,7 @@ export default function CatalogGrid() {
     <section
       id="catalogo"
       aria-labelledby="catalog-heading"
-      className="py-24 border-b border-rose-border/40 relative"
+      className="py-20 sm:py-24 border-b border-rose-border/40 relative overflow-x-clip"
       aria-label="Catálogo de Serviços Mariana Veiga"
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -115,7 +115,7 @@ export default function CatalogGrid() {
 
         {/* View 1: Responsive Editorial Grid (Natural Flow, Never Clipped) */}
         {viewMode === "grid" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
             {SERVICES.map((service) => (
               <ServiceCard
                 key={service.id}

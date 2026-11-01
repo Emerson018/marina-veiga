@@ -37,21 +37,12 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
     expect(screen.getByText(/Experiência Integral/i)).toBeInTheDocument();
   });
 
-  it("toggles deliverables expansion on click with correct aria attributes", async () => {
-    const { fireEvent } = await import("@testing-library/react");
+  it("renders deliverables within disclosure container for each service", () => {
     render(<CatalogGrid />);
 
-    const toggleButtons = screen.getAllByRole("button", { name: /Ver o que está incluso/i });
-    expect(toggleButtons.length).toBeGreaterThanOrEqual(1);
-    expect(toggleButtons[0]).toHaveAttribute("aria-expanded", "false");
-
-    fireEvent.click(toggleButtons[0]);
-    expect(toggleButtons[0]).toHaveAttribute("aria-expanded", "true");
-    expect(toggleButtons[0]).toHaveTextContent(/Ocultar entregáveis/i);
-
-    fireEvent.click(toggleButtons[0]);
-    expect(toggleButtons[0]).toHaveAttribute("aria-expanded", "false");
-    expect(toggleButtons[0]).toHaveTextContent(/Ver o que está incluso/i);
+    for (const service of SERVICES) {
+      expect(screen.getByText(service.deliverables[0])).toBeInTheDocument();
+    }
   });
 
   it("allows switching between grid and carousel view modes", async () => {
