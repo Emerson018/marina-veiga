@@ -59,75 +59,75 @@ export default function AboutManifesto() {
       ref={sectionRef}
       id="sobre"
       aria-labelledby="about-heading"
-      className="py-20 md:py-24 border-b border-rose-border/40 relative overflow-hidden"
+      className="py-12 md:py-16 border-b border-rose-border/40 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div
-          className={`max-w-3xl mb-10 lg:mb-12 transition-all duration-700 motion-reduce:transition-none ${
+          className={`max-w-3xl mb-6 lg:mb-8 transition-all duration-700 motion-reduce:transition-none ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
+          <span className="text-[11px] uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-2">
             Manifesto & Metodologia
           </span>
           <h2
             id="about-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4 text-balance"
+            className="text-2xl sm:text-3xl lg:text-4xl font-display text-rose-antique tracking-wide leading-tight mb-2.5 text-balance"
           >
             A imagem não é sobre aparência. É sobre posicionamento.
           </h2>
-          <p className="text-base sm:text-lg text-rose-light/90 font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-rose-light/90 font-light leading-relaxed max-w-2xl">
             No universo corporativo e nos negócios, sua presença comunica antes mesmo de você dizer uma palavra. Meu trabalho é traduzir sua competência e sua ambição em uma linguagem visual coerente, sem fórmulas prontas e sem tendências passageiras.
           </p>
         </div>
 
-        {/* Grid: Story + Pillars (Aligned at top to pull text & caixinhas up) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* Editorial Image */}
+        {/* Grid: Story + Pillars (Balanced proportions to fit full section in viewport) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Editorial Image: Compact aspect ratio and max-width */}
           <div
             className={`lg:col-span-5 relative transition-all duration-700 delay-150 motion-reduce:transition-none ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            <div className="relative aspect-[3/4] w-full rounded-sm overflow-hidden border border-rose-border bg-forest-card/50 shadow-xl">
+            <div className="relative aspect-[4/4.5] sm:aspect-[4/4.8] max-w-[340px] sm:max-w-[380px] w-full mx-auto lg:mx-0 rounded-sm overflow-hidden border border-rose-border bg-forest-card/50 shadow-xl">
               <Image
                 src="/fotos/foto-2.jpg"
                 alt="Mariana Veiga - Consultora de Imagem e Estilo Pessoal"
                 fill
-                sizes="(max-width: 1024px) 100vw, 400px"
-                className="object-cover object-center hover:scale-[1.02] transition-transform duration-500"
+                sizes="(max-width: 1024px) 100vw, 380px"
+                className="object-cover object-top hover:scale-[1.02] transition-transform duration-500"
               />
             </div>
             <div
-              className={`absolute -bottom-6 -right-4 hidden sm:block bg-forest-deep border border-rose-antique/40 p-4 rounded-sm shadow-xl max-w-xs transition-all duration-700 delay-[350ms] motion-reduce:transition-none ${
+              className={`absolute -bottom-4 -right-2 sm:-right-4 hidden sm:block bg-forest-deep border border-rose-antique/40 p-3 sm:p-3.5 rounded-sm shadow-xl max-w-xs transition-all duration-700 delay-[350ms] motion-reduce:transition-none ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              <p className="font-display text-lg text-rose-antique italic">
+              <p className="font-display text-base sm:text-lg text-rose-antique italic leading-snug">
                 “O verdadeiro luxo reside na coerência entre quem você é e o que você veste.”
               </p>
-              <span className="text-[10px] uppercase tracking-widest text-rose-light/60 font-sans block mt-1">
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-rose-light/60 font-sans block mt-1">
                 — Mariana Veiga
               </span>
             </div>
           </div>
 
-          {/* Pillars & Philosophy (Raised margin and closely unified with caixinhas) */}
+          {/* Pillars & Philosophy */}
           <div className="lg:col-span-7 flex flex-col items-start lg:-mt-1">
             {/* Bio statement with elegant left border line */}
             <div
-              className={`relative pl-4 sm:pl-5 border-l-2 border-rose-antique/40 py-1 mb-5 transition-all duration-700 delay-200 motion-reduce:transition-none ${
+              className={`relative pl-4 border-l-2 border-rose-antique/40 py-0.5 mb-4 transition-all duration-700 delay-200 motion-reduce:transition-none ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              <p className="text-sm sm:text-base text-rose-light/90 font-light leading-relaxed">
+              <p className="text-xs sm:text-[13px] md:text-sm text-rose-light/90 font-light leading-relaxed">
                 Formada em Design de Moda e com 4 anos de experiência em consultoria de estilo, construo com cada cliente um closet inteligente, a partir da rotina real, dos objetivos profissionais e das proporções dela. Sem restrições arbitrárias.
               </p>
             </div>
 
-            {/* Caixinhas Grid */}
-            <div className="w-full grid grid-cols-1 gap-3 sm:gap-3.5">
+            {/* Caixinhas Grid: Compact padding and spacing */}
+            <div className="w-full grid grid-cols-1 gap-2.5 sm:gap-3">
               {pillars.map((pillar, index) => {
                 const IconComponent = pillar.icon;
                 const delayStyle =
@@ -140,20 +140,20 @@ export default function AboutManifesto() {
                 return (
                   <div
                     key={pillar.title}
-                    className={`group p-4 sm:p-5 rounded-sm border border-rose-border bg-forest-card/40 hover:border-rose-antique/70 hover:bg-forest-card/70 transition-all duration-500 motion-reduce:transition-none hover:-translate-y-0.5 flex items-start gap-4 ${delayStyle} ${
+                    className={`group p-3.5 sm:p-4 rounded-sm border border-rose-border bg-forest-card/40 hover:border-rose-antique/70 hover:bg-forest-card/70 transition-all duration-500 motion-reduce:transition-none hover:-translate-y-0.5 flex items-start gap-3 sm:gap-3.5 ${delayStyle} ${
                       isVisible
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 translate-y-4"
                     }`}
                   >
-                    <div className="p-2 sm:p-2.5 rounded-sm bg-forest-deep border border-rose-border text-rose-antique shrink-0 group-hover:border-rose-antique/50 group-hover:scale-105 transition-transform duration-300">
-                      <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                    <div className="p-2 rounded-sm bg-forest-deep border border-rose-border text-rose-antique shrink-0 group-hover:border-rose-antique/50 group-hover:scale-105 transition-transform duration-300">
+                      <IconComponent className="w-4 h-4 text-rose-antique" aria-hidden="true" />
                     </div>
                     <div>
-                      <h3 className="font-sans text-xs sm:text-sm uppercase tracking-widest text-rose-antique font-semibold mb-1">
+                      <h3 className="font-sans text-xs sm:text-[13px] uppercase tracking-widest text-rose-antique font-semibold mb-0.5">
                         {pillar.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-rose-light/80 font-light leading-relaxed">
+                      <p className="text-xs text-rose-light/80 font-light leading-relaxed">
                         {pillar.description}
                       </p>
                     </div>
