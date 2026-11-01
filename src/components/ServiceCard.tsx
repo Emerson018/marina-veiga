@@ -23,11 +23,10 @@ export default function ServiceCard({
 
   return (
     <article
-      className={`group/card relative flex flex-col justify-between rounded-sm border p-5 sm:p-6 transition-[border-color,background-color,box-shadow] duration-300 motion-reduce:transition-none ${
-        service.isFeatured
+      className={`group/card relative flex flex-col justify-between rounded-sm border p-5 sm:p-6 transition-[border-color,background-color,box-shadow] duration-300 motion-reduce:transition-none ${service.isFeatured
           ? "border-rose-antique bg-forest-card/95 shadow-2xl shadow-rose-antique/10 ring-1 ring-rose-antique/40"
           : "border-rose-border bg-forest-card/85 hover:border-rose-antique/60 hover:bg-forest-card shadow-xl"
-      } ${!isActive ? "pointer-events-auto select-none" : ""}`}
+        } ${!isActive ? "pointer-events-auto select-none" : ""}`}
       aria-labelledby={`service-title-${service.id}`}
       onClick={(e) => {
         if (!isActive && onSelect) {
@@ -50,11 +49,10 @@ export default function ServiceCard({
             )}
             {service.badge && (
               <span
-                className={`text-[9px] uppercase tracking-ultra px-2 py-0.5 rounded-sm font-semibold font-sans ${
-                  service.isFeatured
+                className={`text-[9px] uppercase tracking-ultra px-2 py-0.5 rounded-sm font-semibold font-sans ${service.isFeatured
                     ? "bg-rose-antique text-forest-deep"
                     : "bg-forest-deep border border-rose-border text-rose-antique"
-                }`}
+                  }`}
               >
                 {service.badge}
               </span>
@@ -121,18 +119,16 @@ export default function ServiceCard({
           disabled={!isActive}
           aria-expanded={isExpanded}
           aria-controls={`deliverables-${service.id}`}
-          className={`w-full flex items-center justify-between py-2 text-[10px] sm:text-[11px] uppercase tracking-widest font-sans transition-colors border-t border-rose-border/30 focus-visible:outline-rose-antique ${
-            isActive
+          className={`w-full flex items-center justify-between py-2 text-[10px] sm:text-[11px] uppercase tracking-widest font-sans transition-colors border-t border-rose-border/30 focus-visible:outline-rose-antique ${isActive
               ? "text-rose-antique hover:text-rose-light cursor-pointer"
               : "text-rose-antique/60 cursor-default"
-          }`}
+            }`}
           style={{ touchAction: "manipulation" }}
         >
           <span>{isExpanded ? "Ocultar entregáveis" : "Ver o que está incluso"}</span>
           <ChevronDown
-            className={`w-3.5 h-3.5 transition-transform duration-300 motion-reduce:transition-none ${
-              isExpanded ? "rotate-180" : "group-hover/card:translate-y-0.5"
-            }`}
+            className={`w-3.5 h-3.5 transition-transform duration-300 motion-reduce:transition-none ${isExpanded ? "rotate-180" : "group-hover/card:translate-y-0.5"
+              }`}
             aria-hidden="true"
           />
         </button>
@@ -140,11 +136,10 @@ export default function ServiceCard({
         {/* Expandable Deliverables & CTA without redundant heading */}
         <div
           id={`deliverables-${service.id}`}
-          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out motion-reduce:transition-none ${
-            isExpanded
+          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out motion-reduce:transition-none ${isExpanded
               ? "grid-rows-[1fr] opacity-100 mt-2"
               : "grid-rows-[0fr] opacity-0 group-hover/card:grid-rows-[1fr] group-hover/card:opacity-100 group-hover/card:mt-2 group-focus-within/card:grid-rows-[1fr] group-focus-within/card:opacity-100 group-focus-within/card:mt-2"
-          }`}
+            }`}
         >
           <div className="overflow-hidden space-y-4 pt-2">
             <ul className="space-y-2 border-t border-rose-border/40 pt-3" role="list">
@@ -167,11 +162,10 @@ export default function ServiceCard({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-sm text-xs uppercase tracking-widest font-semibold transition-[background-color,color] duration-200 focus-visible:outline-rose-antique ${
-                service.isFeatured
+              className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-sm text-xs uppercase tracking-widest font-semibold transition-[background-color,color] duration-200 focus-visible:outline-rose-antique ${service.isFeatured
                   ? "bg-rose-antique text-forest-deep hover:bg-rose-light shadow-md"
                   : "border border-rose-antique text-rose-antique hover:bg-rose-antique hover:text-forest-deep"
-              }`}
+                }`}
               aria-label={`Conversar no WhatsApp sobre ${service.title}`}
               style={{ touchAction: "manipulation" }}
             >

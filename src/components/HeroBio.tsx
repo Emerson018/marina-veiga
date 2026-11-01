@@ -18,7 +18,7 @@ export default function HeroBio() {
   let currentWordIndex = 0;
 
   return (
-    <div className="relative pl-5 sm:pl-6 my-8 max-w-2xl">
+    <div className="relative pl-4 sm:pl-5 my-4 sm:my-5 max-w-xl">
       {/* Decorative luxury accent line with animated draw and jewel pip */}
       <div
         className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-rose-antique via-rose-antique/40 to-transparent hero-animated-line"
@@ -30,7 +30,7 @@ export default function HeroBio() {
       />
 
       {/* Sentence 1 */}
-      <p className="text-base sm:text-lg text-rose-light/90 font-light leading-relaxed">
+      <p className="text-sm sm:text-[15px] text-rose-light/90 font-light leading-relaxed">
         {words1.map((word, i) => {
           const delay = baseDelay + currentWordIndex++ * wordDelayStep;
           return (
@@ -46,7 +46,7 @@ export default function HeroBio() {
       </p>
 
       {/* Sentence 2 - Strategic emphasis */}
-      <p className="mt-3 text-base sm:text-lg text-rose-light font-normal leading-relaxed">
+      <p className="mt-2 text-sm sm:text-[15px] text-rose-light font-normal leading-relaxed">
         {words2Part1.map((word, i) => {
           const delay = baseDelay + currentWordIndex++ * wordDelayStep;
           const isQuietLuxury =
