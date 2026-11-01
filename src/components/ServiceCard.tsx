@@ -4,6 +4,7 @@ import { generateWhatsAppUrl } from "@/utils/whatsapp";
 
 export interface ServiceCardProps {
   service: Service;
+  serviceNumber?: number;
   isActive?: boolean;
   isExpanded?: boolean;
   onToggleExpand?: () => void;
@@ -12,6 +13,7 @@ export interface ServiceCardProps {
 
 export default function ServiceCard({
   service,
+  serviceNumber,
   isActive = true,
   isExpanded = false,
   onToggleExpand,
@@ -37,17 +39,27 @@ export default function ServiceCard({
       {/* Top Badges */}
       <div>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          {service.badge && (
-            <span
-              className={`text-[9px] uppercase tracking-ultra px-2 py-0.5 rounded-sm font-semibold font-sans ${
-                service.isFeatured
-                  ? "bg-rose-antique text-forest-deep"
-                  : "bg-forest-deep border border-rose-border text-rose-antique"
-              }`}
-            >
-              {service.badge}
-            </span>
-          )}
+          <div className="flex items-center gap-1.5">
+            {serviceNumber && (
+              <span
+                className="text-[10px] uppercase tracking-widest font-semibold font-sans px-2 py-0.5 rounded-sm bg-forest-deep border border-rose-antique/50 text-rose-antique tabular-nums"
+                aria-label={`Serviço número ${serviceNumber}`}
+              >
+                Nº {String(serviceNumber).padStart(2, "0")}
+              </span>
+            )}
+            {service.badge && (
+              <span
+                className={`text-[9px] uppercase tracking-ultra px-2 py-0.5 rounded-sm font-semibold font-sans ${
+                  service.isFeatured
+                    ? "bg-rose-antique text-forest-deep"
+                    : "bg-forest-deep border border-rose-border text-rose-antique"
+                }`}
+              >
+                {service.badge}
+              </span>
+            )}
+          </div>
           <div className="flex items-center gap-2.5 text-[11px] text-rose-light/60 font-sans ml-auto">
             <span className="inline-flex items-center gap-1">
               <MapPin className="w-3 h-3 text-rose-antique" aria-hidden="true" />

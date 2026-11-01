@@ -37,6 +37,16 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
     expect(screen.getByText(/Experiência Integral/i)).toBeInTheDocument();
   });
 
+  it("displays service numbers on all cards for easy customer reference", () => {
+    render(<CatalogGrid />);
+    expect(screen.getByText("Nº 01")).toBeInTheDocument();
+    expect(screen.getByText("Nº 02")).toBeInTheDocument();
+    expect(screen.getByText("Nº 03")).toBeInTheDocument();
+    expect(screen.getByText("Nº 04")).toBeInTheDocument();
+    expect(screen.getByText("Nº 05")).toBeInTheDocument();
+    expect(screen.getByText("Nº 06")).toBeInTheDocument();
+  });
+
   it("scrolls to center the catalog stage when a card is clicked", () => {
     const scrollToMock = vi.fn();
     window.scrollTo = scrollToMock;

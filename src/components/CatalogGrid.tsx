@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES } from "@/data/services";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import ServiceCard from "./ServiceCard";
@@ -73,9 +72,6 @@ export default function CatalogGrid() {
     return diff;
   };
 
-  const navButtonClass =
-    "w-11 h-11 rounded-full border border-rose-border text-rose-antique hover:border-rose-antique hover:bg-forest-card/80 transition-[background-color,border-color,transform] duration-200 motion-reduce:transition-none flex items-center justify-center active:scale-95 focus-visible:outline-rose-antique shadow-sm";
-
   return (
     <section
       id="catalogo"
@@ -145,6 +141,7 @@ export default function CatalogGrid() {
               >
                 <ServiceCard
                   service={service}
+                  serviceNumber={index + 1}
                   isActive={isCenter}
                   isExpanded={isCenter && expandedServiceId === service.id}
                   onToggleExpand={() => {
@@ -163,65 +160,6 @@ export default function CatalogGrid() {
               </div>
             );
           })}
-        </div>
-
-        {/* Minimalist Rosé Navigation Controls & Progress */}
-        <div className="mt-8 flex flex-col items-center gap-4">
-          <div className="flex items-center gap-6">
-            <button
-              onClick={prevSlide}
-              aria-label="Serviço anterior"
-              className={navButtonClass}
-              style={{ touchAction: "manipulation" }}
-            >
-              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
-            </button>
-
-            <div className="flex flex-col items-center gap-0.5">
-              <span className="font-display tabular-nums text-sm tracking-widest text-rose-antique font-medium">
-                {String(activeIndex + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
-              </span>
-              <span className="text-[11px] uppercase tracking-wider text-rose-light/60 font-sans truncate max-w-[220px] text-center">
-                {SERVICES[activeIndex].title}
-              </span>
-            </div>
-
-            <button
-              onClick={nextSlide}
-              aria-label="Próximo serviço"
-              className={navButtonClass}
-              style={{ touchAction: "manipulation" }}
-            >
-              <ChevronRight className="w-5 h-5" aria-hidden="true" />
-            </button>
-          </div>
-
-          {/* Interactive Pill Dash Indicators with Accessible Touch Targets (min 44px) */}
-          <div
-            className="flex items-center gap-1 pt-1"
-            role="tablist"
-            aria-label="Indicadores dos serviços"
-          >
-            {SERVICES.map((service, idx) => (
-              <button
-                key={service.id}
-                onClick={() => setActiveIndex(idx)}
-                role="tab"
-                aria-selected={idx === activeIndex}
-                aria-label={`Ver serviço ${idx + 1}: ${service.title}`}
-                className="py-3 px-1.5 min-h-[44px] flex items-center justify-center focus-visible:outline-rose-antique"
-                style={{ touchAction: "manipulation" }}
-              >
-                <span
-                  className={`block h-1.5 rounded-full transition-[width,background-color] duration-300 motion-reduce:transition-none ${
-                    idx === activeIndex
-                      ? "w-8 bg-rose-antique"
-                      : "w-2.5 bg-rose-border hover:bg-rose-antique/60"
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Additional Custom Inquiry Note */}
