@@ -36,4 +36,36 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
     render(<CatalogGrid />);
     expect(screen.getByText(/Experiência Integral/i)).toBeInTheDocument();
   });
+
+  it("toggles deliverables expansion on click with correct aria attributes", async () => {
+    const { fireEvent } = await import("@testing-library/react");
+    render(<CatalogGrid />);
+
+    const toggleButtons = screen.getAllByRole("button", { name: /Ver o que está incluso/i });
+    expect(toggleButtons.length).toBeGreaterThanOrEqual(1);
+    expect(toggleButtons[0]).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(toggleButtons[0]);
+    expect(toggleButtons[0]).toHaveAttribute("aria-expanded", "true");
+    expect(toggleButtons[0]).toHaveTextContent(/Ocultar entregáveis/i);
+
+    fireEvent.click(toggleButtons[0]);
+    expect(toggleButtons[0]).toHaveAttribute("aria-expanded", "false");
+    expect(toggleButtons[0]).toHaveTextContent(/Ver o que está incluso/i);
+  });
+
+  it("allows switching between grid and carousel view modes", async () => {
+    const { fireEvent } = await import("@testing-library/react");
+    render(<CatalogGrid />);
+
+    const spotlightButton = screen.getByRole("button", { name: /Modo Destaque/i });
+    expect(spotlightButton).toHaveAttribute("aria-pressed", "false");
+
+    fireEvent.click(spotlightButton);
+    expect(spotlightButton).toHaveAttribute("aria-pressed", "true");
+
+    const gridButton = screen.getByRole("button", { name: /Grade Completa/i });
+    fireEvent.click(gridButton);
+    expect(gridButton).toHaveAttribute("aria-pressed", "true");
+  });
 });

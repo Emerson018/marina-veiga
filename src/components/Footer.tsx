@@ -96,25 +96,25 @@ export default function Footer() {
               © {currentYear} Mariana Veiga Consultoria. Todos os direitos reservados.
             </p>
 
-            {/* Institutional Policies Trigger Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-sans">
+            {/* Institutional Policies Trigger Buttons with Accessible Touch Targets (>= 44px) */}
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-sans">
               <button
                 type="button"
                 onClick={() => setActivePolicy(POLICIES.termos)}
-                className="text-rose-light/70 hover:text-rose-antique underline underline-offset-4 decoration-rose-border transition-colors focus-visible:outline-rose-antique cursor-pointer"
+                className="py-3 px-2 inline-flex items-center min-h-[44px] text-rose-light/70 hover:text-rose-antique underline underline-offset-4 decoration-rose-border transition-colors focus-visible:outline-rose-antique cursor-pointer"
                 style={{ touchAction: "manipulation" }}
               >
                 Termos & Condições
               </button>
 
-              <span className="text-rose-border/60" aria-hidden="true">
+              <span className="text-rose-border/60 select-none px-1" aria-hidden="true">
                 ·
               </span>
 
               <button
                 type="button"
                 onClick={() => setActivePolicy(POLICIES.privacidade)}
-                className="text-rose-light/70 hover:text-rose-antique underline underline-offset-4 decoration-rose-border transition-colors focus-visible:outline-rose-antique cursor-pointer"
+                className="py-3 px-2 inline-flex items-center min-h-[44px] text-rose-light/70 hover:text-rose-antique underline underline-offset-4 decoration-rose-border transition-colors focus-visible:outline-rose-antique cursor-pointer"
                 style={{ touchAction: "manipulation" }}
               >
                 Privacidade & Sigilo (LGPD)

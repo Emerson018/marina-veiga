@@ -14,10 +14,13 @@ interface PolicyModalProps {
 export default function PolicyModal({ policy, isOpen, onClose }: PolicyModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerElementRef = useRef<HTMLElement | null>(null);
 
-  // Focus trap and Escape key listener
+  // Store trigger element and handle focus restoration, focus trap, and Escape key
   useEffect(() => {
     if (!isOpen) return;
+
+    triggerElementRef.current = document.activeElement as HTMLElement;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -33,6 +36,12 @@ export default function PolicyModal({ policy, isOpen, onClose }: PolicyModalProp
 
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
+
+        if (!modalRef.current.contains(document.activeElement)) {
+          e.preventDefault();
+          first.focus();
+          return;
+        }
 
         if (e.shiftKey && document.activeElement === first) {
           e.preventDefault();
@@ -58,6 +67,7 @@ export default function PolicyModal({ policy, isOpen, onClose }: PolicyModalProp
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = originalOverflow;
       clearTimeout(timer);
+      triggerElementRef.current?.focus();
     };
   }, [isOpen, onClose]);
 
@@ -75,9 +85,9 @@ export default function PolicyModal({ policy, isOpen, onClose }: PolicyModalProp
       aria-modal="true"
       aria-labelledby="policy-modal-title"
     >
-      {/* Backdrop overlay */}
+      {/* Backdrop overlay with prefers-reduced-motion check */}
       <div
-        className="fixed inset-0 bg-forest-deep/85 backdrop-blur-sm transition-opacity duration-300"
+        className="fixed inset-0 bg-forest-deep/85 backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -114,7 +124,7 @@ export default function PolicyModal({ policy, isOpen, onClose }: PolicyModalProp
             type="button"
             onClick={onClose}
             aria-label="Fechar janela de políticas"
-            className="p-2 rounded-sm border border-rose-border/60 text-rose-light/70 hover:text-rose-antique hover:border-rose-antique transition-colors shrink-0 focus-visible:outline-rose-antique"
+            className="w-11 h-11 flex items-center justify-center rounded-sm border border-rose-border/60 text-rose-light/70 hover:text-rose-antique hover:border-rose-antique transition-colors shrink-0 focus-visible:outline-rose-antique"
             style={{ touchAction: "manipulation" }}
           >
             <X className="w-5 h-5" aria-hidden="true" />
