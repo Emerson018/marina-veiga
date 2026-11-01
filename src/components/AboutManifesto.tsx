@@ -59,7 +59,7 @@ export default function AboutManifesto() {
       ref={sectionRef}
       id="sobre"
       aria-labelledby="about-heading"
-      className="py-12 md:py-16 border-b border-rose-border/40 relative overflow-hidden"
+      className="scroll-mt-8 py-12 md:py-16 border-b border-rose-border/40 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}

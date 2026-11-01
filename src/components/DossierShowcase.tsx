@@ -30,7 +30,7 @@ export default function DossierShowcase() {
     <section
       id="dossie"
       aria-labelledby="dossier-heading"
-      className="py-24 border-b border-rose-border/40 relative overflow-hidden bg-forest-deep/60"
+      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative overflow-hidden bg-forest-deep/60"
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">

@@ -53,7 +53,7 @@ export default function FaqSection() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="py-24 border-b border-rose-border/40 relative"
+      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative"
     >
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Header */}

@@ -32,7 +32,7 @@ export default function ProcessSteps() {
     <section
       id="metodologia"
       aria-labelledby="process-heading"
-      className="py-24 border-b border-rose-border/40 relative"
+      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
