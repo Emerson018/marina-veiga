@@ -52,3 +52,12 @@ _Avoid_: Contrato burocrático, letras miúdas
 Compromisso de confidencialidade estrita e conformidade com a LGPD em relação a dados pessoais, proporções corporais e fotografias de closet da cliente.
 _Avoid_: Termos genéricos de dados, disclaimer padrão
 
+**Fluidez Editorial (Animações Quiet Luxury)**:
+Movimentos de interface suaves, baseados em transições contínuas e curvas sedosas (`easeOut`), que valorizam a estética de alta-costura sem rebotes infantis, tremores ou distrações à leitura.
+_Avoid_: Bounces, animações espalhafatosas, pop-ins agressivos
+
+**Revelação Sequencial (Stagger Reveal)**:
+Entrada ritmada e ordenada de elementos (etapas da metodologia, cards e tópicos do dossiê) conforme entram na área visível da tela (`viewport`), disparada uma única vez para preservar a estabilidade da leitura.
+_Avoid_: Carregamento abrupto, animações em loop infinito
+
+
