@@ -51,7 +51,7 @@ export default function DossierShowcase() {
                 alt="Mariana Veiga em curadoria prática de roupas e alfaiataria"
                 fill
                 sizes="(max-width: 1024px) 100vw, 450px"
-                className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out motion-reduce:transition-none"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-transparent to-transparent pointer-events-none"
@@ -60,7 +60,7 @@ export default function DossierShowcase() {
 
               {/* Luxury Sheen overlay effect on hover */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-tr from-transparent via-rose-antique/10 to-transparent"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-tr from-transparent via-rose-antique/10 to-transparent motion-reduce:transition-none"
                 aria-hidden="true"
               />
 
@@ -128,7 +128,8 @@ export default function DossierShowcase() {
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-widest font-semibold hover:bg-rose-light transition-colors focus-visible:outline-rose-antique shadow-lg"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-widest font-semibold hover:bg-rose-light transition-colors focus-visible:outline-rose-antique shadow-lg touch-manipulation"
+              style={{ touchAction: "manipulation" }}
             >
               <span>Quero Meu Dossiê de Estilo</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />

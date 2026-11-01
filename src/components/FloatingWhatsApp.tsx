@@ -22,21 +22,15 @@ export default function FloatingWhatsApp() {
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-rose-antique text-forest-deep shadow-2xl hover:bg-rose-light focus-visible:outline-rose-antique focus-visible:outline-offset-4"
+        className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-rose-antique text-forest-deep shadow-2xl hover:bg-rose-light focus-visible:outline-rose-antique focus-visible:outline-offset-4 touch-manipulation motion-reduce:transition-none"
+        style={{ touchAction: "manipulation" }}
       >
-        {/* Soft luxury pulse aura ring */}
-        <span
-          className="absolute inset-0 rounded-full bg-rose-antique/40 animate-ping opacity-20 pointer-events-none"
-          style={{ animationDuration: "3.5s" }}
-          aria-hidden="true"
-        />
-
         <MessageCircle className="w-7 h-7 relative z-10" aria-hidden="true" />
 
         {/* Floating tooltip on desktop hover */}
         <span
           role="tooltip"
-          className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap bg-forest-deep text-rose-light text-xs uppercase tracking-widest px-3 py-1.5 rounded-sm border border-rose-border opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg hidden sm:block z-20"
+          className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap bg-forest-deep text-rose-light text-xs uppercase tracking-widest px-3 py-1.5 rounded-sm border border-rose-border opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg hidden sm:block z-20 motion-reduce:transition-none"
         >
           Falar com Mariana
         </span>

@@ -22,9 +22,9 @@ describe("Ticket 05: DossierShowcase, ProcessSteps, and FaqSection components", 
       expect(
         screen.getByRole("heading", { name: /Como Funciona a Consultoria/i })
       ).toBeInTheDocument();
-      expect(screen.getByText(/01. Diagnóstico & Alinhamento/i)).toBeInTheDocument();
-      expect(screen.getByText(/02. Encontros Práticos/i)).toBeInTheDocument();
-      expect(screen.getByText(/03. Entrega do Dossiê/i)).toBeInTheDocument();
+      expect(screen.getByText(/Diagnóstico & Alinhamento/i)).toBeInTheDocument();
+      expect(screen.getByText(/Encontros Práticos/i)).toBeInTheDocument();
+      expect(screen.getByText(/Entrega do Dossiê/i)).toBeInTheDocument();
     });
   });
 

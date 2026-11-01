@@ -8,7 +8,7 @@ export default function ProcessSteps() {
     {
       number: "01",
       icon: MessageSquareText,
-      title: "01. Diagnóstico & Alinhamento",
+      title: "Diagnóstico & Alinhamento",
       subtitle: "Online | 1 a 2 Encontros",
       description:
         "Entrevista aprofundada para entender sua rotina corporativa, cargos e aspirações de carreira. Mapeamento do estilo predominante e identificação técnica das proporções anatômicas.",
@@ -16,7 +16,7 @@ export default function ProcessSteps() {
     {
       number: "02",
       icon: Sparkles,
-      title: "02. Encontros Práticos & Intervenção",
+      title: "Encontros Práticos & Intervenção",
       subtitle: "Presencial ou Híbrido",
       description:
         "Sessão de Closet Detox para multiplicar looks com seu acervo real e, conforme o pacote, acompanhamento de Personal Shopper focado em peças-chave de alfaiataria e durabilidade.",
@@ -24,7 +24,7 @@ export default function ProcessSteps() {
     {
       number: "03",
       icon: BookOpenCheck,
-      title: "03. Entrega do Dossiê & Consolidação",
+      title: "Entrega do Dossiê & Consolidação",
       subtitle: "Digital & Físico + Suporte",
       description:
         "Apresentação detalhada do seu Dossiê de Estilo personalizado com todas as combinações registradas. Inclui 30 dias de acompanhamento contínuo via WhatsApp para tirar dúvidas no dia a dia.",
