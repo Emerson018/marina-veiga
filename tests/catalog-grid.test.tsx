@@ -36,27 +36,4 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
     render(<CatalogGrid />);
     expect(screen.getByText(/Experiência Integral/i)).toBeInTheDocument();
   });
-
-  it("renders deliverables within disclosure container for each service", () => {
-    render(<CatalogGrid />);
-
-    for (const service of SERVICES) {
-      expect(screen.getByText(service.deliverables[0])).toBeInTheDocument();
-    }
-  });
-
-  it("allows switching between grid and carousel view modes", async () => {
-    const { fireEvent } = await import("@testing-library/react");
-    render(<CatalogGrid />);
-
-    const spotlightButton = screen.getByRole("button", { name: /Modo Destaque/i });
-    expect(spotlightButton).toHaveAttribute("aria-pressed", "false");
-
-    fireEvent.click(spotlightButton);
-    expect(spotlightButton).toHaveAttribute("aria-pressed", "true");
-
-    const gridButton = screen.getByRole("button", { name: /Grade Completa/i });
-    fireEvent.click(gridButton);
-    expect(gridButton).toHaveAttribute("aria-pressed", "true");
-  });
 });

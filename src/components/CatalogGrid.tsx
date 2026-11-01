@@ -1,27 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, LayoutGrid, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES } from "@/data/services";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import ServiceCard from "./ServiceCard";
 
 export default function CatalogGrid() {
-  const [viewMode, setViewMode] = useState<"grid" | "carousel">("grid");
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({});
+  const [expandedServiceId, setExpandedServiceId] = useState<string | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   const corporateWhatsAppUrl = generateWhatsAppUrl(
     "Olá Mariana! Gostaria de conversar sobre uma proposta corporativa personalizada."
   );
-
-  const toggleExpand = (id: string) => {
-    setExpandedIds((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
 
   const prevSlide = () => {
     setActiveIndex((prev) => (prev === 0 ? SERVICES.length - 1 : prev - 1));
@@ -54,19 +46,28 @@ export default function CatalogGrid() {
     setTouchStartX(null);
   };
 
+  // Circular offset calculation relative to activeIndex (-3 to +2 for 6 items)
+  const getCardOffset = (index: number, active: number, total: number) => {
+    let diff = index - active;
+    if (diff < -Math.floor(total / 2)) diff += total;
+    if (diff > Math.floor((total - 1) / 2)) diff -= total;
+    return diff;
+  };
+
   const navButtonClass =
-    "w-11 h-11 rounded-full border border-rose-border text-rose-antique hover:border-rose-antique hover:bg-forest-card/80 transition-[background-color,border-color,transform] duration-200 motion-reduce:transition-none flex items-center justify-center active:scale-95 focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:outline-none shadow-sm cursor-pointer";
+    "w-11 h-11 rounded-full border border-rose-border text-rose-antique hover:border-rose-antique hover:bg-forest-card/80 transition-[background-color,border-color,transform] duration-200 motion-reduce:transition-none flex items-center justify-center active:scale-95 focus-visible:outline-rose-antique shadow-sm";
 
   return (
     <section
       id="catalogo"
       aria-labelledby="catalog-heading"
-      className="py-20 sm:py-24 border-b border-rose-border/40 relative overflow-x-clip"
+      className="py-24 border-b border-rose-border/40 relative overflow-hidden"
+      aria-roledescription="carrossel"
       aria-label="Catálogo de Serviços Mariana Veiga"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
             Catálogo Exclusivo
           </span>
@@ -81,137 +82,122 @@ export default function CatalogGrid() {
           </p>
         </div>
 
-        {/* View Mode Switcher (Quiet Luxury Aesthetic) */}
-        <div className="flex items-center justify-center gap-2 mb-12" role="group" aria-label="Modo de visualização do catálogo">
-          <button
-            type="button"
-            onClick={() => setViewMode("grid")}
-            aria-pressed={viewMode === "grid"}
-            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-sm text-xs uppercase tracking-widest font-sans transition-all duration-200 min-h-[44px] focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:outline-none cursor-pointer ${
-              viewMode === "grid"
-                ? "bg-rose-antique text-forest-deep font-semibold shadow-md"
-                : "border border-rose-border/70 text-rose-antique/80 hover:text-rose-antique hover:border-rose-antique/60 bg-forest-card/50"
-            }`}
-            style={{ touchAction: "manipulation" }}
-          >
-            <LayoutGrid className="w-4 h-4" aria-hidden="true" />
-            <span>Grade Completa</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode("carousel")}
-            aria-pressed={viewMode === "carousel"}
-            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-sm text-xs uppercase tracking-widest font-sans transition-all duration-200 min-h-[44px] focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:outline-none cursor-pointer ${
-              viewMode === "carousel"
-                ? "bg-rose-antique text-forest-deep font-semibold shadow-md"
-                : "border border-rose-border/70 text-rose-antique/80 hover:text-rose-antique hover:border-rose-antique/60 bg-forest-card/50"
-            }`}
-            style={{ touchAction: "manipulation" }}
-          >
-            <Sparkles className="w-4 h-4" aria-hidden="true" />
-            <span>Modo Destaque</span>
-          </button>
+        {/* High-Fashion Spotlight Gallery Stage */}
+        <div
+          className="relative w-full max-w-5xl mx-auto flex items-start justify-center min-h-[620px] sm:min-h-[660px] md:min-h-[700px] py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm"
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          aria-label="Galeria de serviços. Use as setas do teclado para navegar."
+        >
+          {SERVICES.map((service, index) => {
+            const diff = getCardOffset(index, activeIndex, SERVICES.length);
+            const isCenter = diff === 0;
+            const isLeft = diff === -1;
+            const isRight = diff === 1;
+
+            let transformClass = "translate-x-0 scale-100 z-30 opacity-100 shadow-2xl";
+            if (isLeft) {
+              transformClass =
+                "-translate-x-[55%] sm:-translate-x-[72%] md:-translate-x-[85%] scale-[0.88] z-20 opacity-40 hover:opacity-75 cursor-pointer";
+            } else if (isRight) {
+              transformClass =
+                "translate-x-[55%] sm:translate-x-[72%] md:translate-x-[85%] scale-[0.88] z-20 opacity-40 hover:opacity-75 cursor-pointer";
+            } else if (!isCenter) {
+              transformClass = "translate-x-0 scale-75 z-10 opacity-0 pointer-events-none";
+            }
+
+            return (
+              <div
+                key={service.id}
+                className={`absolute top-0 w-full max-w-[320px] sm:max-w-[390px] md:max-w-[420px] transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${transformClass}`}
+                onClick={() => {
+                  if (!isCenter) {
+                    setActiveIndex(index);
+                  }
+                }}
+                onFocus={() => {
+                  if (!isCenter) setActiveIndex(index);
+                }}
+                tabIndex={isCenter ? 0 : -1}
+              >
+                <ServiceCard
+                  service={service}
+                  isActive={isCenter}
+                  isExpanded={isCenter && expandedServiceId === service.id}
+                  onToggleExpand={() => {
+                    if (isCenter) {
+                      setExpandedServiceId((prev) =>
+                        prev === service.id ? null : service.id
+                      );
+                    }
+                  }}
+                  onSelect={() => setActiveIndex(index)}
+                />
+              </div>
+            );
+          })}
         </div>
 
-        {/* View 1: Responsive Editorial Grid (Natural Flow, Never Clipped) */}
-        {viewMode === "grid" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
-            {SERVICES.map((service) => (
-              <ServiceCard
+        {/* Minimalist Rosé Navigation Controls & Progress */}
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <div className="flex items-center gap-6">
+            <button
+              onClick={prevSlide}
+              aria-label="Serviço anterior"
+              className={navButtonClass}
+              style={{ touchAction: "manipulation" }}
+            >
+              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+            </button>
+
+            <div className="flex flex-col items-center gap-0.5">
+              <span className="font-display tabular-nums text-sm tracking-widest text-rose-antique font-medium">
+                {String(activeIndex + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
+              </span>
+              <span className="text-[11px] uppercase tracking-wider text-rose-light/60 font-sans truncate max-w-[220px] text-center">
+                {SERVICES[activeIndex].title}
+              </span>
+            </div>
+
+            <button
+              onClick={nextSlide}
+              aria-label="Próximo serviço"
+              className={navButtonClass}
+              style={{ touchAction: "manipulation" }}
+            >
+              <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            </button>
+          </div>
+
+          {/* Interactive Pill Dash Indicators with Accessible Touch Targets (min 44px) */}
+          <div
+            className="flex items-center gap-1 pt-1"
+            role="tablist"
+            aria-label="Indicadores dos serviços"
+          >
+            {SERVICES.map((service, idx) => (
+              <button
                 key={service.id}
-                service={service}
-                isActive={true}
-                isExpanded={!!expandedIds[service.id]}
-                onToggleExpand={() => toggleExpand(service.id)}
-              />
+                onClick={() => setActiveIndex(idx)}
+                role="tab"
+                aria-selected={idx === activeIndex}
+                aria-label={`Ver serviço ${idx + 1}: ${service.title}`}
+                className="py-3 px-1.5 min-h-[44px] flex items-center justify-center focus-visible:outline-rose-antique"
+                style={{ touchAction: "manipulation" }}
+              >
+                <span
+                  className={`block h-1.5 rounded-full transition-[width,background-color] duration-300 motion-reduce:transition-none ${
+                    idx === activeIndex
+                      ? "w-8 bg-rose-antique"
+                      : "w-2.5 bg-rose-border hover:bg-rose-antique/60"
+                  }`}
+                />
+              </button>
             ))}
           </div>
-        )}
-
-        {/* View 2: Spotlight Carousel (Dynamic In-Flow Container, Never Clipped) */}
-        {viewMode === "carousel" && (
-          <div
-            className="w-full max-w-2xl mx-auto focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:outline-none rounded-sm"
-            tabIndex={0}
-            onKeyDown={handleKeyDown}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            aria-label="Carrossel de serviços. Use as setas do teclado para navegar."
-            aria-roledescription="carrossel"
-          >
-            {/* Active Card in Normal Flow (Auto Height) */}
-            <div className="w-full transition-opacity duration-300">
-              <ServiceCard
-                service={SERVICES[activeIndex]}
-                isActive={true}
-                isExpanded={!!expandedIds[SERVICES[activeIndex].id]}
-                onToggleExpand={() => toggleExpand(SERVICES[activeIndex].id)}
-              />
-            </div>
-
-            {/* Navigation Controls */}
-            <div className="mt-8 flex flex-col items-center gap-4">
-              <div className="flex items-center gap-6">
-                <button
-                  type="button"
-                  onClick={prevSlide}
-                  aria-label="Serviço anterior"
-                  className={navButtonClass}
-                  style={{ touchAction: "manipulation" }}
-                >
-                  <ChevronLeft className="w-5 h-5" aria-hidden="true" />
-                </button>
-
-                <div className="flex flex-col items-center gap-0.5">
-                  <span className="font-display tabular-nums text-sm tracking-widest text-rose-antique font-medium">
-                    {String(activeIndex + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
-                  </span>
-                  <span className="text-[11px] uppercase tracking-wider text-rose-light/60 font-sans truncate max-w-[220px] text-center">
-                    {SERVICES[activeIndex].title}
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={nextSlide}
-                  aria-label="Próximo serviço"
-                  className={navButtonClass}
-                  style={{ touchAction: "manipulation" }}
-                >
-                  <ChevronRight className="w-5 h-5" aria-hidden="true" />
-                </button>
-              </div>
-
-              {/* Indicator Pills with Minimum 44px Touch Targets */}
-              <div
-                className="flex items-center gap-1 pt-1"
-                role="tablist"
-                aria-label="Indicadores dos serviços"
-              >
-                {SERVICES.map((service, idx) => (
-                  <button
-                    key={service.id}
-                    type="button"
-                    onClick={() => setActiveIndex(idx)}
-                    role="tab"
-                    aria-selected={idx === activeIndex}
-                    aria-label={`Ver serviço ${idx + 1}: ${service.title}`}
-                    className="py-3 px-1.5 min-h-[44px] flex items-center justify-center focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:outline-none cursor-pointer"
-                    style={{ touchAction: "manipulation" }}
-                  >
-                    <span
-                      className={`block h-1.5 rounded-full transition-all duration-300 motion-reduce:transition-none ${
-                        idx === activeIndex
-                          ? "w-8 bg-rose-antique"
-                          : "w-2.5 bg-rose-border hover:bg-rose-antique/60"
-                      }`}
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+        </div>
 
         {/* Additional Custom Inquiry Note */}
         <div className="mt-16 text-center p-8 rounded-sm border border-rose-border bg-forest-card/30 max-w-2xl mx-auto">
@@ -226,8 +212,7 @@ export default function CatalogGrid() {
             href={corporateWhatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs uppercase tracking-widest text-rose-antique hover:text-rose-light underline underline-offset-4 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:outline-none"
-            style={{ touchAction: "manipulation" }}
+            className="text-xs uppercase tracking-widest text-rose-antique hover:text-rose-light underline underline-offset-4 font-medium transition-colors"
           >
             Solicitar Proposta Corporativa Customizada →
           </a>
