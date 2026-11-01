@@ -35,5 +35,33 @@ describe("Ticket 06: FloatingWhatsApp and Footer components", () => {
       expect(screen.getByRole("link", { name: /Metodologia/i })).toHaveAttribute("href", "#metodologia");
       expect(screen.getByRole("link", { name: /FAQ/i })).toHaveAttribute("href", "#faq");
     });
+
+    it("opens and closes institutional policy modals for terms and privacy", async () => {
+      const { fireEvent } = await import("@testing-library/react");
+      render(<Footer />);
+
+      const termsButton = screen.getByRole("button", { name: /Termos & Condições/i });
+      const privacyButton = screen.getByRole("button", { name: /Privacidade & Sigilo/i });
+
+      expect(termsButton).toBeInTheDocument();
+      expect(privacyButton).toBeInTheDocument();
+
+      // Open Terms modal
+      fireEvent.click(termsButton);
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+      expect(screen.getByText(/Diretrizes de agendamento, atendimento e propriedade intelectual/i)).toBeInTheDocument();
+      expect(screen.getByText(/Política de Reagendamento \(48h Úteis\)/i)).toBeInTheDocument();
+
+      // Close modal
+      const closeButton = screen.getByRole("button", { name: /Fechar janela de políticas/i });
+      fireEvent.click(closeButton);
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+      // Open Privacy modal
+      fireEvent.click(privacyButton);
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+      expect(screen.getByText(/Compromisso de confidencialidade estrita e conformidade com a LGPD/i)).toBeInTheDocument();
+      expect(screen.getByText(/Cláusula de Sigilo Absoluto/i)).toBeInTheDocument();
+    });
   });
 });

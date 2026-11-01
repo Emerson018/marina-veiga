@@ -44,3 +44,11 @@ _Avoid_: Checkout, pagamento online, compra com carrinho
 Modelo de consultoria que combina etapas estratégicas e diagnósticas realizadas online com sessões práticas presenciais (closet e shopping).
 _Avoid_: Atendimento misto, presencial com vídeo
 
+**Termos & Condições da Consultoria**:
+Diretrizes e normas de agendamento, reagendamento com 48h de aviso prévio, direitos autorais do Dossiê de Estilo e condições contratuais do atendimento.
+_Avoid_: Contrato burocrático, letras miúdas
+
+**Privacidade & Sigilo de Imagem**:
+Compromisso de confidencialidade estrita e conformidade com a LGPD em relação a dados pessoais, proporções corporais e fotografias de closet da cliente.
+_Avoid_: Termos genéricos de dados, disclaimer padrão
+
