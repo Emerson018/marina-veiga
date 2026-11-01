@@ -64,20 +64,17 @@ export default function AboutManifesto() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div
-          className={`max-w-3xl mb-6 lg:mb-8 transition-all duration-700 motion-reduce:transition-none ${
+          className={`max-w-3xl mb-5 lg:mb-6 transition-all duration-700 motion-reduce:transition-none ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <span className="text-[11px] uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-2">
-            Manifesto & Metodologia
-          </span>
           <h2
             id="about-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-display text-rose-antique tracking-wide leading-tight mb-2.5 text-balance"
+            className="text-2xl sm:text-3xl lg:text-4xl font-display text-rose-antique tracking-wide leading-tight mb-2 text-balance"
           >
             A imagem não é sobre aparência. É sobre posicionamento.
           </h2>
-          <p className="text-sm sm:text-base text-rose-light/90 font-light leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-[15px] text-rose-light/90 font-light leading-relaxed max-w-3xl">
             No universo corporativo e nos negócios, sua presença comunica antes mesmo de você dizer uma palavra. Meu trabalho é traduzir sua competência e sua ambição em uma linguagem visual coerente, sem fórmulas prontas e sem tendências passageiras.
           </p>
         </div>
