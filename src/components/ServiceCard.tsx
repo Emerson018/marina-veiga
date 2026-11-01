@@ -21,11 +21,11 @@ export default function ServiceCard({
 
   return (
     <article
-      className={`group/card relative flex flex-col justify-between rounded-sm border p-6 sm:p-8 transition-[border-color,background-color,box-shadow] duration-300 motion-reduce:transition-none ${
+      className={`group/card relative flex flex-col justify-between rounded-sm border p-6 sm:p-8 transition-[border-color,background-color,box-shadow] duration-300 motion-reduce:transition-none h-full ${
         service.isFeatured
           ? "border-rose-antique bg-forest-card/95 shadow-2xl shadow-rose-antique/10 ring-1 ring-rose-antique/40"
-          : "border-rose-border bg-forest-card/80 hover:border-rose-antique/60 hover:bg-forest-card shadow-xl"
-      } ${!isActive ? "pointer-events-auto select-none" : ""}`}
+          : "border-rose-border/60 bg-forest-card/80 hover:border-rose-antique/60 hover:bg-forest-card shadow-xl"
+      } ${!isActive ? "pointer-events-auto select-none opacity-80" : ""}`}
       aria-labelledby={`service-title-${service.id}`}
       onClick={(e) => {
         if (!isActive && onSelect) {
@@ -34,7 +34,7 @@ export default function ServiceCard({
         }
       }}
     >
-      {/* Top Badges */}
+      {/* Top Badges & Metadata */}
       <div>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           {service.badge && (
@@ -48,13 +48,13 @@ export default function ServiceCard({
               {service.badge}
             </span>
           )}
-          <div className="flex items-center gap-3 text-xs text-rose-light/60 font-sans ml-auto">
+          <div className="flex items-center gap-3 text-xs text-rose-light/70 font-sans ml-auto">
             <span className="inline-flex items-center gap-1">
-              <MapPin className="w-3 h-3 text-rose-antique" aria-hidden="true" />
+              <MapPin className="w-3.5 h-3.5 text-rose-antique shrink-0" aria-hidden="true" />
               {service.modality}
             </span>
             <span className="inline-flex items-center gap-1">
-              <Clock className="w-3 h-3 text-rose-antique" aria-hidden="true" />
+              <Clock className="w-3.5 h-3.5 text-rose-antique shrink-0" aria-hidden="true" />
               {service.duration}
             </span>
           </div>
@@ -68,17 +68,18 @@ export default function ServiceCard({
           {service.title}
         </h3>
         {service.tagline && (
-          <p className="text-xs uppercase tracking-widest text-rose-antique/80 font-medium mb-4">
+          <p className="text-xs uppercase tracking-widest text-rose-antique/80 font-medium mb-3">
             {service.tagline}
           </p>
         )}
-        <p className="text-sm text-rose-light/80 font-light leading-relaxed mb-6">
+        <p className="text-sm text-rose-light/85 font-light leading-relaxed mb-6">
           {service.description}
         </p>
       </div>
 
-      {/* Pricing Block */}
-      <div className="pt-4 border-t border-rose-border/60">
+      {/* Pricing, Deliverables & Permanent CTA */}
+      <div className="pt-4 border-t border-rose-border/60 mt-auto flex flex-col justify-end">
+        {/* Pricing Block */}
         <div className="mb-4 space-y-1.5">
           <div className="flex items-baseline gap-2">
             <span className="text-xs uppercase tracking-widest text-rose-light/60 font-sans">
@@ -97,7 +98,7 @@ export default function ServiceCard({
           </span>
         </div>
 
-        {/* Semantic Accessible Toggle Button: Hover / Tap to reveal deliverables */}
+        {/* Semantic Accessible Toggle Button: Click to reveal deliverables */}
         <button
           type="button"
           onClick={(e) => {
@@ -109,7 +110,7 @@ export default function ServiceCard({
           disabled={!isActive}
           aria-expanded={isExpanded}
           aria-controls={`deliverables-${service.id}`}
-          className={`w-full flex items-center justify-between py-2.5 text-[11px] uppercase tracking-widest font-sans transition-colors border-t border-rose-border/30 focus-visible:outline-rose-antique ${
+          className={`w-full flex items-center justify-between py-2.5 text-[11px] uppercase tracking-widest font-sans transition-colors border-t border-rose-border/30 focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:outline-none min-h-[44px] ${
             isActive
               ? "text-rose-antique hover:text-rose-light cursor-pointer"
               : "text-rose-antique/60 cursor-default"
@@ -119,34 +120,34 @@ export default function ServiceCard({
           <span>{isExpanded ? "Ocultar entregáveis" : "Ver o que está incluso"}</span>
           <ChevronDown
             className={`w-3.5 h-3.5 transition-transform duration-300 motion-reduce:transition-none ${
-              isExpanded ? "rotate-180" : "group-hover/card:translate-y-0.5"
+              isExpanded ? "rotate-180" : ""
             }`}
             aria-hidden="true"
           />
         </button>
 
-        {/* Expandable Deliverables & CTA */}
+        {/* Expandable Deliverables */}
         <div
           id={`deliverables-${service.id}`}
-          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out motion-reduce:transition-none ${
+          className={`grid transition-[grid-template-rows,opacity,margin] duration-300 ease-out motion-reduce:transition-none ${
             isExpanded
               ? "grid-rows-[1fr] opacity-100 mt-2"
-              : "grid-rows-[0fr] opacity-0 group-hover/card:grid-rows-[1fr] group-hover/card:opacity-100 group-hover/card:mt-2 group-focus-within/card:grid-rows-[1fr] group-focus-within/card:opacity-100 group-focus-within/card:mt-2"
+              : "grid-rows-[0fr] opacity-0 mt-0"
           }`}
         >
-          <div className="overflow-hidden space-y-6">
-            <div className="pt-4 border-t border-rose-border/40">
-              <span className="text-[11px] uppercase tracking-wider text-rose-antique/90 font-semibold block mb-3">
+          <div className="overflow-hidden">
+            <div className="pt-3 pb-2 border-t border-rose-border/40">
+              <span className="text-[11px] uppercase tracking-wider text-rose-antique/90 font-semibold block mb-2.5">
                 O que está incluso:
               </span>
-              <ul className="space-y-2.5" role="list">
+              <ul className="space-y-2" role="list">
                 {service.deliverables.map((item, index) => (
                   <li
                     key={index}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-rose-light/90 font-light leading-relaxed"
+                    className="flex items-start gap-2.5 text-xs text-rose-light/90 font-light leading-relaxed"
                   >
                     <Check
-                      className="w-4 h-4 text-rose-antique shrink-0 mt-0.5"
+                      className="w-3.5 h-3.5 text-rose-antique shrink-0 mt-0.5"
                       aria-hidden="true"
                     />
                     <span>{item}</span>
@@ -154,23 +155,26 @@ export default function ServiceCard({
                 ))}
               </ul>
             </div>
-
-            <a
-              href={whatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold transition-[background-color,color] duration-200 focus-visible:outline-rose-antique ${
-                service.isFeatured
-                  ? "bg-rose-antique text-forest-deep hover:bg-rose-light shadow-md"
-                  : "border border-rose-antique text-rose-antique hover:bg-rose-antique hover:text-forest-deep"
-              }`}
-              aria-label={`Conversar no WhatsApp sobre ${service.title}`}
-              style={{ touchAction: "manipulation" }}
-            >
-              <MessageCircle className="w-4 h-4" aria-hidden="true" />
-              <span>Quero Esta Consultoria</span>
-            </a>
           </div>
+        </div>
+
+        {/* Permanent Primary CTA (Always Visible & Accessible) */}
+        <div className="pt-4 mt-2">
+          <a
+            href={whatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold transition-[background-color,color] duration-200 focus-visible:ring-2 focus-visible:ring-rose-antique focus-visible:ring-offset-2 focus-visible:ring-offset-forest-deep focus-visible:outline-none min-h-[44px] ${
+              service.isFeatured
+                ? "bg-rose-antique text-forest-deep hover:bg-rose-light shadow-md"
+                : "border border-rose-antique text-rose-antique hover:bg-rose-antique hover:text-forest-deep"
+            }`}
+            aria-label={`Conversar no WhatsApp sobre ${service.title}`}
+            style={{ touchAction: "manipulation" }}
+          >
+            <MessageCircle className="w-4 h-4" aria-hidden="true" />
+            <span>Quero Esta Consultoria</span>
+          </a>
         </div>
       </div>
     </article>
