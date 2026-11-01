@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Italiana, Montserrat } from "next/font/google";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 const italiana = Italiana({
@@ -62,7 +63,7 @@ export default function RootLayout({
           Pular para o conteúdo principal
         </a>
         <div id="root-container" className="flex flex-col min-h-screen">
-          {children}
+          <MotionProvider>{children}</MotionProvider>
         </div>
       </body>
     </html>

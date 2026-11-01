@@ -1,4 +1,7 @@
+"use client";
+
 import { MessageSquareText, Sparkles, BookOpenCheck } from "lucide-react";
+import { m, type Variants } from "framer-motion";
 
 export default function ProcessSteps() {
   const steps = [
@@ -28,15 +31,43 @@ export default function ProcessSteps() {
     },
   ];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.18,
+      },
+    },
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.65,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
   return (
     <section
       id="metodologia"
       aria-labelledby="process-heading"
-      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative"
+      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <m.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
             Jornada de Transformação
           </span>
@@ -50,16 +81,24 @@ export default function ProcessSteps() {
             Um método estruturado em 3 etapas sequenciais que combina estratégia,
             prática e autonomia perpétua para o seu dia a dia profissional.
           </p>
-        </div>
+        </m.div>
 
-        {/* 3 Step Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* 3 Step Cards - Staggered Reveal */}
+        <m.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {steps.map((step) => {
             const Icon = step.icon;
             return (
-              <div
+              <m.div
                 key={step.number}
-                className="relative p-8 rounded-sm border border-rose-border bg-forest-card/40 flex flex-col justify-between hover:border-rose-antique/50 transition-colors"
+                variants={cardVariants}
+                whileHover={{ y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
+                className="relative p-8 rounded-sm border border-rose-border bg-forest-card/40 flex flex-col justify-between hover:border-rose-antique/50 hover:bg-forest-card/70 transition-colors shadow-lg"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -81,10 +120,10 @@ export default function ProcessSteps() {
                     {step.description}
                   </p>
                 </div>
-              </div>
+              </m.div>
             );
           })}
-        </div>
+        </m.div>
       </div>
     </section>
   );

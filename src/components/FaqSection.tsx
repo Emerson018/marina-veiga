@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { m, AnimatePresence } from "framer-motion";
 
 interface FaqItem {
   id: string;
@@ -100,16 +101,24 @@ export default function FaqSection() {
                   />
                 </button>
 
-                {isOpen && (
-                  <div
-                    id={`faq-region-${faq.id}`}
-                    role="region"
-                    aria-labelledby={`faq-btn-${faq.id}`}
-                    className="px-6 pb-6 pt-2 text-xs sm:text-sm text-rose-light/80 font-light leading-relaxed border-t border-rose-border/30 animate-fadeIn"
-                  >
-                    <p>{faq.answer}</p>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <m.div
+                      id={`faq-region-${faq.id}`}
+                      role="region"
+                      aria-labelledby={`faq-btn-${faq.id}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-rose-light/80 font-light leading-relaxed border-t border-rose-border/30">
+                        <p>{faq.answer}</p>
+                      </div>
+                    </m.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}

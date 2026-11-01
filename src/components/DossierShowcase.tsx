@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { BookOpen, CheckCircle2, ArrowRight } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
+import { m } from "framer-motion";
 
 export default function DossierShowcase() {
   const whatsAppUrl = generateWhatsAppUrl(
@@ -34,21 +37,34 @@ export default function DossierShowcase() {
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Visual Showcase: Dossier Mockup */}
-          <div className="lg:col-span-5 relative order-2 lg:order-1">
-            <div className="relative aspect-[4/5] w-full max-w-md mx-auto rounded-sm overflow-hidden border border-rose-antique/50 bg-forest-card shadow-2xl">
+          {/* Visual Showcase: Dossier Mockup with luxury sheen and smooth entrance */}
+          <m.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 relative order-2 lg:order-1"
+          >
+            <div className="group relative aspect-[4/5] w-full max-w-md mx-auto rounded-sm overflow-hidden border border-rose-antique/50 bg-forest-card shadow-2xl">
               <Image
                 src="/fotos/foto-3.jpeg"
                 alt="Mariana Veiga em curadoria prática de roupas e alfaiataria"
                 fill
                 sizes="(max-width: 1024px) 100vw, 450px"
-                className="object-cover object-center hover:scale-[1.02] transition-transform duration-500"
+                className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-transparent to-transparent pointer-events-none"
                 aria-hidden="true"
               />
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-sm bg-forest-deep/90 border border-rose-border backdrop-blur-sm">
+
+              {/* Luxury Sheen overlay effect on hover */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-tr from-transparent via-rose-antique/10 to-transparent"
+                aria-hidden="true"
+              />
+
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-sm bg-forest-deep/90 border border-rose-border backdrop-blur-sm shadow-lg">
                 <span className="text-[10px] uppercase tracking-ultra text-rose-antique font-sans font-semibold block mb-1">
                   Exclusividade
                 </span>
@@ -57,10 +73,16 @@ export default function DossierShowcase() {
                 </p>
               </div>
             </div>
-          </div>
+          </m.div>
 
           {/* Editorial Description */}
-          <div className="lg:col-span-7 flex flex-col items-start order-1 lg:order-2">
+          <m.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            className="lg:col-span-7 flex flex-col items-start order-1 lg:order-2"
+          >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-border bg-forest-card mb-4">
               <BookOpen className="w-3.5 h-3.5 text-rose-antique" aria-hidden="true" />
               <span className="text-[11px] uppercase tracking-ultra text-rose-antique font-sans font-medium">
@@ -106,12 +128,12 @@ export default function DossierShowcase() {
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-widest font-semibold hover:bg-rose-light transition-colors focus-visible:outline-rose-antique"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-widest font-semibold hover:bg-rose-light transition-colors focus-visible:outline-rose-antique shadow-lg"
             >
               <span>Quero Meu Dossiê de Estilo</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
-          </div>
+          </m.div>
         </div>
       </div>
     </section>
