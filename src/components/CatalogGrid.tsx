@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES } from "@/data/services";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
@@ -10,6 +10,25 @@ export default function CatalogGrid() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedServiceId, setExpandedServiceId] = useState<string | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  const scrollToStage = () => {
+    if (typeof window === "undefined" || !stageRef.current) return;
+    try {
+      const navbarHeight = 80;
+      const topGap = 16;
+      const stageTop =
+        stageRef.current.getBoundingClientRect().top + window.scrollY;
+      const targetScrollY = Math.max(0, stageTop - navbarHeight - topGap);
+
+      window.scrollTo({
+        top: targetScrollY,
+        behavior: "smooth",
+      });
+    } catch {
+      // Graceful fallback for test runners / environments without scrollTo
+    }
+  };
 
   const corporateWhatsAppUrl = generateWhatsAppUrl(
     "Olá Mariana! Gostaria de conversar sobre uma proposta corporativa personalizada."
@@ -84,6 +103,7 @@ export default function CatalogGrid() {
 
         {/* High-Fashion Spotlight Gallery Stage */}
         <div
+          ref={stageRef}
           className="relative w-full max-w-5xl mx-auto flex items-start justify-center min-h-[620px] sm:min-h-[660px] md:min-h-[700px] py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm"
           tabIndex={0}
           onKeyDown={handleKeyDown}
@@ -116,6 +136,7 @@ export default function CatalogGrid() {
                   if (!isCenter) {
                     setActiveIndex(index);
                   }
+                  scrollToStage();
                 }}
                 onFocus={() => {
                   if (!isCenter) setActiveIndex(index);
@@ -131,9 +152,13 @@ export default function CatalogGrid() {
                       setExpandedServiceId((prev) =>
                         prev === service.id ? null : service.id
                       );
+                      scrollToStage();
                     }
                   }}
-                  onSelect={() => setActiveIndex(index)}
+                  onSelect={() => {
+                    setActiveIndex(index);
+                    scrollToStage();
+                  }}
                 />
               </div>
             );

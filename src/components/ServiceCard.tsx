@@ -154,6 +154,7 @@ export default function ServiceCard({
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-sm text-xs uppercase tracking-widest font-semibold transition-[background-color,color] duration-200 focus-visible:outline-rose-antique ${
                 service.isFeatured
                   ? "bg-rose-antique text-forest-deep hover:bg-rose-light shadow-md"

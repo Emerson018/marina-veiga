@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import CatalogGrid from "@/components/CatalogGrid";
 import { SERVICES } from "@/data/services";
 
@@ -35,5 +35,20 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
   it("highlights the featured 360 consultation package", () => {
     render(<CatalogGrid />);
     expect(screen.getByText(/Experiência Integral/i)).toBeInTheDocument();
+  });
+
+  it("scrolls to center the catalog stage when a card is clicked", () => {
+    const scrollToMock = vi.fn();
+    window.scrollTo = scrollToMock;
+
+    render(<CatalogGrid />);
+    const cardTitle = screen.getByRole("heading", { name: SERVICES[0].title });
+    fireEvent.click(cardTitle);
+
+    expect(scrollToMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        behavior: "smooth",
+      })
+    );
   });
 });
