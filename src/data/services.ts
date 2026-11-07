@@ -5,6 +5,8 @@ export interface Service {
   description: string;
   badge?: string;
   isFeatured?: boolean;
+  savingsNote?: string;
+  howItWorks?: string[];
   deliverables: string[];
   price: string;
   installments: string;
@@ -15,6 +17,59 @@ export interface Service {
 }
 
 export const SERVICES: Service[] = [
+  {
+    id: "dossie-estilo",
+    title: "Dossiê de Estilo",
+    badge: "Entregável & Guia",
+    tagline: "Seu mapa de looks para o dia a dia e para viagens",
+    description:
+      "Um guia visual criado com as peças que você já tem. Você fotografa suas peças, me envia, e eu monto as combinações e organizo tudo em um mapa prático. Assim, você abre o armário e sabe exatamente o que vestir, seja na rotina, no trabalho ou na mala de uma viagem.",
+    howItWorks: [
+      "Você recebe um passo a passo simples para fotografar suas peças.",
+      "Você envia as fotos pelo WhatsApp ou por e-mail.",
+      "Eu monto as combinações e preparo o seu mapa de looks.",
+      "Você recebe o dossiê pronto em até 7 dias.",
+    ],
+    deliverables: [
+      "Guia rápido de como fotografar suas peças",
+      "Looks montados com as suas peças, em formato visual",
+      "Mapa de combinações organizado por ocasião: trabalho, lazer, eventos",
+      "Roteiros de mala para viagens, com poucas peças e muitas combinações",
+      "Entrega digital em alta resolução, para consultar no celular a qualquer hora",
+      "Opção de versão impressa e encadernada, sob solicitação",
+    ],
+    price: "R$ 390",
+    installments: "em até 3x de R$ 130",
+    paymentTerms: "ou R$ 350 à vista no Pix",
+    duration: "Entregue em até 7 dias após o recebimento das fotos",
+    modality: "Online",
+    whatsappMessage:
+      "Olá Mariana! Gostaria de encomendar o meu Dossiê de Estilo.",
+  },
+  {
+    id: "consultoria-completa-360",
+    title: "Consultoria 360°",
+    badge: "Experiência Integral",
+    isFeatured: true,
+    savingsNote: "Economia de R$ 770 em relação aos serviços avulsos",
+    tagline: "Da descoberta do seu estilo ao closet renovado",
+    description:
+      "A jornada completa de consultoria de imagem, do início ao fim: análise das suas proporções, closet organizado, compras certas e um mapa de looks para você seguir sozinha depois.",
+    deliverables: [
+      "Análise de Estilo & Biótipo: seus cortes, comprimentos e tecidos ideais",
+      "Closet Detox presencial: triagem das peças e mais de 30 looks montados",
+      "Personal Shopper: compras guiadas, de acordo com o seu estilo e orçamento",
+      "Dossiê de Estilo: seu mapa de looks para o dia a dia e para viagens, digital (impresso sob solicitação)",
+      "30 dias de acompanhamento comigo pelo WhatsApp",
+    ],
+    price: "R$ 2.190",
+    installments: "em até 10x de R$ 219 sem juros no cartão (ou 6x de R$ 365)",
+    paymentTerms: "ou R$ 1.970 à vista no Pix",
+    duration: "Processo completo em 4 semanas",
+    modality: "Híbrido",
+    whatsappMessage:
+      "Olá Mariana! Tenho interesse na Consultoria 360° e gostaria de verificar disponibilidade de agenda.",
+  },
   {
     id: "analise-estilo-biotipo",
     title: "Análise de Estilo & Biótipo",
@@ -57,25 +112,32 @@ export const SERVICES: Service[] = [
       "Olá Mariana! Gostaria de agendar o Closet Detox presencial.",
   },
   {
-    id: "closet-detox-online",
-    title: "Closet Detox Online",
-    badge: "100% Remoto",
-    tagline: "Consultoria remota guiada para transformar seu guarda-roupa de onde estiver",
+    id: "styling-eventos",
+    title: "Styling para Eventos",
+    badge: "Ocasião Especial",
+    tagline: "O look certo para a sua ocasião especial",
     description:
-      "Metodologia prática e estruturada à distância: você recebe direcionamento completo para triagem, multiplicação de looks e otimização do closet com total comodidade.",
-    deliverables: [
-      "Orientação guiada passo a passo para triagem do seu acervo",
-      "Montagem de combinações estratégicas registradas digitalmente",
-      "Lista direcionada de peças complementares para compras futuras",
-      "Suporte para organização prática do espaço do closet",
+      "Aniversário, formatura, casamento, promoção no trabalho ou qualquer evento em que você quer chegar segura e bem vestida. Eu faço a curadoria do seu look com peças novas que você ainda pode adquirir e também com o que você já tem no closet.",
+    howItWorks: [
+      "Você me conta sobre o evento: data, local, dress code e como quer se sentir.",
+      "Se for usar peças suas, você fotografa o que tem e me envia (te passo um passo a passo simples).",
+      "Eu monto as opções de look e indico peças novas, se fizer sentido.",
+      "Você recebe tudo pronto, com orientação de acessórios, calçados e caimento.",
     ],
-    price: "R$ 490",
-    installments: "em até 4x de R$ 122,50 sem juros no cartão",
-    paymentTerms: "ou R$ 440 à vista no Pix (com desconto)",
-    duration: "Sessão guiada online",
+    deliverables: [
+      "Briefing personalizado sobre o evento e o seu estilo",
+      "Curadoria de peças novas, com sugestões de marcas e lojas dentro do seu orçamento",
+      "Montagem de looks com as peças que você já tem",
+      "Até 3 opções de look para o mesmo evento, com acessórios e calçados",
+      "Entrega digital, para consultar no celular",
+    ],
+    price: "R$ 360",
+    installments: "em até 3x de R$ 120 sem juros no cartão",
+    paymentTerms: "ou R$ 325 à vista no Pix",
+    duration: "Consultoria pré-evento",
     modality: "Online",
     whatsappMessage:
-      "Olá Mariana! Gostaria de saber mais e agendar o Closet Detox Online.",
+      "Olá Mariana! Gostaria de saber mais e agendar o Styling para Eventos.",
   },
   {
     id: "personal-shopper",
@@ -98,49 +160,5 @@ export const SERVICES: Service[] = [
     modality: "Presencial",
     whatsappMessage:
       "Olá Mariana! Gostaria de saber mais sobre a assessoria de Personal Shopper.",
-  },
-  {
-    id: "consultoria-completa-360",
-    title: "Consultoria 360°",
-    badge: "Experiência Integral",
-    isFeatured: true,
-    tagline: "A transformação integral: da descoberta de estilo ao closet renovado",
-    description:
-      "A experiência definitiva de consultoria de imagem. Uma jornada completa que une análise de biótipo, closet detox, assessoria de compras e entrega do Dossiê de Estilo exclusivo.",
-    deliverables: [
-      "Análise completa de estilo e biótipo",
-      "Sessão completa de Closet Detox com multiplicação de looks",
-      "Assessoria personalizada de Personal Shopper",
-      "Dossiê de Estilo físico/digital exclusivo e encadernado",
-      "30 dias de acompanhamento direto com Mariana Veiga via WhatsApp",
-    ],
-    price: "R$ 2.190",
-    installments: "em até 10x de R$ 219,00 sem juros no cartão (ou 6x de R$ 365,00)",
-    paymentTerms: "ou R$ 1.970 à vista no Pix (com desconto)",
-    duration: "Processo completo ao longo de 4 a 6 semanas",
-    modality: "Híbrido",
-    whatsappMessage:
-      "Olá Mariana! Tenho interesse na Consultoria 360° e gostaria de verificar disponibilidade de agenda.",
-  },
-  {
-    id: "dossie-estilo",
-    title: "Dossiê (só como complemento)",
-    badge: "Complemento Exclusivo",
-    tagline: "Seu livro de estilo pessoal definitivo e atemporal como adicional sob medida",
-    description:
-      "Um guia editorial exclusivo e personalizado página por página, compilando todas as diretrizes de imagem, cápsulas de looks executivos e referências práticas para o seu cotidiano.",
-    deliverables: [
-      "Documento editorial personalizado em alta resolução",
-      "Guia completo de silhuetas, proporções, cortes e linhas",
-      "Cápsula corporativa com catálogo de combinações práticas",
-      "Disponível exclusivamente como complemento aos serviços de consultoria",
-    ],
-    price: "R$ 390",
-    installments: "em até 3x de R$ 130,00 sem juros no cartão",
-    paymentTerms: "ou R$ 350 à vista no Pix (com desconto)",
-    duration: "Entregue em até 10 dias úteis",
-    modality: "Online",
-    whatsappMessage:
-      "Olá Mariana! Gostaria de solicitar o Dossiê de Estilo como complemento.",
   },
 ];

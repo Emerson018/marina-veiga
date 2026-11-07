@@ -82,7 +82,7 @@ export default function CatalogGrid() {
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
             Catálogo Exclusivo
           </span>
@@ -97,10 +97,61 @@ export default function CatalogGrid() {
           </p>
         </div>
 
+        {/* Category Navigation Bar */}
+        <nav
+          aria-label="Categorias de serviços"
+          className="w-full max-w-4xl mx-auto mb-10 px-2"
+        >
+          <div
+            role="tablist"
+            className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 no-scrollbar scroll-smooth flex-nowrap sm:flex-wrap"
+          >
+            {SERVICES.map((service, index) => {
+              const isSelected = activeIndex === index;
+              return (
+                <button
+                  key={service.id}
+                  role="tab"
+                  id={`tab-${service.id}`}
+                  aria-label={service.title}
+                  aria-selected={isSelected}
+                  aria-controls={`service-card-${service.id}`}
+                  tabIndex={isSelected ? 0 : -1}
+                  onClick={() => {
+                    setActiveIndex(index);
+                    scrollToStage();
+                  }}
+                  className={`whitespace-nowrap px-4 py-2 text-xs uppercase tracking-wider font-sans rounded-sm border transition-[background-color,border-color,color,box-shadow] duration-200 focus-visible:ring-1 focus-visible:ring-rose-antique focus-visible:outline-none shrink-0 cursor-pointer ${
+                    isSelected
+                      ? service.isFeatured
+                        ? "bg-rose-antique text-forest-deep border-rose-antique font-bold shadow-lg shadow-rose-antique/30 ring-1 ring-rose-antique"
+                        : "bg-rose-antique text-forest-deep border-rose-antique font-semibold shadow-md shadow-rose-antique/20"
+                      : service.isFeatured
+                      ? "bg-forest-card text-rose-antique border-rose-antique/60 hover:border-rose-antique hover:bg-forest-surface font-semibold"
+                      : "bg-forest-card/60 text-rose-light/80 border-rose-border/60 hover:text-rose-antique hover:border-rose-antique/60 hover:bg-forest-card font-medium"
+                  }`}
+                  style={{ touchAction: "manipulation" }}
+                >
+                  {service.isFeatured && (
+                    <span className="inline-block mr-1 text-rose-antique" aria-hidden="true">
+                      ✦
+                    </span>
+                  )}
+                  {service.title}
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+
         {/* High-Fashion Spotlight Gallery Stage */}
         <div
           ref={stageRef}
-          className="relative w-full max-w-5xl mx-auto flex items-start justify-center min-h-[620px] sm:min-h-[660px] md:min-h-[700px] py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm"
+          className={`relative w-full max-w-5xl mx-auto flex items-start justify-center py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm transition-[min-height] duration-300 ${
+            expandedServiceId
+              ? "min-h-[880px] sm:min-h-[820px] md:min-h-[780px]"
+              : "min-h-[620px] sm:min-h-[660px] md:min-h-[700px]"
+          }`}
           tabIndex={0}
           onKeyDown={handleKeyDown}
           onTouchStart={handleTouchStart}
@@ -127,6 +178,9 @@ export default function CatalogGrid() {
             return (
               <div
                 key={service.id}
+                id={`service-card-${service.id}`}
+                role="tabpanel"
+                aria-labelledby={`tab-${service.id}`}
                 className={`absolute top-0 w-full max-w-[320px] sm:max-w-[390px] md:max-w-[420px] transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${transformClass}`}
                 onClick={() => {
                   if (!isCenter) {

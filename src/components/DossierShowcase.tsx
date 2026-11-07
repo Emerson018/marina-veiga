@@ -1,140 +1,282 @@
 "use client";
 
-import Image from "next/image";
-import { BookOpen, CheckCircle2, ArrowRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ArrowRight, Play, Pause, RotateCcw } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
-import { m } from "framer-motion";
+
+const SCENE_DURATIONS = [6000, 7000, 7000, 7000, 7000, 6000];
 
 export default function DossierShowcase() {
+  const [currentScene, setCurrentScene] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [progressWidths, setProgressWidths] = useState<number[]>([0, 0, 0, 0, 0, 0]);
+
+  const currentSceneRef = useRef(0);
+  const isPausedRef = useRef(false);
+  const t0Ref = useRef(0);
+  const elapsedRef = useRef(0);
+  const animFrameRef = useRef<number | null>(null);
+
   const whatsAppUrl = generateWhatsAppUrl(
-    "Olá Mariana! Gostaria de saber mais sobre como é desenvolvido o Dossiê de Estilo Exclusivo."
+    "Olá Mariana! Gostaria de encomendar o meu Dossiê de Estilo."
   );
 
-  const features = [
-    {
-      title: "Mapeamento Anatômico & Silhueta",
-      description: "Estudo detalhado das suas proporções para indicar caimentos que favorecem sua postura.",
-    },
-    {
-      title: "Cápsula Executiva com +30 Looks",
-      description: "Catálogo fotográfico de combinações práticas para reuniões, viagens e eventos corporativos.",
-    },
-    {
-      title: "Guia de Tecidos & Alfaiataria",
-      description: "Critérios de seleção de matérias-primas nobres, durabilidade e manutenção de peças.",
-    },
-    {
-      title: "Formato Digital & Impresso de Luxo",
-      description: "Acesso permanente no seu smartphone e encadernação editorial premium para sua coleção.",
-    },
-  ];
+  const goToScene = (index: number) => {
+    const nextIdx = index % SCENE_DURATIONS.length;
+    currentSceneRef.current = nextIdx;
+    setCurrentScene(nextIdx);
+    elapsedRef.current = 0;
+    t0Ref.current = performance.now();
+    setProgressWidths((prev) =>
+      prev.map((_, k) => (k < nextIdx ? 100 : 0))
+    );
+  };
+
+  const togglePlayPause = () => {
+    const nextState = !isPausedRef.current;
+    isPausedRef.current = nextState;
+    setIsPaused(nextState);
+    if (!nextState) {
+      t0Ref.current = performance.now() - elapsedRef.current;
+    }
+  };
+
+  const restart = () => {
+    goToScene(0);
+  };
+
+  useEffect(() => {
+    currentSceneRef.current = 0;
+    isPausedRef.current = false;
+    t0Ref.current = performance.now();
+    elapsedRef.current = 0;
+
+    const tick = (now: number) => {
+      if (!isPausedRef.current) {
+        const cur = currentSceneRef.current;
+        const dur = SCENE_DURATIONS[cur];
+        const elapsed = now - t0Ref.current;
+        elapsedRef.current = elapsed;
+
+        if (elapsed >= dur) {
+          const next = (cur + 1) % SCENE_DURATIONS.length;
+          currentSceneRef.current = next;
+          setCurrentScene(next);
+          elapsedRef.current = 0;
+          t0Ref.current = performance.now();
+          setProgressWidths((prev) =>
+            prev.map((_, k) => (k < next ? 100 : 0))
+          );
+        } else {
+          const percent = Math.min(100, (elapsed / dur) * 100);
+          setProgressWidths((prev) => {
+            const copy = [...prev];
+            copy[cur] = percent;
+            return copy;
+          });
+        }
+      }
+      animFrameRef.current = requestAnimationFrame(tick);
+    };
+
+    animFrameRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section
       id="dossie"
-      aria-labelledby="dossier-heading"
-      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative overflow-hidden bg-forest-deep/60"
+      aria-label="Dossiê de Estilo em Movimento"
+      className="scroll-mt-4 sm:scroll-mt-0 py-3 sm:py-4 border-b border-rose-border/40 relative overflow-hidden bg-forest-deep/60 min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center w-full px-2 sm:px-4 lg:px-6"
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Visual Showcase: Dossier Mockup with luxury sheen and smooth entrance */}
-          <m.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 relative order-2 lg:order-1"
-          >
-            <div className="group relative aspect-[4/5] w-full max-w-md mx-auto rounded-sm overflow-hidden border border-rose-antique/50 bg-forest-card shadow-2xl">
-              <Image
-                src="/fotos/foto-3.jpeg"
-                alt="Mariana Veiga em curadoria prática de roupas e alfaiataria"
-                fill
-                sizes="(max-width: 1024px) 100vw, 450px"
-                className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out motion-reduce:transition-none"
-              />
-              <div
-                className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-transparent to-transparent pointer-events-none"
-                aria-hidden="true"
-              />
-
-              {/* Luxury Sheen overlay effect on hover */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-tr from-transparent via-rose-antique/10 to-transparent motion-reduce:transition-none"
-                aria-hidden="true"
-              />
-
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-sm bg-forest-deep/90 border border-rose-border backdrop-blur-sm shadow-lg">
-                <span className="text-[10px] uppercase tracking-ultra text-rose-antique font-sans font-semibold block mb-1">
-                  Exclusividade
-                </span>
-                <p className="font-display text-base text-rose-light">
-                  Curadoria & Consultoria Prática Personalizada
-                </p>
-              </div>
+      <div className="w-full flex flex-col items-center justify-center">
+        {/* Video / Interactive Stage */}
+        <div className="dossier-stage" id="dossier-stage" aria-live="polite">
+          {/* Scene 0: Intro */}
+          <section className={`dossier-scene center ${currentScene === 0 ? "on" : ""}`}>
+            <div className="dossier-t">
+              <h1>Dossiê de Estilo</h1>
+              <p>
+                Seu mapa perpétuo. A consultoria não termina na sessão: ela continua com você, com autonomia para se vestir bem todos os dias.
+              </p>
             </div>
-          </m.div>
+          </section>
 
-          {/* Editorial Description */}
-          <m.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="lg:col-span-7 flex flex-col items-start order-1 lg:order-2"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-border bg-forest-card mb-4">
-              <BookOpen className="w-3.5 h-3.5 text-rose-antique" aria-hidden="true" />
-              <span className="text-[11px] uppercase tracking-ultra text-rose-antique font-sans font-medium">
-                Entregável Exclusivo
-              </span>
+          {/* Scene 1: Pilar 1 - Mapa de Looks */}
+          <section className={`dossier-scene ${currentScene === 1 ? "on" : ""}`}>
+            <div className="dossier-t">
+              <div className="dossier-num">Pilar 1</div>
+              <h2>Mapa de Looks</h2>
+              <p>
+                As combinações feitas com as suas peças, fotografadas e organizadas por ocasião. Você abre o armário e já sabe o que vestir.
+              </p>
             </div>
+            <svg viewBox="0 0 400 260" aria-hidden="true">
+              <g className="dossier-pop">
+                <rect x="10" y="20" width="110" height="170" rx="6" />
+                <path d="M45 60h40l12 20v70H33V80z" />
+                <text x="65" y="215">Trabalho</text>
+              </g>
+              <g className="dossier-pop">
+                <rect x="145" y="20" width="110" height="170" rx="6" />
+                <path d="M180 60h40l10 25-14 8v60h-32V93l-14-8z" />
+                <text x="200" y="215">Lazer</text>
+              </g>
+              <g className="dossier-pop">
+                <rect x="280" y="20" width="110" height="170" rx="6" />
+                <path d="M335 60l25 20-12 100h-26L310 80z" />
+                <text x="335" y="215">Eventos</text>
+              </g>
+            </svg>
+          </section>
 
-            <h2
-              id="dossier-heading"
-              className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-6 text-balance"
-            >
-              O Dossiê de Estilo: Seu Guia Perpétuo
-            </h2>
-
-            <p className="text-base sm:text-lg text-rose-light/90 font-light leading-relaxed mb-8">
-              A consultoria de imagem não termina na sessão de conversa. Ao final da
-              jornada, você recebe seu Dossiê de Estilo: um livro personalizado que
-              documenta todas as suas decisões de imagem, garantindo que você nunca mais
-              fique em dúvida diante do espelho.
-            </p>
-
-            {/* Feature List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full mb-10">
-              {features.map((feat) => (
-                <div key={feat.title} className="flex items-start gap-3">
-                  <CheckCircle2
-                    className="w-5 h-5 text-rose-antique shrink-0 mt-0.5"
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <h3 className="font-sans text-xs uppercase tracking-widest text-rose-antique font-semibold mb-1">
-                      {feat.title}
-                    </h3>
-                    <p className="text-xs text-rose-light/75 font-light leading-relaxed">
-                      {feat.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+          {/* Scene 2: Pilar 2 - Roteiros de Mala */}
+          <section className={`dossier-scene ${currentScene === 2 ? "on" : ""}`}>
+            <div className="dossier-t">
+              <div className="dossier-num">Pilar 2</div>
+              <h2>Roteiros de Mala</h2>
+              <p>
+                Seleções enxutas para viagens: poucas peças e muitas combinações. Você faz a mala com segurança, sem excesso.
+              </p>
             </div>
+            <svg viewBox="0 0 400 260" aria-hidden="true">
+              <rect className="dossier-draw" x="120" y="110" width="160" height="110" rx="12" />
+              <path className="dossier-draw" d="M165 110V85h70v25" />
+              <circle className="fill dossier-pop" cx="160" cy="165" r="9" />
+              <circle className="fill dossier-pop" cx="200" cy="165" r="9" />
+              <circle className="fill dossier-pop" cx="240" cy="165" r="9" />
+              <g className="dossier-pop">
+                <path d="M160 156C160 90 70 90 60 50" />
+                <path d="M200 156C200 80 200 70 200 40" />
+                <path d="M240 156C240 90 330 90 340 50" />
+              </g>
+              <text x="60" y="38">Look 1</text>
+              <text x="200" y="30">Look 2</text>
+              <text x="340" y="38">Look 3</text>
+            </svg>
+          </section>
 
-            <a
-              href={whatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-widest font-semibold hover:bg-rose-light transition-colors focus-visible:outline-rose-antique shadow-lg touch-manipulation"
+          {/* Scene 3: Pilar 3 - Silhueta &amp; Proporções */}
+          <section className={`dossier-scene ${currentScene === 3 ? "on" : ""}`}>
+            <div className="dossier-t">
+              <div className="dossier-num">Pilar 3</div>
+              <h2>Silhueta &amp; Proporções</h2>
+              <p>
+                Cortes, caimentos e comprimentos que valorizam o seu corpo e a sua postura, aplicados aos looks do seu mapa.
+              </p>
+            </div>
+            <svg viewBox="0 0 400 260" aria-hidden="true">
+              <path
+                className="dossier-draw"
+                d="M200 20a22 22 0 1 0 .1 0M170 70q30-12 60 0l14 80-14 8 8 90h-76l8-90-14-8z"
+              />
+              <g className="dossier-pop">
+                <path d="M110 70h180M120 132h160M130 200h140" strokeDasharray="5 6" />
+              </g>
+              <text x="75" y="74">ombros</text>
+              <text x="85" y="136">cintura</text>
+              <text x="95" y="204">quadril</text>
+            </svg>
+          </section>
+
+          {/* Scene 4: Pilar 4 - Digital &amp; Impresso */}
+          <section className={`dossier-scene ${currentScene === 4 ? "on" : ""}`}>
+            <div className="dossier-t">
+              <div className="dossier-num">Pilar 4</div>
+              <h2>Digital &amp; Impresso</h2>
+              <p>
+                Acesso permanente no celular, em alta resolução. Se preferir, a versão impressa e encadernada sai sob solicitação.
+              </p>
+            </div>
+            <svg viewBox="0 0 400 260" aria-hidden="true">
+              <g className="dossier-pop">
+                <rect x="60" y="30" width="110" height="200" rx="14" />
+                <rect x="74" y="52" width="82" height="100" rx="4" />
+                <path d="M74 172h82M74 188h54" />
+              </g>
+              <g className="dossier-pop">
+                <path d="M220 60h90a8 8 0 0 1 8 8v150h-98a8 8 0 0 1-8-8V68a8 8 0 0 1 8-8z" />
+                <path d="M232 90h66M232 110h66M232 130h40" />
+              </g>
+            </svg>
+          </section>
+
+          {/* Scene 5: Finale */}
+          <section className={`dossier-scene center ${currentScene === 5 ? "on" : ""}`}>
+            <div className="dossier-t">
+              <h2>
+                Para nunca mais ficar em dúvida <em>diante do espelho</em>
+              </h2>
+            </div>
+          </section>
+        </div>
+
+        {/* Video Control Bar + Compact CTA */}
+        <div className="dossier-bar flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <button
+              type="button"
+              onClick={togglePlayPause}
+              aria-label={isPaused ? "Reproduzir apresentação" : "Pausar apresentação"}
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full border border-rose-antique text-rose-light text-xs font-sans hover:bg-rose-antique hover:text-forest-deep transition-colors focus-visible:outline-rose-antique shrink-0"
               style={{ touchAction: "manipulation" }}
             >
-              <span>Quero Meu Dossiê de Estilo</span>
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </a>
-          </m.div>
+              {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
+              <span>{isPaused ? "Reproduzir" : "Pausar"}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={restart}
+              aria-label="Reiniciar apresentação"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full border border-rose-antique text-rose-light text-xs font-sans hover:bg-rose-antique hover:text-forest-deep transition-colors focus-visible:outline-rose-antique shrink-0"
+              style={{ touchAction: "manipulation" }}
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Reiniciar</span>
+            </button>
+          </div>
+
+          {/* Interactive Progress Segments */}
+          <div className="dossier-prog min-w-[100px] flex-1" role="tablist" aria-label="Etapas da apresentação">
+            {SCENE_DURATIONS.map((_, idx) => (
+              <div
+                key={idx}
+                role="tab"
+                tabIndex={0}
+                aria-selected={currentScene === idx}
+                aria-label={`Ir para a cena ${idx + 1}`}
+                onClick={() => goToScene(idx)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    goToScene(idx);
+                  }
+                }}
+                className="dossier-seg"
+              >
+                <i style={{ width: `${progressWidths[idx] || 0}%` }} />
+              </div>
+            ))}
+          </div>
+
+          {/* Compact CTA link */}
+          <a
+            href={whatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-wider font-semibold hover:bg-rose-light transition-colors focus-visible:outline-rose-antique shadow-md touch-manipulation shrink-0"
+            style={{ touchAction: "manipulation" }}
+            aria-label="Quero Meu Dossiê de Estilo pelo WhatsApp"
+          >
+            <span>Quero Meu Dossiê</span>
+            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>

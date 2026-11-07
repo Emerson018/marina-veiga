@@ -49,9 +49,9 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
     const titles = SERVICES.map((s) => s.title);
     expect(titles).toContain("Análise de Estilo & Biótipo");
     expect(titles).toContain("Closet Detox");
-    expect(titles).toContain("Closet Detox Online");
+    expect(titles).toContain("Styling para Eventos");
     expect(titles).toContain("Personal Shopper");
     expect(titles).toContain("Consultoria 360°");
-    expect(titles).toContain("Dossiê (só como complemento)");
+    expect(titles).toContain("Dossiê de Estilo");
   });
 });

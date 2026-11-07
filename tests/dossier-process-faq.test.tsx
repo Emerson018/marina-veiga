@@ -9,9 +9,9 @@ describe("Ticket 05: DossierShowcase, ProcessSteps, and FaqSection components", 
     it("renders the dossier showcase with key features and CTA", () => {
       render(<DossierShowcase />);
       expect(
-        screen.getByRole("heading", { name: /O Dossiê de Estilo/i })
+        screen.getByRole("heading", { name: /Dossiê de Estilo/i })
       ).toBeInTheDocument();
-      expect(screen.getByText(/Cápsula Executiva/i)).toBeInTheDocument();
+      expect(screen.getByText(/Mapa de Looks/i)).toBeInTheDocument();
       expect(screen.getByRole("link", { name: /Quero Meu Dossiê/i })).toBeInTheDocument();
     });
   });
