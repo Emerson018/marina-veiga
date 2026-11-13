@@ -1,0 +1,4 @@
+interface:
+  display_name: "My Skills - Embla Carousel v8"
+  short_description: "Embla Carousel v8 docs and API reference"
+  default_prompt: "Use $embla-carousel to implement or configure a carousel"

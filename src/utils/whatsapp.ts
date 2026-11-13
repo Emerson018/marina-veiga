@@ -1,5 +1,5 @@
 export const DEFAULT_WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5511999999999";
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5551989221831";
 
 /**
  * Normalizes a phone number by stripping out all non-digit characters.

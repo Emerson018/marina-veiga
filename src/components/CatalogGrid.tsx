@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES } from "@/data/services";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import ServiceCard from "./ServiceCard";
@@ -8,8 +9,14 @@ import ServiceCard from "./ServiceCard";
 export default function CatalogGrid() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedServiceId, setExpandedServiceId] = useState<string | null>(null);
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+
   const stageRef = useRef<HTMLDivElement>(null);
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
+  const isHorizontalDragRef = useRef<boolean | null>(null);
+  const hasDraggedRef = useRef<boolean>(false);
+  const isTouchActiveRef = useRef<boolean>(false);
 
   const scrollToStage = () => {
     if (typeof window === "undefined" || !stageRef.current) return;
@@ -49,19 +56,166 @@ export default function CatalogGrid() {
     }
   };
 
+  // --- Touch Gestures Handling (Mobile Swiping & Dragging) ---
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
+    isTouchActiveRef.current = true;
+    const touch = e.touches[0];
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      time: Date.now(),
+    };
+    isHorizontalDragRef.current = null;
+    hasDraggedRef.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartRef.current) return;
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - touchStartRef.current.x;
+    const deltaY = touch.clientY - touchStartRef.current.y;
+
+    if (isHorizontalDragRef.current === null) {
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
+      if (absX > 6 || absY > 6) {
+        if (absX >= absY) {
+          isHorizontalDragRef.current = true;
+          setIsDragging(true);
+        } else {
+          // Vertical page scroll detected, do not intercept
+          isHorizontalDragRef.current = false;
+        }
+      }
+    }
+
+    if (isHorizontalDragRef.current === true) {
+      hasDraggedRef.current = true;
+      setDragOffset(deltaX);
+    }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const deltaX = touchStartX - touchEndX;
-    if (Math.abs(deltaX) > 40) {
-      if (deltaX > 0) nextSlide();
-      else prevSlide();
+    if (isHorizontalDragRef.current === true && touchStartRef.current) {
+      const touchEndX = e.changedTouches[0]?.clientX ?? touchStartRef.current.x;
+      const deltaX = touchEndX - touchStartRef.current.x;
+      const deltaTime = Date.now() - touchStartRef.current.time;
+
+      const isQuickFlick = deltaTime < 300 && Math.abs(deltaX) > 25;
+      const isDragPassed = Math.abs(deltaX) > 40;
+
+      if (isQuickFlick || isDragPassed) {
+        if (deltaX < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
     }
-    setTouchStartX(null);
+
+    touchStartRef.current = null;
+    isHorizontalDragRef.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+
+    setTimeout(() => {
+      hasDraggedRef.current = false;
+      isTouchActiveRef.current = false;
+    }, 60);
+  };
+
+  const handleTouchCancel = () => {
+    touchStartRef.current = null;
+    isHorizontalDragRef.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+    hasDraggedRef.current = false;
+    isTouchActiveRef.current = false;
+  };
+
+  // --- Mouse Drag Gestures (Desktop Support) ---
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (isTouchActiveRef.current) return;
+    if (e.button !== 0) return;
+
+    touchStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      time: Date.now(),
+    };
+    isHorizontalDragRef.current = null;
+    hasDraggedRef.current = false;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!touchStartRef.current) return;
+    const deltaX = e.clientX - touchStartRef.current.x;
+    const deltaY = e.clientY - touchStartRef.current.y;
+
+    if (isHorizontalDragRef.current === null) {
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
+      if (absX > 6 || absY > 6) {
+        if (absX >= absY) {
+          isHorizontalDragRef.current = true;
+          setIsDragging(true);
+        } else {
+          isHorizontalDragRef.current = false;
+        }
+      }
+    }
+
+    if (isHorizontalDragRef.current === true) {
+      hasDraggedRef.current = true;
+      setDragOffset(deltaX);
+    }
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (isHorizontalDragRef.current === true && touchStartRef.current) {
+      const deltaX = e.clientX - touchStartRef.current.x;
+      const deltaTime = Date.now() - touchStartRef.current.time;
+
+      const isQuickFlick = deltaTime < 300 && Math.abs(deltaX) > 25;
+      const isDragPassed = Math.abs(deltaX) > 40;
+
+      if (isQuickFlick || isDragPassed) {
+        if (deltaX < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    touchStartRef.current = null;
+    isHorizontalDragRef.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+
+    setTimeout(() => {
+      hasDraggedRef.current = false;
+    }, 60);
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      touchStartRef.current = null;
+      isHorizontalDragRef.current = null;
+      setIsDragging(false);
+      setDragOffset(0);
+      setTimeout(() => {
+        hasDraggedRef.current = false;
+      }, 60);
+    }
+  };
+
+  // Suppress accidental clicks when user performed a drag gesture
+  const handleClickCapture = (e: React.MouseEvent) => {
+    if (hasDraggedRef.current) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
   };
 
   // Circular offset calculation relative to activeIndex (-3 to +2 for 6 items)
@@ -80,7 +234,7 @@ export default function CatalogGrid() {
       aria-roledescription="carrossel"
       aria-label="Catálogo de Serviços Mariana Veiga"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
@@ -147,16 +301,26 @@ export default function CatalogGrid() {
         {/* High-Fashion Spotlight Gallery Stage */}
         <div
           ref={stageRef}
-          className={`relative w-full max-w-5xl mx-auto flex items-start justify-center py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm transition-[min-height] duration-300 ${
+          className={`relative w-full max-w-5xl mx-auto flex items-start justify-center py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm transition-[min-height] duration-300 touch-pan-y ${
+            isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+          } ${
             expandedServiceId
               ? "min-h-[880px] sm:min-h-[820px] md:min-h-[780px]"
               : "min-h-[620px] sm:min-h-[660px] md:min-h-[700px]"
           }`}
+          style={{ touchAction: "pan-y" }}
           tabIndex={0}
           onKeyDown={handleKeyDown}
           onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          aria-label="Galeria de serviços. Use as setas do teclado para navegar."
+          onTouchCancel={handleTouchCancel}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onClickCapture={handleClickCapture}
+          aria-label="Galeria de serviços. Use as setas do teclado ou arraste para navegar."
         >
           {SERVICES.map((service, index) => {
             const diff = getCardOffset(index, activeIndex, SERVICES.length);
@@ -175,14 +339,41 @@ export default function CatalogGrid() {
               transformClass = "translate-x-0 scale-75 z-10 opacity-0 pointer-events-none";
             }
 
+            // Real-time finger drag translation override
+            let dragTransformStyle: React.CSSProperties | undefined = undefined;
+            if (isDragging) {
+              if (isCenter) {
+                dragTransformStyle = {
+                  transform: `translateX(${dragOffset}px) scale(1)`,
+                  transition: "none",
+                };
+              } else if (isLeft) {
+                dragTransformStyle = {
+                  transform: `translateX(calc(var(--card-peek-left, -55%) + ${dragOffset}px)) scale(0.88)`,
+                  transition: "none",
+                };
+              } else if (isRight) {
+                dragTransformStyle = {
+                  transform: `translateX(calc(var(--card-peek-right, 55%) + ${dragOffset}px)) scale(0.88)`,
+                  transition: "none",
+                };
+              }
+            }
+
             return (
               <div
                 key={service.id}
                 id={`service-card-${service.id}`}
                 role="tabpanel"
                 aria-labelledby={`tab-${service.id}`}
-                className={`absolute top-0 w-full max-w-[320px] sm:max-w-[390px] md:max-w-[420px] transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${transformClass}`}
+                className={`absolute top-0 w-full max-w-[310px] sm:max-w-[390px] md:max-w-[420px] [--card-peek-left:-55%] sm:[--card-peek-left:-72%] md:[--card-peek-left:-85%] [--card-peek-right:55%] sm:[--card-peek-right:72%] md:[--card-peek-right:85%] motion-reduce:transition-none ${
+                  isDragging
+                    ? "transition-none select-none"
+                    : "transition-[transform,opacity] duration-500 ease-out"
+                } ${transformClass}`}
+                style={dragTransformStyle}
                 onClick={() => {
+                  if (hasDraggedRef.current) return;
                   if (!isCenter) {
                     setActiveIndex(index);
                   }
@@ -199,7 +390,7 @@ export default function CatalogGrid() {
                   isActive={isCenter}
                   isExpanded={isCenter && expandedServiceId === service.id}
                   onToggleExpand={() => {
-                    if (isCenter) {
+                    if (isCenter && !hasDraggedRef.current) {
                       setExpandedServiceId((prev) =>
                         prev === service.id ? null : service.id
                       );
@@ -207,13 +398,84 @@ export default function CatalogGrid() {
                     }
                   }}
                   onSelect={() => {
-                    setActiveIndex(index);
-                    scrollToStage();
+                    if (!hasDraggedRef.current) {
+                      setActiveIndex(index);
+                      scrollToStage();
+                    }
                   }}
                 />
               </div>
             );
           })}
+        </div>
+
+        {/* Navigation Controls: Arrows, Pagination Dots & Swipe Hint */}
+        <div className="flex flex-col items-center justify-center gap-3.5 mt-8 relative z-30">
+          <div className="flex items-center justify-center gap-3 sm:gap-5">
+            <button
+              type="button"
+              onClick={() => {
+                prevSlide();
+                scrollToStage();
+              }}
+              aria-label="Ver serviço anterior"
+              className="flex items-center justify-center w-11 h-11 rounded-full border border-rose-antique/50 bg-forest-card/90 text-rose-antique hover:bg-rose-antique hover:text-forest-deep transition-[background-color,color,border-color,transform] duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique shadow-lg shadow-forest-deep/60 cursor-pointer"
+              style={{ touchAction: "manipulation" }}
+            >
+              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+            </button>
+
+            {/* Pagination Dots */}
+            <div
+              role="tablist"
+              aria-label="Indicadores dos serviços do catálogo"
+              className="flex items-center gap-2 px-3 py-2 rounded-full bg-forest-card/80 border border-rose-border/60"
+            >
+              {SERVICES.map((service, idx) => {
+                const isSelected = activeIndex === idx;
+                return (
+                  <button
+                    key={service.id}
+                    type="button"
+                    role="tab"
+                    id={`dot-${service.id}`}
+                    aria-selected={isSelected}
+                    aria-label={`Ir para o serviço ${idx + 1}: ${service.title}`}
+                    onClick={() => {
+                      setActiveIndex(idx);
+                      scrollToStage();
+                    }}
+                    className={`transition-all duration-300 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique cursor-pointer ${
+                      isSelected
+                        ? "w-7 h-2 bg-rose-antique shadow-md shadow-rose-antique/30"
+                        : "w-2 h-2 bg-rose-border hover:bg-rose-antique/60"
+                    }`}
+                    style={{ touchAction: "manipulation" }}
+                  />
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                nextSlide();
+                scrollToStage();
+              }}
+              aria-label="Ver próximo serviço"
+              className="flex items-center justify-center w-11 h-11 rounded-full border border-rose-antique/50 bg-forest-card/90 text-rose-antique hover:bg-rose-antique hover:text-forest-deep transition-[background-color,color,border-color,transform] duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique shadow-lg shadow-forest-deep/60 cursor-pointer"
+              style={{ touchAction: "manipulation" }}
+            >
+              <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            </button>
+          </div>
+
+          {/* Swipe affordance hint for mobile touch users */}
+          <p className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-rose-antique/70 font-sans select-none">
+            <span aria-hidden="true">←</span>
+            <span>Arraste para o lado ou use as setas</span>
+            <span aria-hidden="true">→</span>
+          </p>
         </div>
 
         {/* Additional Custom Inquiry Note */}

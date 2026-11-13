@@ -89,4 +89,90 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
       })
     );
   });
+
+  it("switches to next and previous slide using navigation chevron buttons", () => {
+    const scrollToMock = vi.fn();
+    window.scrollTo = scrollToMock;
+
+    render(<CatalogGrid />);
+
+    const nextBtn = screen.getByRole("button", { name: "Ver próximo serviço" });
+    const prevBtn = screen.getByRole("button", { name: "Ver serviço anterior" });
+
+    // Initially at index 0 (SERVICES[0].title)
+    const firstTab = screen.getByRole("tab", { name: SERVICES[0].title });
+    expect(firstTab).toHaveAttribute("aria-selected", "true");
+
+    // Click Next button -> should switch to index 1
+    fireEvent.click(nextBtn);
+    const secondTab = screen.getByRole("tab", { name: SERVICES[1].title });
+    expect(secondTab).toHaveAttribute("aria-selected", "true");
+    expect(firstTab).toHaveAttribute("aria-selected", "false");
+
+    // Click Prev button -> should switch back to index 0
+    fireEvent.click(prevBtn);
+    expect(firstTab).toHaveAttribute("aria-selected", "true");
+    expect(secondTab).toHaveAttribute("aria-selected", "false");
+  });
+
+  it("switches slide when pagination dot is clicked", () => {
+    const scrollToMock = vi.fn();
+    window.scrollTo = scrollToMock;
+
+    render(<CatalogGrid />);
+
+    // Click dot for service 3 (SERVICES[2])
+    const dot3 = screen.getByRole("tab", {
+      name: `Ir para o serviço 3: ${SERVICES[2].title}`,
+    });
+    fireEvent.click(dot3);
+
+    const tab3 = screen.getByRole("tab", { name: SERVICES[2].title });
+    expect(tab3).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("switches to next and previous slide via touch drag swipe gestures", () => {
+    render(<CatalogGrid />);
+
+    const gallery = screen.getByLabelText(
+      "Galeria de serviços. Use as setas do teclado ou arraste para navegar."
+    );
+
+    // Initial state: SERVICES[0] is active
+    expect(
+      screen.getByRole("tab", { name: SERVICES[0].title })
+    ).toHaveAttribute("aria-selected", "true");
+
+    // Swipe left (drag finger left: deltaX = -80) -> nextSlide()
+    fireEvent.touchStart(gallery, {
+      touches: [{ clientX: 200, clientY: 100 }],
+    });
+    fireEvent.touchMove(gallery, {
+      touches: [{ clientX: 120, clientY: 100 }],
+    });
+    fireEvent.touchEnd(gallery, {
+      changedTouches: [{ clientX: 120, clientY: 100 }],
+    });
+
+    // Should now be on SERVICES[1]
+    expect(
+      screen.getByRole("tab", { name: SERVICES[1].title })
+    ).toHaveAttribute("aria-selected", "true");
+
+    // Swipe right (drag finger right: deltaX = +80) -> prevSlide()
+    fireEvent.touchStart(gallery, {
+      touches: [{ clientX: 100, clientY: 100 }],
+    });
+    fireEvent.touchMove(gallery, {
+      touches: [{ clientX: 180, clientY: 100 }],
+    });
+    fireEvent.touchEnd(gallery, {
+      changedTouches: [{ clientX: 180, clientY: 100 }],
+    });
+
+    // Should be back on SERVICES[0]
+    expect(
+      screen.getByRole("tab", { name: SERVICES[0].title })
+    ).toHaveAttribute("aria-selected", "true");
+  });
 });
