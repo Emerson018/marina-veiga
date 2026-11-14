@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES } from "@/data/services";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import ServiceCard from "./ServiceCard";
+import { m } from "framer-motion";
+import { VIEWPORT_ONCE, revealItem } from "@/lib/motion";
 
 export default function CatalogGrid() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -236,7 +238,14 @@ export default function CatalogGrid() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <m.div
+          data-reveal
+          variants={revealItem}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+          className="text-center max-w-3xl mx-auto mb-10"
+        >
           <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
             Catálogo Exclusivo
           </span>
@@ -249,7 +258,7 @@ export default function CatalogGrid() {
           <p className="text-base sm:text-lg text-rose-light/80 font-light leading-relaxed">
             Cada mulher tem um momento e um objetivo diferente. Escolha o formato que faz mais sentido para o seu momento e para a sua rotina.
           </p>
-        </div>
+        </m.div>
 
         {/* Category Navigation Bar */}
         <nav

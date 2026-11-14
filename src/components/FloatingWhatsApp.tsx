@@ -3,6 +3,7 @@
 import { MessageCircle } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import { m } from "framer-motion";
+import { EASE_SILK, SPRING_SETTLE } from "@/lib/motion";
 
 export default function FloatingWhatsApp() {
   const whatsAppUrl = generateWhatsAppUrl(
@@ -19,9 +20,16 @@ export default function FloatingWhatsApp() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Atendimento flutuante com Mariana Veiga no WhatsApp"
+        data-reveal
+        initial={{ opacity: 0, y: 12 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.6, ease: EASE_SILK, delay: 1.6 },
+        }}
         whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.94 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        whileTap={{ scale: 0.96 }}
+        transition={SPRING_SETTLE}
         className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-rose-antique text-forest-deep shadow-2xl hover:bg-rose-light focus-visible:outline-rose-antique focus-visible:outline-offset-4 touch-manipulation motion-reduce:transition-none"
         style={{ touchAction: "manipulation" }}
       >

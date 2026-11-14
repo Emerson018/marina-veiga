@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { m, AnimatePresence } from "framer-motion";
+import { VIEWPORT_ONCE, revealItem, staggerContainer } from "@/lib/motion";
 
 interface FaqItem {
   id: string;
@@ -58,7 +59,14 @@ export default function FaqSection() {
     >
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <m.div
+          data-reveal
+          variants={revealItem}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+          className="text-center max-w-2xl mx-auto mb-16"
+        >
           <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
             Perguntas Frequentes
           </span>
@@ -71,15 +79,23 @@ export default function FaqSection() {
           <p className="text-base sm:text-lg text-rose-light/80 font-light leading-relaxed">
             Transparência e clareza sobre nosso formato de trabalho, modalidades e entregáveis.
           </p>
-        </div>
+        </m.div>
 
         {/* Accordion List */}
-        <div className="space-y-4">
+        <m.div
+          variants={staggerContainer(0.08)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+          className="space-y-4"
+        >
           {faqs.map((faq) => {
             const isOpen = openId === faq.id;
             return (
-              <div
+              <m.div
                 key={faq.id}
+                data-reveal
+                variants={revealItem}
                 className="rounded-sm border border-rose-border bg-forest-card/40 overflow-hidden transition-colors hover:border-rose-antique/40"
               >
                 <button
@@ -94,7 +110,7 @@ export default function FaqSection() {
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-rose-antique shrink-0 transition-transform duration-300 motion-reduce:transition-none ${
+                    className={`w-5 h-5 text-rose-antique shrink-0 transition-transform duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
                       isOpen ? "rotate-180" : ""
                     }`}
                     aria-hidden="true"
@@ -119,10 +135,10 @@ export default function FaqSection() {
                     </m.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </m.div>
             );
           })}
-        </div>
+        </m.div>
       </div>
     </section>
   );

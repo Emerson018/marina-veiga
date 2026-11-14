@@ -55,6 +55,12 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${italiana.variable} ${montserrat.variable} scroll-smooth`}
     >
+      <head>
+        {/* Sem JS, nada fica preso no estado inicial das animações. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}.thread-fallback{opacity:1!important}`}</style>
+        </noscript>
+      </head>
       <body className="bg-forest text-rose-light antialiased selection:bg-rose-antique selection:text-forest-deep min-h-screen">
         {/* Skip link for keyboard accessibility (Web Interface Guidelines) */}
         <a

@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { m, type Variants } from "framer-motion";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
+import { VIEWPORT_ONCE, pressable, revealItem } from "@/lib/motion";
+import ThreadLine from "./ThreadLine";
 
 interface ProcessStep {
   number: string;
@@ -112,10 +114,11 @@ export default function ProcessSteps() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          data-reveal
+          variants={revealItem}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
           className="text-center max-w-3xl mx-auto mb-14 sm:mb-16"
         >
           <h2
@@ -134,7 +137,11 @@ export default function ProcessSteps() {
           className="hidden md:grid grid-cols-3 gap-6 lg:gap-8 mb-6 px-8 relative"
           aria-hidden="true"
         >
-          <div className="absolute top-1/2 left-[16%] right-[16%] h-px bg-rose-border/70 -translate-y-1/2" />
+          <ThreadLine
+            orientation="horizontal"
+            offset={["start 0.9", "start 0.45"]}
+            className="absolute top-1/2 left-[16%] right-[16%] h-px -translate-y-1/2"
+          />
           {STEPS.map((step) => (
             <div key={step.number} className="relative z-10 flex justify-center">
               <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-forest-deep border border-rose-antique/50 text-[11px] uppercase tracking-widest text-rose-antique font-sans font-semibold tabular-nums">
@@ -150,13 +157,20 @@ export default function ProcessSteps() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
+          className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
         >
+          {/* No celular, o fio costura as etapas empilhadas pela margem */}
+          <ThreadLine
+            orientation="vertical"
+            offset={["start 0.8", "end 0.6"]}
+            className="md:hidden absolute left-3 top-3 bottom-3 w-px z-10"
+          />
           {STEPS.map((step, index) => {
             const Icon = step.icon;
             return (
               <m.article
                 key={step.number}
+                data-reveal
                 variants={cardVariants}
                 className="group relative rounded-xl border border-rose-border/80 bg-forest-card/55 p-6 sm:p-7 flex flex-col justify-between transition-[border-color,background-color] duration-300 hover:border-rose-antique/60 hover:bg-forest-card/85 motion-reduce:transition-none"
               >
@@ -242,7 +256,14 @@ export default function ProcessSteps() {
         </m.div>
 
         {/* Bottom Consultation Entry Strip */}
-        <div className="mt-12 rounded-xl border border-rose-border/70 bg-forest-deep/70 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto">
+        <m.div
+          data-reveal
+          variants={revealItem}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
+          className="mt-12 rounded-xl border border-rose-border/70 bg-forest-deep/70 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto"
+        >
           <div className="text-center md:text-left">
             <h3 className="font-display text-xl sm:text-2xl text-rose-antique mb-1.5">
               Quer entender qual etapa ou pacote atende ao seu momento?
@@ -251,17 +272,18 @@ export default function ProcessSteps() {
               Antes de contratar, alinhamos sua rotina e objetivos em uma conversa rápida e sem compromisso.
             </p>
           </div>
-          <a
+          <m.a
             href={diagnosticWhatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
+            {...pressable}
             className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-widest font-semibold hover:bg-rose-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique shrink-0"
             style={{ touchAction: "manipulation" }}
           >
             <MessageCircle className="w-4 h-4" aria-hidden="true" />
             <span>Alinhar Minha Consultoria</span>
-          </a>
-        </div>
+          </m.a>
+        </m.div>
       </div>
     </section>
   );

@@ -30,7 +30,7 @@ describe("Ticket 03: Header, Hero, and AboutManifesto components", () => {
     it("renders editorial title, value proposition, and CTA buttons", () => {
       render(<Hero />);
       expect(
-        screen.getByRole("heading", { name: /Elegância Estratégica & Autoridade Feminina/i })
+        screen.getByRole("heading", { name: /Elegância que nasce do que você já tem/i })
       ).toBeInTheDocument();
 
       const ctaCatalog = screen.getByRole("link", { name: /Conhecer os Serviços/i });
@@ -40,10 +40,18 @@ describe("Ticket 03: Header, Hero, and AboutManifesto components", () => {
       expect(ctaWhatsApp).toHaveAttribute("href", expect.stringContaining("wa.me"));
     });
 
-    it("has editorial hero image with accessible alt text", () => {
+    it("fala do posicionamento amplo, com destaque para a autonomia da cliente", () => {
       render(<Hero />);
-      const heroImg = screen.getByAltText(/Mariana Veiga/i);
-      expect(heroImg).toBeInTheDocument();
+      expect(screen.getByText(/decidir sozinha/i)).toBeInTheDocument();
+      expect(screen.queryByText(/vestir sua ambição/i)).toBeNull();
+    });
+
+    it("apresenta o Fio de Alinhavo como elemento decorativo, sem foto", () => {
+      const { container } = render(<Hero />);
+      expect(screen.queryByRole("img")).toBeNull();
+      const canvas = container.querySelector("canvas");
+      expect(canvas).not.toBeNull();
+      expect(canvas?.closest("[aria-hidden='true']")).not.toBeNull();
     });
   });
 

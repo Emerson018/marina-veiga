@@ -3,6 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, ArrowUp } from "lucide-react";
+import { m } from "framer-motion";
+import {
+  VIEWPORT_ONCE,
+  pressable,
+  revealItem,
+  staggerContainer,
+} from "@/lib/motion";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import { NAV_LINKS } from "@/data/navigation";
 import { POLICIES, PolicyDocument } from "@/data/policies";
@@ -23,9 +30,19 @@ export default function Footer() {
         className="bg-forest-deep border-t border-rose-border/50 pt-16 pb-12 relative"
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-rose-border/30">
+          <m.div
+            variants={staggerContainer(0.12)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+            className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-rose-border/30"
+          >
             {/* Brand Column */}
-            <div className="md:col-span-5 flex flex-col items-start">
+            <m.div
+              data-reveal
+              variants={revealItem}
+              className="md:col-span-5 flex flex-col items-start"
+            >
               <span className="font-display text-2xl sm:text-3xl tracking-wide text-rose-antique block mb-1">
                 Mariana Veiga
               </span>
@@ -37,21 +54,22 @@ export default function Footer() {
                 com segurança no trabalho, na rotina, nos eventos e nas viagens.
               </p>
 
-              <a
+              <m.a
                 href={whatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                {...pressable}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm border border-rose-antique/50 text-rose-antique hover:bg-rose-antique hover:text-forest-deep text-xs uppercase tracking-widest font-medium transition-colors focus-visible:outline-rose-antique"
                 aria-label="Falar diretamente com Mariana Veiga no WhatsApp"
                 style={{ touchAction: "manipulation" }}
               >
                 <MessageCircle className="w-4 h-4" aria-hidden="true" />
                 <span>Falar Diretamente com Mariana</span>
-              </a>
-            </div>
+              </m.a>
+            </m.div>
 
             {/* Navigation Links */}
-            <div className="md:col-span-3">
+            <m.div data-reveal variants={revealItem} className="md:col-span-3">
               <span className="text-xs uppercase tracking-widest text-rose-antique font-semibold block mb-4">
                 Navegação
               </span>
@@ -67,10 +85,10 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </m.div>
 
             {/* Modality & Service Information */}
-            <div className="md:col-span-4">
+            <m.div data-reveal variants={revealItem} className="md:col-span-4">
               <span className="text-xs uppercase tracking-widest text-rose-antique font-semibold block mb-4">
                 Atendimento Híbrido
               </span>
@@ -87,8 +105,8 @@ export default function Footer() {
                   Atendimento com número restrito de clientes por mês para garantir dedicação exclusiva.
                 </span>
               </div>
-            </div>
-          </div>
+            </m.div>
+          </m.div>
 
           {/* Bottom Bar: Copyright, Policies & Back to Top */}
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-rose-light/60 font-light">

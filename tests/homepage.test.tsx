@@ -7,7 +7,7 @@ describe("HomePage Full Integration", () => {
     render(<HomePage />);
     expect(screen.getByRole("banner")).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: /Elegância Estratégica & Autoridade Feminina/i })
+      screen.getByRole("heading", { name: /Elegância que nasce do que você já tem/i })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: /A imagem não é sobre aparência/i })

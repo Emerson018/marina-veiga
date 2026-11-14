@@ -53,8 +53,16 @@ Compromisso de confidencialidade estrita e conformidade com a LGPD em relação 
 _Avoid_: Termos genéricos de dados, disclaimer padrão
 
 **Fluidez Editorial (Animações Quiet Luxury)**:
-Movimentos de interface suaves, baseados em transições contínuas e curvas sedosas (`easeOut`), que valorizam a estética de alta-costura sem rebotes infantis, tremores ou distrações à leitura.
+Movimentos de interface suaves, baseados em transições contínuas, curvas sedosas (`easeOut`) e molas amortecidas que respondem ao toque, ao cursor e à rolagem com peso físico, mas se acomodam no destino sem ultrapassá-lo. Valorizam a estética de alta-costura sem rebotes infantis, tremores ou distrações à leitura.
 _Avoid_: Bounces, animações espalhafatosas, pop-ins agressivos
+
+**Fio de Alinhavo**:
+Motivo visual assinatura do site: uma linha fina em rosa antigo que costura, na abertura, o contorno de um manequim de moulage com um vestido alinhavado, e reage ao cursor como um fio puxado que se acomoda. Reaparece de forma discreta costurando as etapas da Metodologia. Remete ao ateliê, ao corpo real e ao caimento.
+_Avoid_: Linha decorativa, rabisco, divisor
+
+**Revelação por Tecido**:
+Entrada de uma fotografia por uma máscara que desce como um tecido assentando, usada no retrato da Mariana na seção Sobre.
+_Avoid_: Fade genérico, slide-in
 
 **Revelação Sequencial (Stagger Reveal)**:
 Entrada ritmada e ordenada de elementos (etapas da metodologia, cards e tópicos do dossiê) conforme entram na área visível da tela (`viewport`), disparada uma única vez para preservar a estabilidade da leitura.

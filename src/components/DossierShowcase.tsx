@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Play, Pause, RotateCcw } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
+import { m } from "framer-motion";
+import { VIEWPORT_ONCE, revealItem } from "@/lib/motion";
 
 const SCENE_DURATIONS = [6000, 7000, 7000, 7000, 7000, 6000];
 
@@ -94,7 +96,14 @@ export default function DossierShowcase() {
       aria-label="Dossiê de Estilo em Movimento"
       className="scroll-mt-4 sm:scroll-mt-0 py-3 sm:py-4 border-b border-rose-border/40 relative overflow-hidden bg-forest-deep/60 min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center w-full px-2 sm:px-4 lg:px-6"
     >
-      <div className="w-full flex flex-col items-center justify-center">
+      <m.div
+        data-reveal
+        variants={revealItem}
+        initial="hidden"
+        whileInView="visible"
+        viewport={VIEWPORT_ONCE}
+        className="w-full flex flex-col items-center justify-center"
+      >
         {/* Video / Interactive Stage */}
         <div className="dossier-stage" id="dossier-stage" aria-live="polite">
           {/* Scene 0: Intro */}
@@ -278,7 +287,7 @@ export default function DossierShowcase() {
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </a>
         </div>
-      </div>
+      </m.div>
     </section>
   );
 }
