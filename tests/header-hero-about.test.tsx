@@ -53,7 +53,7 @@ describe("Ticket 03: Header, Hero, and AboutManifesto components", () => {
       expect(
         screen.getByRole("heading", { name: /A imagem não é sobre aparência/i })
       ).toBeInTheDocument();
-      expect(screen.getByText(/Dress Code Estratégico/i)).toBeInTheDocument();
+      expect(screen.getByText(/Estilo para a Vida Real/i)).toBeInTheDocument();
       expect(screen.getByText(/Quiet Luxury/i)).toBeInTheDocument();
       expect(screen.getByText(/Autonomia Perpétua/i)).toBeInTheDocument();
     });

@@ -30,11 +30,11 @@ export default function Footer() {
                 Mariana Veiga
               </span>
               <span className="text-[11px] uppercase tracking-ultra text-rose-antique/70 font-sans block mb-4">
-                Consultoria de Imagem & Dress Code Corporativo
+                Consultoria de Imagem & Estilo Pessoal
               </span>
               <p className="text-xs sm:text-sm text-rose-light/75 font-light leading-relaxed max-w-sm mb-6">
-                Posicionamento de imagem estratégica, elegância atemporal e quiet luxury
-                para mulheres profissionais e executivas de alto impacto.
+                Elegância atemporal e quiet luxury para mulheres que querem se vestir
+                com segurança no trabalho, na rotina, nos eventos e nas viagens.
               </p>
 
               <a

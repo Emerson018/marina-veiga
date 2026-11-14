@@ -87,7 +87,7 @@ export default function Hero() {
             <div className="relative w-full h-full rounded-sm overflow-hidden">
               <Image
                 src="/fotos/foto-1.jpg"
-                alt="Mariana Veiga - Consultora de Imagem e Dress Code Corporativo"
+                alt="Mariana Veiga - Consultora de Imagem e Estilo Pessoal"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 360px"

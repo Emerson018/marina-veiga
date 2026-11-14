@@ -18,22 +18,23 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Mariana Veiga | Consultoria de Imagem & Dress Code Corporativo",
+  title: "Mariana Veiga | Consultoria de Imagem & Estilo Pessoal",
   description:
-    "Catálogo exclusivo de serviços de consultoria de imagem feminina e executiva. Alinhamento de estilo pessoal, biótipo, closet detox e dossiê de estilo com elegância e autoridade.",
+    "Consultoria de imagem feminina para o trabalho, a rotina, os eventos e as viagens. Dossiê de Estilo, análise de biótipo, closet detox, styling para eventos e personal shopper, com preços e prazos claros.",
   keywords: [
     "consultoria de imagem",
-    "dress code corporativo",
     "estilo pessoal",
+    "dossiê de estilo",
     "closet detox",
     "personal shopper",
+    "styling para eventos",
     "Mariana Veiga",
   ],
   authors: [{ name: "Mariana Veiga" }],
   openGraph: {
-    title: "Mariana Veiga | Consultoria de Imagem & Estilo Executivo",
+    title: "Mariana Veiga | Consultoria de Imagem & Estilo Pessoal",
     description:
-      "Catálogo exclusivo de serviços de consultoria de imagem feminina e executiva. Descubra sua melhor versão com elegância e estratégia.",
+      "Consultoria de imagem feminina a partir das peças que você já tem: looks para o trabalho, a rotina, os eventos e as viagens.",
     type: "website",
     locale: "pt_BR",
   },

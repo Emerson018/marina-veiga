@@ -36,9 +36,9 @@ export default function AboutManifesto() {
   const pillars = [
     {
       icon: ShieldCheck,
-      title: "Dress Code Estratégico",
+      title: "Estilo para a Vida Real",
       description:
-        "Domine os códigos visuais do ambiente corporativo e posicione sua autoridade com segurança e refinamento.",
+        "Looks pensados para as ocasiões que você vive de fato: o trabalho, a rotina, os eventos e as viagens, sempre a partir das peças que você já tem.",
     },
     {
       icon: Sparkles,
@@ -75,7 +75,7 @@ export default function AboutManifesto() {
             A imagem não é sobre aparência. É sobre posicionamento.
           </h2>
           <p className="text-sm sm:text-[15px] text-rose-light/90 font-light leading-relaxed max-w-3xl">
-            No universo corporativo e nos negócios, sua presença comunica antes mesmo de você dizer uma palavra. Meu trabalho é traduzir sua competência e sua ambição em uma linguagem visual coerente, sem fórmulas prontas e sem tendências passageiras.
+            Numa reunião, num casamento ou numa viagem, sua presença comunica antes mesmo de você dizer uma palavra. Meu trabalho é traduzir quem você é em uma linguagem visual coerente, sem fórmulas prontas e sem tendências passageiras.
           </p>
         </div>
 
@@ -119,7 +119,7 @@ export default function AboutManifesto() {
               }`}
             >
               <p className="text-xs sm:text-[13px] md:text-sm text-rose-light/90 font-light leading-relaxed">
-                Formada em Design de Moda e com 4 anos de experiência em consultoria de estilo, construo com cada cliente um closet inteligente, a partir da rotina real, dos objetivos profissionais e das proporções dela. Sem restrições arbitrárias.
+                Formada em Design de Moda e com 4 anos de experiência em consultoria de estilo, construo com cada cliente um closet inteligente, a partir da rotina real, dos objetivos e das proporções dela. Sem restrições arbitrárias.
               </p>
             </div>
 

@@ -247,7 +247,7 @@ export default function CatalogGrid() {
             Serviços & Experiências de Imagem
           </h2>
           <p className="text-base sm:text-lg text-rose-light/80 font-light leading-relaxed">
-            Cada mulher tem um momento e um objetivo diferente. Escolha o formato que faz mais sentido para a sua carreira e para a sua rotina.
+            Cada mulher tem um momento e um objetivo diferente. Escolha o formato que faz mais sentido para o seu momento e para a sua rotina.
           </p>
         </div>
 

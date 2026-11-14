@@ -24,19 +24,19 @@ export default function FaqSection() {
       id: "duracao",
       question: "Quanto tempo dura todo o processo de consultoria?",
       answer:
-        "Em média, a Consultoria Completa 360° é realizada ao longo de 4 a 6 semanas, respeitando sua agenda corporativa e garantindo tempo hábil para a confecção artesanal e encadernação do seu Dossiê de Estilo. Serviços pontuais (como Análise de Biótipo) são concluídos em até 10 dias úteis.",
+        "Depende do serviço. A Consultoria 360° acontece ao longo de 4 semanas, seguidas de 30 dias de acompanhamento pelo WhatsApp. A Análise de Estilo & Biótipo é feita em 2 encontros, o Closet Detox numa sessão de 4h e o Dossiê de Estilo fica pronto em até 7 dias depois que você envia as fotos das suas peças.",
     },
     {
       id: "coloracao",
       question: "A consultoria inclui análise de coloração pessoal?",
       answer:
-        "Não. Nosso foco é puramente estratégico e focado em dress code corporativo, proporções anatômicas, caimento de alfaiataria e qualidade de tecidos. Acreditamos que a autoridade feminina e a elegância atemporal dependem de modelagem, postura e contexto profissional, sem restringir suas escolhas a cartelas cromáticas limitantes.",
+        "Não. O foco está nas suas proporções, no caimento, nos tecidos e nas ocasiões que você vive. Acreditamos que a elegância atemporal depende de modelagem, postura e contexto, sem restringir suas escolhas a uma cartela de cores.",
     },
     {
       id: "entrega-dossie",
       question: "Como recebo o meu Dossiê de Estilo?",
       answer:
-        "Você recebe um arquivo digital interativo em altíssima definição para consulta rápida no smartphone e tablet. Nos pacotes de Consultoria 360°, você também recebe um exemplar impresso exclusivo com acabamento de luxo.",
+        "Você recebe um arquivo digital em alta resolução, para consultar no celular a qualquer hora. Se preferir, também há uma versão impressa e encadernada, sob solicitação.",
     },
     {
       id: "agendamento",

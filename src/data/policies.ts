@@ -36,7 +36,7 @@ export const POLICIES: Record<"termos" | "privacidade", PolicyDocument> = {
       {
         title: "3. Entregáveis & Prazos",
         content: [
-          "O Dossiê de Estilo físico/digital exclusivo é elaborado individualmente e entregue em até 10 dias úteis após a conclusão das análises técnicas de estilo e proporções.",
+          "O Dossiê de Estilo físico/digital exclusivo é elaborado individualmente e entregue em até 7 dias após o recebimento das fotos das peças ou a conclusão das etapas de análise, conforme o serviço contratado.",
           "O acompanhamento contínuo de 30 dias via WhatsApp incluso na Consultoria 360° inicia-se a partir da data de entrega do Dossiê, destinado ao esclarecimento de dúvidas pontuais na montagem de looks e ocasiões profissionais.",
         ],
       },

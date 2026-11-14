@@ -34,11 +34,11 @@ const STEPS: ProcessStep[] = [
     modality: "Online",
     duration: "1 a 2 encontros",
     description:
-      "Mapeamento estratégico da sua rotina executiva, cargos e objetivos antes de mexer em qualquer peça do armário.",
+      "Mapeamento da sua rotina, das ocasiões que você vive e dos seus objetivos antes de mexer em qualquer peça do armário.",
     highlights: [
-      "Entrevista de posicionamento pessoal e código visual do seu setor",
+      "Entrevista sobre o seu estilo, a sua rotina e os códigos dos ambientes que você frequenta",
       "Análise técnica de estilo predominante, contraste e proporções",
-      "Definição da imagem que sustenta sua autoridade e seu próximo passo",
+      "Definição da imagem que traduz quem você é e o seu próximo passo",
     ],
     outcome: "Mapa de Estilo & Direção Visual",
   },
