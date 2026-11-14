@@ -72,10 +72,10 @@ export default function Hero() {
             </div>
             <div>
               <span className="block font-display text-xl sm:text-2xl text-rose-antique">
-                Exclusivo
+                Até 7 dias
               </span>
               <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-rose-light/70 font-sans">
-                Dossiê Impresso
+                Dossiê pronto
               </span>
             </div>
           </div>
