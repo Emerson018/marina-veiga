@@ -1,20 +1,18 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Play, Pause, RotateCcw } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import { m } from "framer-motion";
 import { VIEWPORT_ONCE, revealItem } from "@/lib/motion";
 
-const SCENE_DURATIONS = [6000, 7000, 7000, 7000, 7000, 6000];
+const SCENE_DURATIONS = [5000, 5000, 5000, 5000, 5000, 5000];
 
 export default function DossierShowcase() {
   const [currentScene, setCurrentScene] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [progressWidths, setProgressWidths] = useState<number[]>([0, 0, 0, 0, 0, 0]);
 
   const currentSceneRef = useRef(0);
-  const isPausedRef = useRef(false);
   const t0Ref = useRef(0);
   const elapsedRef = useRef(0);
   const animFrameRef = useRef<number | null>(null);
@@ -34,49 +32,33 @@ export default function DossierShowcase() {
     );
   };
 
-  const togglePlayPause = () => {
-    const nextState = !isPausedRef.current;
-    isPausedRef.current = nextState;
-    setIsPaused(nextState);
-    if (!nextState) {
-      t0Ref.current = performance.now() - elapsedRef.current;
-    }
-  };
-
-  const restart = () => {
-    goToScene(0);
-  };
-
   useEffect(() => {
     currentSceneRef.current = 0;
-    isPausedRef.current = false;
     t0Ref.current = performance.now();
     elapsedRef.current = 0;
 
     const tick = (now: number) => {
-      if (!isPausedRef.current) {
-        const cur = currentSceneRef.current;
-        const dur = SCENE_DURATIONS[cur];
-        const elapsed = now - t0Ref.current;
-        elapsedRef.current = elapsed;
+      const cur = currentSceneRef.current;
+      const dur = SCENE_DURATIONS[cur];
+      const elapsed = now - t0Ref.current;
+      elapsedRef.current = elapsed;
 
-        if (elapsed >= dur) {
-          const next = (cur + 1) % SCENE_DURATIONS.length;
-          currentSceneRef.current = next;
-          setCurrentScene(next);
-          elapsedRef.current = 0;
-          t0Ref.current = performance.now();
-          setProgressWidths((prev) =>
-            prev.map((_, k) => (k < next ? 100 : 0))
-          );
-        } else {
-          const percent = Math.min(100, (elapsed / dur) * 100);
-          setProgressWidths((prev) => {
-            const copy = [...prev];
-            copy[cur] = percent;
-            return copy;
-          });
-        }
+      if (elapsed >= dur) {
+        const next = (cur + 1) % SCENE_DURATIONS.length;
+        currentSceneRef.current = next;
+        setCurrentScene(next);
+        elapsedRef.current = 0;
+        t0Ref.current = performance.now();
+        setProgressWidths((prev) =>
+          prev.map((_, k) => (k < next ? 100 : 0))
+        );
+      } else {
+        const percent = Math.min(100, (elapsed / dur) * 100);
+        setProgressWidths((prev) => {
+          const copy = [...prev];
+          copy[cur] = percent;
+          return copy;
+        });
       }
       animFrameRef.current = requestAnimationFrame(tick);
     };
@@ -227,30 +209,6 @@ export default function DossierShowcase() {
 
         {/* Video Control Bar + Compact CTA */}
         <div className="dossier-bar flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <button
-              type="button"
-              onClick={togglePlayPause}
-              aria-label={isPaused ? "Reproduzir apresentação" : "Pausar apresentação"}
-              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full border border-rose-antique text-rose-light text-xs font-sans hover:bg-rose-antique hover:text-forest-deep transition-colors focus-visible:outline-rose-antique shrink-0"
-              style={{ touchAction: "manipulation" }}
-            >
-              {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
-              <span>{isPaused ? "Reproduzir" : "Pausar"}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={restart}
-              aria-label="Reiniciar apresentação"
-              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full border border-rose-antique text-rose-light text-xs font-sans hover:bg-rose-antique hover:text-forest-deep transition-colors focus-visible:outline-rose-antique shrink-0"
-              style={{ touchAction: "manipulation" }}
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reiniciar</span>
-            </button>
-          </div>
-
           {/* Interactive Progress Segments */}
           <div className="dossier-prog min-w-[100px] flex-1" role="tablist" aria-label="Etapas da apresentação">
             {SCENE_DURATIONS.map((_, idx) => (

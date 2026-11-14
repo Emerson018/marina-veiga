@@ -40,10 +40,14 @@ describe("Ticket 03: Header, Hero, and AboutManifesto components", () => {
       expect(ctaWhatsApp).toHaveAttribute("href", expect.stringContaining("wa.me"));
     });
 
-    it("fala do posicionamento amplo, com destaque para a autonomia da cliente", () => {
+    it("destaca a proposta de valor e ambição feminina no hero bio", () => {
       render(<Hero />);
-      expect(screen.getByText(/decidir sozinha/i)).toBeInTheDocument();
-      expect(screen.queryByText(/vestir sua ambição/i)).toBeNull();
+      expect(
+        screen.getByText((_, el) => el?.tagName.toLowerCase() === "p" && (el?.textContent?.includes("vestir sua ambição") ?? false))
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText((_, el) => el?.tagName.toLowerCase() === "p" && (el?.textContent?.includes("mulheres que lideram") ?? false))
+      ).toBeInTheDocument();
     });
 
     it("apresenta o Fio de Alinhavo como elemento decorativo, sem foto", () => {

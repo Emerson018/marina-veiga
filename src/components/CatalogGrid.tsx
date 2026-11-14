@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SERVICES } from "@/data/services";
 import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import ServiceCard from "./ServiceCard";
@@ -310,12 +309,12 @@ export default function CatalogGrid() {
         {/* High-Fashion Spotlight Gallery Stage */}
         <div
           ref={stageRef}
-          className={`relative w-full max-w-5xl mx-auto flex items-start justify-center py-4 focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm transition-[min-height] duration-300 touch-pan-y ${
+          className={`relative w-full max-w-5xl mx-auto flex items-start justify-center py-4 [perspective:1200px] focus-visible:ring-1 focus-visible:ring-rose-antique/50 focus-visible:outline-none rounded-sm transition-[min-height] duration-300 touch-pan-y ${
             isDragging ? "cursor-grabbing select-none" : "cursor-grab"
           } ${
             expandedServiceId
-              ? "min-h-[880px] sm:min-h-[820px] md:min-h-[780px]"
-              : "min-h-[620px] sm:min-h-[660px] md:min-h-[700px]"
+              ? "min-h-[920px] sm:min-h-[860px] md:min-h-[820px]"
+              : "min-h-[660px] sm:min-h-[700px] md:min-h-[740px]"
           }`}
           style={{ touchAction: "pan-y" }}
           tabIndex={0}
@@ -337,35 +336,78 @@ export default function CatalogGrid() {
             const isLeft = diff === -1;
             const isRight = diff === 1;
 
-            let transformClass = "translate-x-0 scale-100 z-30 opacity-100 shadow-2xl";
+            let transformClass = "translate-x-0 translate-y-0 scale-100 z-30 opacity-100 shadow-2xl";
             if (isLeft) {
               transformClass =
-                "-translate-x-[55%] sm:-translate-x-[72%] md:-translate-x-[85%] scale-[0.88] z-20 opacity-40 hover:opacity-75 cursor-pointer";
+                "-translate-x-[55%] sm:-translate-x-[72%] md:-translate-x-[85%] translate-y-8 sm:translate-y-10 scale-[0.84] z-10 opacity-40 hover:opacity-75 cursor-pointer";
             } else if (isRight) {
               transformClass =
-                "translate-x-[55%] sm:translate-x-[72%] md:translate-x-[85%] scale-[0.88] z-20 opacity-40 hover:opacity-75 cursor-pointer";
+                "translate-x-[55%] sm:translate-x-[72%] md:translate-x-[85%] translate-y-8 sm:translate-y-10 scale-[0.84] z-10 opacity-40 hover:opacity-75 cursor-pointer";
             } else if (!isCenter) {
-              transformClass = "translate-x-0 scale-75 z-10 opacity-0 pointer-events-none";
+              transformClass = "translate-x-0 translate-y-14 scale-75 z-0 opacity-0 pointer-events-none";
             }
 
-            // Real-time finger drag translation override
+            // Real-time finger drag translation override with dynamic 3D depth
             let dragTransformStyle: React.CSSProperties | undefined = undefined;
             if (isDragging) {
+              const DRAG_RANGE = 260;
+              const dragProgress = Math.min(1, Math.abs(dragOffset) / DRAG_RANGE);
+              const draggingLeft = dragOffset < 0; // swiping left -> right card incoming
+              const draggingRight = dragOffset > 0; // swiping right -> left card incoming
+
               if (isCenter) {
+                // Card in spotlight moves to side, scales down, moves down/backwards
+                const scale = 1 - dragProgress * 0.16;
+                const translateY = dragProgress * 36;
+                const opacity = 1 - dragProgress * 0.55;
                 dragTransformStyle = {
-                  transform: `translateX(${dragOffset}px) scale(1)`,
+                  transform: `translateX(${dragOffset}px) translateY(${translateY}px) scale(${scale})`,
+                  opacity,
+                  zIndex: 20,
                   transition: "none",
                 };
               } else if (isLeft) {
-                dragTransformStyle = {
-                  transform: `translateX(calc(var(--card-peek-left, -55%) + ${dragOffset}px)) scale(0.88)`,
-                  transition: "none",
-                };
+                if (draggingRight) {
+                  // Left card is coming up into spotlight: rising up from 36px to 0, scaling from 0.84 to 1
+                  const scale = 0.84 + dragProgress * 0.16;
+                  const translateY = 36 - dragProgress * 36;
+                  const opacity = 0.4 + dragProgress * 0.6;
+                  dragTransformStyle = {
+                    transform: `translateX(calc(var(--card-peek-left, -55%) + ${dragOffset}px)) translateY(${translateY}px) scale(${scale})`,
+                    opacity,
+                    zIndex: 30,
+                    transition: "none",
+                  };
+                } else {
+                  // Left card stays behind as user drags further left
+                  dragTransformStyle = {
+                    transform: `translateX(calc(var(--card-peek-left, -55%) + ${dragOffset * 0.25}px)) translateY(36px) scale(0.84)`,
+                    opacity: Math.max(0, 0.4 - dragProgress * 0.25),
+                    zIndex: 10,
+                    transition: "none",
+                  };
+                }
               } else if (isRight) {
-                dragTransformStyle = {
-                  transform: `translateX(calc(var(--card-peek-right, 55%) + ${dragOffset}px)) scale(0.88)`,
-                  transition: "none",
-                };
+                if (draggingLeft) {
+                  // Right card is coming up into spotlight: rising up from 36px to 0, scaling from 0.84 to 1
+                  const scale = 0.84 + dragProgress * 0.16;
+                  const translateY = 36 - dragProgress * 36;
+                  const opacity = 0.4 + dragProgress * 0.6;
+                  dragTransformStyle = {
+                    transform: `translateX(calc(var(--card-peek-right, 55%) + ${dragOffset}px)) translateY(${translateY}px) scale(${scale})`,
+                    opacity,
+                    zIndex: 30,
+                    transition: "none",
+                  };
+                } else {
+                  // Right card stays behind as user drags further right
+                  dragTransformStyle = {
+                    transform: `translateX(calc(var(--card-peek-right, 55%) + ${dragOffset * 0.25}px)) translateY(36px) scale(0.84)`,
+                    opacity: Math.max(0, 0.4 - dragProgress * 0.25),
+                    zIndex: 10,
+                    transition: "none",
+                  };
+                }
               }
             }
 
@@ -378,7 +420,7 @@ export default function CatalogGrid() {
                 className={`absolute top-0 w-full max-w-[310px] sm:max-w-[390px] md:max-w-[420px] [--card-peek-left:-55%] sm:[--card-peek-left:-72%] md:[--card-peek-left:-85%] [--card-peek-right:55%] sm:[--card-peek-right:72%] md:[--card-peek-right:85%] motion-reduce:transition-none ${
                   isDragging
                     ? "transition-none select-none"
-                    : "transition-[transform,opacity] duration-500 ease-out"
+                    : "transition-[transform,opacity,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 } ${transformClass}`}
                 style={dragTransformStyle}
                 onClick={() => {
@@ -418,73 +460,37 @@ export default function CatalogGrid() {
           })}
         </div>
 
-        {/* Navigation Controls: Arrows, Pagination Dots & Swipe Hint */}
-        <div className="flex flex-col items-center justify-center gap-3.5 mt-8 relative z-30">
-          <div className="flex items-center justify-center gap-3 sm:gap-5">
-            <button
-              type="button"
-              onClick={() => {
-                prevSlide();
-                scrollToStage();
-              }}
-              aria-label="Ver serviço anterior"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-rose-antique/50 bg-forest-card/90 text-rose-antique hover:bg-rose-antique hover:text-forest-deep transition-[background-color,color,border-color,transform] duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique shadow-lg shadow-forest-deep/60 cursor-pointer"
-              style={{ touchAction: "manipulation" }}
-            >
-              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
-            </button>
-
-            {/* Pagination Dots */}
-            <div
-              role="tablist"
-              aria-label="Indicadores dos serviços do catálogo"
-              className="flex items-center gap-2 px-3 py-2 rounded-full bg-forest-card/80 border border-rose-border/60"
-            >
-              {SERVICES.map((service, idx) => {
-                const isSelected = activeIndex === idx;
-                return (
-                  <button
-                    key={service.id}
-                    type="button"
-                    role="tab"
-                    id={`dot-${service.id}`}
-                    aria-selected={isSelected}
-                    aria-label={`Ir para o serviço ${idx + 1}: ${service.title}`}
-                    onClick={() => {
-                      setActiveIndex(idx);
-                      scrollToStage();
-                    }}
-                    className={`transition-all duration-300 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique cursor-pointer ${
-                      isSelected
-                        ? "w-7 h-2 bg-rose-antique shadow-md shadow-rose-antique/30"
-                        : "w-2 h-2 bg-rose-border hover:bg-rose-antique/60"
-                    }`}
-                    style={{ touchAction: "manipulation" }}
-                  />
-                );
-              })}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                nextSlide();
-                scrollToStage();
-              }}
-              aria-label="Ver próximo serviço"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-rose-antique/50 bg-forest-card/90 text-rose-antique hover:bg-rose-antique hover:text-forest-deep transition-[background-color,color,border-color,transform] duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique shadow-lg shadow-forest-deep/60 cursor-pointer"
-              style={{ touchAction: "manipulation" }}
-            >
-              <ChevronRight className="w-5 h-5" aria-hidden="true" />
-            </button>
+        {/* Navigation Indicators */}
+        <div className="flex items-center justify-center mt-8 relative z-30">
+          <div
+            role="tablist"
+            aria-label="Indicadores dos serviços do catálogo"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-forest-card/80 border border-rose-border/60 shadow-lg shadow-forest-deep/40"
+          >
+            {SERVICES.map((service, idx) => {
+              const isSelected = activeIndex === idx;
+              return (
+                <button
+                  key={service.id}
+                  type="button"
+                  role="tab"
+                  id={`dot-${service.id}`}
+                  aria-selected={isSelected}
+                  aria-label={`Ir para o serviço ${idx + 1}: ${service.title}`}
+                  onClick={() => {
+                    setActiveIndex(idx);
+                    scrollToStage();
+                  }}
+                  className={`transition-all duration-300 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique cursor-pointer ${
+                    isSelected
+                      ? "w-7 h-2 bg-rose-antique shadow-md shadow-rose-antique/30"
+                      : "w-2 h-2 bg-rose-border hover:bg-rose-antique/60"
+                  }`}
+                  style={{ touchAction: "manipulation" }}
+                />
+              );
+            })}
           </div>
-
-          {/* Swipe affordance hint for mobile touch users */}
-          <p className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-rose-antique/70 font-sans select-none">
-            <span aria-hidden="true">←</span>
-            <span>Arraste para o lado ou use as setas</span>
-            <span aria-hidden="true">→</span>
-          </p>
         </div>
 
         {/* Additional Custom Inquiry Note */}

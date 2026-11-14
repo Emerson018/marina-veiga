@@ -90,29 +90,24 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
     );
   });
 
-  it("switches to next and previous slide using navigation chevron buttons", () => {
+  it("switches active slide directly when clicking an adjacent catalog card", () => {
     const scrollToMock = vi.fn();
     window.scrollTo = scrollToMock;
 
     render(<CatalogGrid />);
 
-    const nextBtn = screen.getByRole("button", { name: "Ver próximo serviço" });
-    const prevBtn = screen.getByRole("button", { name: "Ver serviço anterior" });
-
     // Initially at index 0 (SERVICES[0].title)
     const firstTab = screen.getByRole("tab", { name: SERVICES[0].title });
     expect(firstTab).toHaveAttribute("aria-selected", "true");
 
-    // Click Next button -> should switch to index 1
-    fireEvent.click(nextBtn);
+    // Click on adjacent card (SERVICES[1]) directly to bring it to center
+    const secondCard = document.getElementById(`service-card-${SERVICES[1].id}`);
+    expect(secondCard).not.toBeNull();
+    if (secondCard) fireEvent.click(secondCard);
+
     const secondTab = screen.getByRole("tab", { name: SERVICES[1].title });
     expect(secondTab).toHaveAttribute("aria-selected", "true");
     expect(firstTab).toHaveAttribute("aria-selected", "false");
-
-    // Click Prev button -> should switch back to index 0
-    fireEvent.click(prevBtn);
-    expect(firstTab).toHaveAttribute("aria-selected", "true");
-    expect(secondTab).toHaveAttribute("aria-selected", "false");
   });
 
   it("switches slide when pagination dot is clicked", () => {
