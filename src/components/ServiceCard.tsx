@@ -99,18 +99,13 @@ export default function ServiceCard({
           </div>
         </div>
 
-        {/* Title & Tagline */}
+        {/* Title */}
         <h3
           id={`service-title-${service.id}`}
-          className="text-xl sm:text-2xl font-display text-rose-antique tracking-wide mb-1.5 leading-snug"
+          className="text-xl sm:text-2xl font-display text-rose-antique tracking-wide mb-3 leading-snug"
         >
           {service.title}
         </h3>
-        {service.tagline && (
-          <p className="text-[11px] uppercase tracking-widest text-rose-antique/80 font-medium mb-3">
-            {service.tagline}
-          </p>
-        )}
         <p className="text-xs sm:text-[13px] text-rose-light/80 font-light leading-relaxed mb-4">
           {service.description}
         </p>
@@ -120,7 +115,7 @@ export default function ServiceCard({
           <div className="mb-4 px-3 py-2 rounded-sm bg-forest-deep/90 border border-rose-antique/40 flex items-start gap-2 shadow-inner">
             <Check className="w-3.5 h-3.5 text-rose-antique shrink-0 mt-0.5" aria-hidden="true" />
             <p className="text-xs text-rose-light/95 font-sans leading-relaxed">
-              <strong className="text-rose-antique font-semibold">Transformação completa:</strong> biótipo, closet detox, personal shopper e dossiê em uma só jornada integrada.
+              <strong className="text-rose-antique font-semibold">Transformação completa:</strong> biotipo, closet detox, personal shopper e dossiê em uma só jornada integrada.
             </p>
           </div>
         )}

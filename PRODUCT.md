@@ -25,12 +25,12 @@ Consultoria de imagem pessoal ampla, ancorada na vida real da cliente: trabalha 
 - **Formato de entrega:** três modalidades coexistem:
   - **100% online:** Dossiê de Estilo (a cliente fotografa as peças seguindo um guia, envia por WhatsApp ou e-mail e recebe o dossiê digital em até 7 dias) e Styling para Eventos. Atendem clientes fora da cidade da Mariana.
   - **Presencial:** Closet Detox (sessão de 4h) e Personal Shopper (4h de acompanhamento).
-  - **Híbrido:** Análise de Estilo & Biótipo (2 encontros) e Consultoria 360° (4 semanas, com 30 dias de acompanhamento pelo WhatsApp).
+  - **Híbrido:** Análise de Estilo & Biotipo (2 encontros) e Consultoria 360° (4 semanas, com 30 dias de acompanhamento pelo WhatsApp).
 - **Vagas:** atendimento com número restrito de vagas mensais (`src/data/policies.ts`).
 
 ## Capabilities and Constraints
 
-- **Catálogo de 6 serviços** (fonte da verdade: `src/data/services.ts`): Dossiê de Estilo, Consultoria 360° (destaque, pacote com economia em relação aos avulsos), Análise de Estilo & Biótipo, Closet Detox, Styling para Eventos e Personal Shopper. Cada um tem entregáveis expansíveis, preço, parcelamento, condição no Pix, duração e modalidade.
+- **Catálogo de 6 serviços** (fonte da verdade: `src/data/services.ts`): Dossiê de Estilo, Consultoria 360° (destaque, pacote com economia em relação aos avulsos), Análise de Estilo & Biotipo, Closet Detox, Styling para Eventos e Personal Shopper. Cada um tem entregáveis expansíveis, preço, parcelamento, condição no Pix, duração e modalidade.
 - **Fora do portfólio:** Coloração Pessoal e Visagismo não são oferecidos. A FAQ explica essa escolha deliberada (foco em proporções, caimento e tecidos em vez de cartela de cores). Não reintroduzir sem confirmação.
 - **Showcase do Dossiê de Estilo:** apresentação interativa dos pilares do dossiê (`src/components/DossierShowcase.tsx`).
 - **Sem checkout:** não há carrinho nem pagamento no site; a conversão é 100% consultiva via WhatsApp.

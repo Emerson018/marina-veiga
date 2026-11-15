@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { SERVICES } from "@/data/services";
-import { generateWhatsAppUrl } from "@/utils/whatsapp";
 import ServiceCard from "./ServiceCard";
 import { m } from "framer-motion";
 import { VIEWPORT_ONCE, revealItem } from "@/lib/motion";
@@ -18,6 +17,38 @@ export default function CatalogGrid() {
   const isHorizontalDragRef = useRef<boolean | null>(null);
   const hasDraggedRef = useRef<boolean>(false);
   const isTouchActiveRef = useRef<boolean>(false);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [stageHeight, setStageHeight] = useState<number | null>(null);
+
+  // Cards are absolutely positioned, so the stage must grow to fit the tallest
+  // visible card (including an expanded one) or the section clips it.
+  useEffect(() => {
+    if (typeof ResizeObserver === "undefined") return;
+    const total = SERVICES.length;
+    const visible = [-1, 0, 1].map((d) => (activeIndex + d + total) % total);
+
+    const measure = () => {
+      let tallest = 0;
+      visible.forEach((idx) => {
+        const el = cardRefs.current[idx];
+        if (!el) return;
+        const h = el.offsetHeight;
+        // Side cards sit 40px lower and are scaled to 0.84 around their center.
+        const bottom = idx === activeIndex ? h : h * 0.92 + 40;
+        tallest = Math.max(tallest, bottom);
+      });
+      // py-4 on the stage + breathing room for the card shadow
+      if (tallest > 0) setStageHeight(Math.ceil(tallest + 32 + 24));
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    visible.forEach((idx) => {
+      const el = cardRefs.current[idx];
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [activeIndex]);
 
   const scrollToStage = () => {
     if (typeof window === "undefined" || !stageRef.current) return;
@@ -36,10 +67,6 @@ export default function CatalogGrid() {
       // Graceful fallback for test runners / environments without scrollTo
     }
   };
-
-  const corporateWhatsAppUrl = generateWhatsAppUrl(
-    "Olá Mariana! Gostaria de conversar sobre uma proposta corporativa personalizada."
-  );
 
   const prevSlide = () => {
     setActiveIndex((prev) => (prev === 0 ? SERVICES.length - 1 : prev - 1));
@@ -245,18 +272,12 @@ export default function CatalogGrid() {
           viewport={VIEWPORT_ONCE}
           className="text-center max-w-3xl mx-auto mb-10"
         >
-          <span className="text-xs uppercase tracking-ultra text-rose-antique font-sans font-medium block mb-3">
-            Catálogo Exclusivo
-          </span>
           <h2
             id="catalog-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4 text-balance"
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight text-balance"
           >
             Serviços & Experiências de Imagem
           </h2>
-          <p className="text-base sm:text-lg text-rose-light/80 font-light leading-relaxed">
-            Cada mulher tem um momento e um objetivo diferente. Escolha o formato que faz mais sentido para o seu momento e para a sua rotina.
-          </p>
         </m.div>
 
         {/* Category Navigation Bar */}
@@ -313,10 +334,13 @@ export default function CatalogGrid() {
             isDragging ? "cursor-grabbing select-none" : "cursor-grab"
           } ${
             expandedServiceId
-              ? "min-h-[920px] sm:min-h-[860px] md:min-h-[820px]"
+              ? "min-h-[1050px] sm:min-h-[980px] md:min-h-[950px]"
               : "min-h-[660px] sm:min-h-[700px] md:min-h-[740px]"
           }`}
-          style={{ touchAction: "pan-y" }}
+          style={{
+            touchAction: "pan-y",
+            ...(stageHeight ? { minHeight: stageHeight } : {}),
+          }}
           tabIndex={0}
           onKeyDown={handleKeyDown}
           onTouchStart={handleTouchStart}
@@ -414,6 +438,9 @@ export default function CatalogGrid() {
             return (
               <div
                 key={service.id}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
                 id={`service-card-${service.id}`}
                 role="tabpanel"
                 aria-labelledby={`tab-${service.id}`}
@@ -460,57 +487,6 @@ export default function CatalogGrid() {
           })}
         </div>
 
-        {/* Navigation Indicators */}
-        <div className="flex items-center justify-center mt-8 relative z-30">
-          <div
-            role="tablist"
-            aria-label="Indicadores dos serviços do catálogo"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-forest-card/80 border border-rose-border/60 shadow-lg shadow-forest-deep/40"
-          >
-            {SERVICES.map((service, idx) => {
-              const isSelected = activeIndex === idx;
-              return (
-                <button
-                  key={service.id}
-                  type="button"
-                  role="tab"
-                  id={`dot-${service.id}`}
-                  aria-selected={isSelected}
-                  aria-label={`Ir para o serviço ${idx + 1}: ${service.title}`}
-                  onClick={() => {
-                    setActiveIndex(idx);
-                    scrollToStage();
-                  }}
-                  className={`transition-all duration-300 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique cursor-pointer ${
-                    isSelected
-                      ? "w-7 h-2 bg-rose-antique shadow-md shadow-rose-antique/30"
-                      : "w-2 h-2 bg-rose-border hover:bg-rose-antique/60"
-                  }`}
-                  style={{ touchAction: "manipulation" }}
-                />
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Additional Custom Inquiry Note */}
-        <div className="mt-16 text-center p-8 rounded-sm border border-rose-border bg-forest-card/30 max-w-2xl mx-auto">
-          <h3 className="font-display text-xl text-rose-antique mb-2">
-            Necessita de um projeto corporativo sob medida?
-          </h3>
-          <p className="text-xs sm:text-sm text-rose-light/70 font-light mb-4">
-            Atendemos também executivas de alta liderança, palestras in-company sobre
-            dress code corporativo e consultoria para equipes.
-          </p>
-          <a
-            href={corporateWhatsAppUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs uppercase tracking-widest text-rose-antique hover:text-rose-light underline underline-offset-4 font-medium transition-colors"
-          >
-            Solicitar Proposta Corporativa Customizada →
-          </a>
-        </div>
       </div>
     </section>
   );

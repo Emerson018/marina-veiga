@@ -16,7 +16,7 @@ _Avoid_: Loja virtual, e-commerce, carrinho
 Experiência em carrossel interativo estilo alta-costura onde o serviço ativo fica em foco central ampliado e os adjacentes em prévia lateral translúcida, com expansão fluida de entregáveis no hover ou toque.
 _Avoid_: Banners rotativos, slides genéricos
 
-**Análise de Estilo & Biótipo**:
+**Análise de Estilo & Biotipo**:
 Mapeamento estruturado das proporções corporais e da identidade visual da cliente para alinhamento de modelagens e silhuetas.
 _Avoid_: Tipificação, teste de corpo
 
@@ -29,11 +29,11 @@ Assessoria presencial ou guiada para aquisição cirúrgica de peças complement
 _Avoid_: Acompanhante de compras
 
 **Consultoria Completa 360°**:
-Jornada integral que abrange estilo, biótipo, revitalização de guarda-roupa e personal shopper, consolidada no Dossiê de Estilo.
+Jornada integral que abrange estilo, biotipo, revitalização de guarda-roupa e personal shopper, consolidada no Dossiê de Estilo.
 _Avoid_: Pacote total, combo
 
 **Dossiê de Estilo**:
-Guia editorial exclusivo e personalizado entregue à cliente compilando suas diretrizes de estilo, combinações, biótipo e recomendações práticas.
+Guia editorial exclusivo e personalizado entregue à cliente compilando suas diretrizes de estilo, combinações, biotipo e recomendações práticas.
 _Avoid_: Apostila, manual, PDF genérico, relatório
 
 **Conversão WhatsApp**:

@@ -51,7 +51,7 @@ export const POLICIES: Record<"termos" | "privacidade", PolicyDocument> = {
         title: "5. Condições Financeiras & Pagamento",
         content: [
           "Os valores de investimento vigentes são os expressos no catálogo oficial do site na data de contratação.",
-          "O pagamento pode ser efetuado à vista via Pix com desconto, ou parcelado no cartão de crédito em até 4x sem juros (ou em até 10x sem juros especificamente no pacote Consultoria 360°). A confirmação do agendamento dá-se mediante quitação da primeira parcela ou do valor integral à vista.",
+          "O pagamento pode ser efetuado à vista via Pix, ou parcelado no cartão de crédito em até 3x sem juros (ou em até 6x sem juros especificamente no pacote Consultoria 360°). A confirmação do agendamento dá-se mediante quitação da primeira parcela ou do valor integral à vista.",
         ],
       },
     ],
@@ -65,7 +65,7 @@ export const POLICIES: Record<"termos" | "privacidade", PolicyDocument> = {
       {
         title: "1. Cláusula de Sigilo Absoluto (Compromisso de Discrição)",
         content: [
-          "Reconhecemos a intimidade e a confidencialidade inerentes à análise de armário, rotina profissional e estilo pessoal. Todas as fotos registradas durante as sessões de Closet Detox, montagem de looks, acervo pessoal e avaliações de biótipo são mantidas sob rigoroso sigilo profissional.",
+          "Reconhecemos a intimidade e a confidencialidade inerentes à análise de armário, rotina profissional e estilo pessoal. Todas as fotos registradas durante as sessões de Closet Detox, montagem de looks, acervo pessoal e avaliações de biotipo são mantidas sob rigoroso sigilo profissional.",
           "Fica expressamente garantido que nenhuma fotografia, imagem de acervo, identificação ou registro visual da cliente será veiculado, publicado ou exposto em redes sociais, portfólios ou materiais comerciais, salvo mediante autorização prévia, expressa e por escrito da própria cliente.",
         ],
       },

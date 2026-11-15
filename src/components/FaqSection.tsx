@@ -25,7 +25,7 @@ export default function FaqSection() {
       id: "duracao",
       question: "Quanto tempo dura todo o processo de consultoria?",
       answer:
-        "Depende do serviço. A Consultoria 360° acontece ao longo de 4 semanas, seguidas de 30 dias de acompanhamento pelo WhatsApp. A Análise de Estilo & Biótipo é feita em 2 encontros, o Closet Detox numa sessão de 4h e o Dossiê de Estilo fica pronto em até 7 dias depois que você envia as fotos das suas peças.",
+        "Depende do serviço. A Consultoria 360° acontece ao longo de 4 semanas, seguidas de 30 dias de acompanhamento pelo WhatsApp. A Análise de Estilo & Biotipo é feita em 2 encontros, o Closet Detox numa sessão de 4h e o Dossiê de Estilo fica pronto em até 7 dias depois que você envia as fotos das suas peças.",
     },
     {
       id: "coloracao",
@@ -72,13 +72,10 @@ export default function FaqSection() {
           </span>
           <h2
             id="faq-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight mb-4 text-balance"
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-rose-antique tracking-wide leading-tight text-balance"
           >
             Tire Suas Dúvidas
           </h2>
-          <p className="text-base sm:text-lg text-rose-light/80 font-light leading-relaxed">
-            Transparência e clareza sobre nosso formato de trabalho, modalidades e entregáveis.
-          </p>
         </m.div>
 
         {/* Accordion List */}

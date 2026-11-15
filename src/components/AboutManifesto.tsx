@@ -2,15 +2,32 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Sparkles, ShieldCheck, Compass } from "lucide-react";
 import { m, useScroll, useTransform, type Variants } from "framer-motion";
 import {
   EASE_SILK,
-  SPRING_SETTLE,
   VIEWPORT_ONCE,
   revealItem,
   staggerContainer,
 } from "@/lib/motion";
+import PillarTape, { type Pillar } from "./PillarTape";
+
+const PILLARS: Pillar[] = [
+  {
+    title: "Estilo para a vida real",
+    description:
+      "Looks pensados para as ocasiões que você vive de fato: o trabalho, a rotina, os eventos e as viagens, sempre a partir das peças que você já tem.",
+  },
+  {
+    title: "Quiet luxury",
+    description:
+      "Elegância sem excessos: caimentos impecáveis, tecidos nobres e peças atemporais com alto custo por uso.",
+  },
+  {
+    title: "Autonomia perpétua",
+    description:
+      "Você no controle do seu closet, escolhendo looks pela manhã com rapidez, intenção e sem frustração.",
+  },
+];
 
 /** Metade da Revelação por Tecido: sai de `from` e assenta em 0. */
 function fabricDrop(from: string): Variants {
@@ -29,27 +46,6 @@ export default function AboutManifesto() {
     offset: ["start end", "end start"],
   });
   const portraitY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
-
-  const pillars = [
-    {
-      icon: ShieldCheck,
-      title: "Estilo para a Vida Real",
-      description:
-        "Looks pensados para as ocasiões que você vive de fato: o trabalho, a rotina, os eventos e as viagens, sempre a partir das peças que você já tem.",
-    },
-    {
-      icon: Sparkles,
-      title: "Quiet Luxury",
-      description:
-        "Elegância sem excessos: caimentos impecáveis, tecidos nobres e peças atemporais com alto custo por uso.",
-    },
-    {
-      icon: Compass,
-      title: "Autonomia Perpétua",
-      description:
-        "Você no controle do seu closet, escolhendo looks pela manhã com rapidez, intenção e sem frustração.",
-    },
-  ];
 
   return (
     <section
@@ -153,34 +149,8 @@ export default function AboutManifesto() {
               </p>
             </m.div>
 
-            {/* Caixinhas Grid: Compact padding and spacing */}
-            <div className="w-full grid grid-cols-1 gap-2.5 sm:gap-3">
-              {pillars.map((pillar) => {
-                const IconComponent = pillar.icon;
-
-                return (
-                  <m.div
-                    key={pillar.title}
-                    data-reveal
-                    variants={revealItem}
-                    whileHover={{ y: -2, transition: SPRING_SETTLE }}
-                    className="group p-3.5 sm:p-4 rounded-sm border border-rose-border bg-forest-card/40 hover:border-rose-antique/70 hover:bg-forest-card/70 transition-colors duration-500 motion-reduce:transition-none flex items-start gap-3 sm:gap-3.5"
-                  >
-                    <div className="p-2 rounded-sm bg-forest-deep border border-rose-border text-rose-antique shrink-0 group-hover:border-rose-antique/50 group-hover:scale-105 transition-transform duration-300">
-                      <IconComponent className="w-4 h-4 text-rose-antique" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h3 className="font-sans text-xs sm:text-[13px] uppercase tracking-widest text-rose-antique font-semibold mb-0.5">
-                        {pillar.title}
-                      </h3>
-                      <p className="text-xs text-rose-light/80 font-light leading-relaxed">
-                        {pillar.description}
-                      </p>
-                    </div>
-                  </m.div>
-                );
-              })}
-            </div>
+            {/* Fita Métrica: os princípios marcados por um alfinete */}
+            <PillarTape pillars={PILLARS} />
           </m.div>
         </div>
       </div>

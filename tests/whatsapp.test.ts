@@ -27,15 +27,15 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
     expect(url).toBe(`https://wa.me/${DEFAULT_WHATSAPP_NUMBER}`);
   });
 
-  it("contains exactly 6 consultation services with all required fields", () => {
-    expect(SERVICES).toHaveLength(6);
+  it("contains exactly 7 catalog services with all required fields", () => {
+    expect(SERVICES).toHaveLength(7);
 
     for (const service of SERVICES) {
       expect(service.id).toBeTruthy();
       expect(service.title).toBeTruthy();
       expect(service.description).toBeTruthy();
       expect(service.deliverables.length).toBeGreaterThan(0);
-      expect(service.price).toMatch(/^R\$\s?[\d.,]+/);
+      expect(service.price).toMatch(/^(R\$\s?[\d.,]+|Sob consulta)$/);
       expect(service.installments).toBeTruthy();
       expect(service.paymentTerms).toBeTruthy();
       expect(service.whatsappMessage).toBeTruthy();
@@ -47,7 +47,7 @@ describe("Ticket 02: WhatsApp Utility and Services Data", () => {
 
   it("includes the 6 canonical services matching the updated catalog", () => {
     const titles = SERVICES.map((s) => s.title);
-    expect(titles).toContain("Análise de Estilo & Biótipo");
+    expect(titles).toContain("Análise de Estilo & Biotipo");
     expect(titles).toContain("Closet Detox");
     expect(titles).toContain("Styling para Eventos");
     expect(titles).toContain("Personal Shopper");

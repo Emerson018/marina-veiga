@@ -136,6 +136,10 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 159, 171, 0.3);
 }
 
+.dossier-stage.is-paused * {
+  animation-play-state: paused !important;
+}
+
 .dossier-scene {
   position: absolute;
   inset: 0;
@@ -392,4 +396,78 @@
     stroke-dashoffset: 0 !important;
     animation: none !important;
   }
+}
+
+/* ProcessSteps ("Como Funciona a Consultoria") Editorial Animations */
+@keyframes processSheen {
+  0% {
+    transform: translateX(-110%) skewX(-18deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateX(210%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes processFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes processPulseRing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.16);
+    opacity: 0.9;
+  }
+}
+
+.process-active-sheen {
+  animation: processSheen 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: 0.4s;
+}
+
+.process-float-slow {
+  animation: processFloat 3.6s ease-in-out infinite;
+}
+
+.process-pulse-ring {
+  animation: processPulseRing 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-active-sheen,
+  .process-float-slow,
+  .process-pulse-ring {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Fita Métrica (Sobre): marcações de meio centímetro e de centímetro. */
+.tape-ticks-minor {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(212, 159, 171, 0.32) 0 1px,
+    transparent 1px 8px
+  );
+}
+
+.tape-ticks-major {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(212, 159, 171, 0.55) 0 1px,
+    transparent 1px 40px
+  );
 }

@@ -20,7 +20,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Mariana Veiga | Consultoria de Imagem & Estilo Pessoal",
   description:
-    "Consultoria de imagem feminina para o trabalho, a rotina, os eventos e as viagens. Dossiê de Estilo, análise de biótipo, closet detox, styling para eventos e personal shopper, com preços e prazos claros.",
+    "Consultoria de imagem feminina para o trabalho, a rotina, os eventos e as viagens. Dossiê de Estilo, análise de biotipo, closet detox, styling para eventos e personal shopper, com preços e prazos claros.",
   keywords: [
     "consultoria de imagem",
     "estilo pessoal",

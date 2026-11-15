@@ -4,7 +4,7 @@ import CatalogGrid from "@/components/CatalogGrid";
 import { SERVICES } from "@/data/services";
 
 describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
-  it("renders all 6 consultation services with titles, price, and installments", () => {
+  it("renders all catalog services with titles, price, and installments", () => {
     render(<CatalogGrid />);
 
     for (const service of SERVICES) {
@@ -110,20 +110,19 @@ describe("Ticket 04: CatalogGrid and ServiceCard components", () => {
     expect(firstTab).toHaveAttribute("aria-selected", "false");
   });
 
-  it("switches slide when pagination dot is clicked", () => {
-    const scrollToMock = vi.fn();
-    window.scrollTo = scrollToMock;
-
+  it("does not render pagination dots below the stage", () => {
     render(<CatalogGrid />);
+    expect(
+      screen.queryByRole("tablist", { name: "Indicadores dos serviços do catálogo" })
+    ).not.toBeInTheDocument();
+  });
 
-    // Click dot for service 3 (SERVICES[2])
-    const dot3 = screen.getByRole("tab", {
-      name: `Ir para o serviço 3: ${SERVICES[2].title}`,
-    });
-    fireEvent.click(dot3);
-
-    const tab3 = screen.getByRole("tab", { name: SERVICES[2].title });
-    expect(tab3).toHaveAttribute("aria-selected", "true");
+  it("offers corporate projects as a catalog card instead of a footer note", () => {
+    render(<CatalogGrid />);
+    expect(screen.getByRole("tab", { name: "Projetos Corporativos" })).toBeInTheDocument();
+    expect(
+      screen.queryByText("Necessita de um projeto corporativo sob medida?")
+    ).not.toBeInTheDocument();
   });
 
   it("switches to next and previous slide via touch drag swipe gestures", () => {
