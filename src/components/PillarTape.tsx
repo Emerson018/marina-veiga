@@ -115,7 +115,7 @@ export default function PillarTape({ pillars }: { pillars: Pillar[] }) {
             <li
               key={pillar.title}
               onMouseEnter={() => settled && setActive(i)}
-              className="border-t border-rose-border/50 first:border-t-0 py-3 sm:py-3.5 first:pt-0.5"
+              className="border-t border-rose-border/50 first:border-t-0 py-2 sm:py-2.5 first:pt-0.5"
             >
               <div
                 className={`transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
@@ -128,13 +128,13 @@ export default function PillarTape({ pillars }: { pillars: Pillar[] }) {
                   ref={(el) => {
                     titleRefs.current[i] = el;
                   }}
-                  className={`font-display text-lg sm:text-xl text-rose-antique tracking-wide leading-snug transition-opacity duration-500 motion-reduce:transition-none ${
+                  className={`font-display text-base sm:text-lg text-rose-antique tracking-wide leading-snug transition-opacity duration-500 motion-reduce:transition-none ${
                     isActive || !settled ? "opacity-100" : "opacity-70"
                   }`}
                 >
                   {pillar.title}
                 </h3>
-                <p className="mt-1 text-xs sm:text-[13px] text-rose-light/75 font-light leading-relaxed max-w-xl">
+                <p className="mt-0.5 text-xs sm:text-[13px] text-rose-light/75 font-light leading-relaxed max-w-xl">
                   {pillar.description}
                 </p>
               </div>

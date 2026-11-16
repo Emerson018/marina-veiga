@@ -54,7 +54,8 @@ export default function Header() {
       if (targetElement) {
         const headerOffset = 76;
         const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: Math.max(0, offsetPosition),
