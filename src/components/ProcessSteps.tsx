@@ -533,7 +533,7 @@ export default function ProcessSteps() {
     <section
       id="metodologia"
       aria-labelledby="process-heading"
-      className="scroll-mt-20 py-20 sm:py-24 border-b border-rose-border/40 relative overflow-hidden"
+      className="scroll-mt-20 pt-10 sm:pt-12 pb-20 sm:pb-24 border-b border-rose-border/40 relative overflow-hidden"
     >
       {/* Luz de ambiência sutil acompanhando a etapa em foco */}
       <div

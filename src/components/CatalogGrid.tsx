@@ -258,7 +258,7 @@ export default function CatalogGrid() {
     <section
       id="catalogo"
       aria-labelledby="catalog-heading"
-      className="scroll-mt-20 py-24 border-b border-rose-border/40 relative overflow-hidden"
+      className="scroll-mt-20 pt-10 sm:pt-12 pb-20 sm:pb-24 border-b border-rose-border/40 relative overflow-hidden"
       aria-roledescription="carrossel"
       aria-label="Catálogo de Serviços Mariana Veiga"
     >

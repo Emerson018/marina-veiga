@@ -52,10 +52,17 @@ export default function Header() {
       const targetId = href.slice(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        const headerOffset = 76;
-        const elementPosition = targetElement.getBoundingClientRect().top;
+        // Alinha o título ou elemento principal da seção perfeitamente abaixo do cabeçalho fixo,
+        // eliminando o espaço vazio excessivo no topo e evitando cortes nas imagens e cards
+        const anchorTarget =
+          targetElement.querySelector("h2, h1, [role='heading'], .dossier-stage") ||
+          targetElement;
+
+        // Cabeçalho fixo tem ~76px; deixamos 18px de respiro acima do título
+        const headerClearance = 94;
+        const targetRect = anchorTarget.getBoundingClientRect();
         const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
+          targetRect.top + window.pageYOffset - headerClearance;
 
         window.scrollTo({
           top: Math.max(0, offsetPosition),

@@ -43,10 +43,14 @@ export default function Footer() {
       const targetId = href.slice(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        const headerOffset = 76;
-        const elementPosition = targetElement.getBoundingClientRect().top;
+        const anchorTarget =
+          targetElement.querySelector("h2, h1, [role='heading'], .dossier-stage") ||
+          targetElement;
+
+        const headerClearance = 94;
+        const targetRect = anchorTarget.getBoundingClientRect();
         const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
+          targetRect.top + window.pageYOffset - headerClearance;
 
         window.scrollTo({
           top: Math.max(0, offsetPosition),

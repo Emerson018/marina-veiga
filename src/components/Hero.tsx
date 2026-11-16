@@ -77,9 +77,13 @@ export default function Hero() {
                 e.preventDefault();
                 const targetElement = document.getElementById("catalogo");
                 if (targetElement) {
-                  const headerOffset = 76;
-                  const elementPosition = targetElement.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                  const anchorTarget =
+                    targetElement.querySelector("h2, h1, [role='heading']") ||
+                    targetElement;
+                  const headerClearance = 94;
+                  const targetRect = anchorTarget.getBoundingClientRect();
+                  const offsetPosition =
+                    targetRect.top + window.pageYOffset - headerClearance;
                   window.scrollTo({
                     top: Math.max(0, offsetPosition),
                     behavior: "smooth",
