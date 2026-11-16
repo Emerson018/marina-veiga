@@ -51,7 +51,7 @@ export const POLICIES: Record<"termos" | "privacidade", PolicyDocument> = {
         title: "5. Condições Financeiras & Pagamento",
         content: [
           "Os valores de investimento vigentes são os expressos no catálogo oficial do site na data de contratação.",
-          "O pagamento pode ser efetuado à vista via Pix, ou parcelado no cartão de crédito em até 3x sem juros (ou em até 6x sem juros especificamente no pacote Consultoria 360°). A confirmação do agendamento dá-se mediante quitação da primeira parcela ou do valor integral à vista.",
+          "O pagamento pode ser efetuado à vista via Pix, ou parcelado no cartão de crédito em até 4x (ou em até 10x especificamente no pacote Consultoria 360°). A confirmação do agendamento dá-se mediante quitação da primeira parcela ou do valor integral à vista.",
         ],
       },
     ],
