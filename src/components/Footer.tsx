@@ -23,6 +23,44 @@ export default function Footer() {
     "Olá Mariana! Gostaria de falar sobre a consultoria de imagem."
   );
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    if (href === "/" || href === "#" || href === "#main-content" || href === "#inicio") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      try {
+        window.history.pushState(null, "", "/");
+      } catch {}
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      const targetId = href.slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerOffset = 76;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: "smooth",
+        });
+
+        try {
+          window.history.pushState(null, "", href);
+        } catch {}
+      } else {
+        window.location.hash = href;
+      }
+    }
+  };
+
   return (
     <>
       <footer
@@ -78,6 +116,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className="text-xs uppercase tracking-widest text-rose-light/70 hover:text-rose-antique transition-colors focus-visible:outline-rose-antique"
                     >
                       {link.label}
@@ -92,19 +131,11 @@ export default function Footer() {
               <span className="text-xs uppercase tracking-widest text-rose-antique font-semibold block mb-4">
                 Atendimento Híbrido
               </span>
-              <p className="text-xs sm:text-sm text-rose-light/75 font-light leading-relaxed mb-4">
+              <p className="text-xs sm:text-sm text-rose-light/75 font-light leading-relaxed">
                 Sessões estratégicas e diagnósticas realizadas 100% online para todo o
                 Brasil e exterior. Etapas práticas presenciais de Closet Detox e Personal
                 Shopper sob agendamento.
               </p>
-              <div className="p-3.5 rounded-sm border border-rose-border bg-forest-card/30">
-                <span className="text-[10px] uppercase tracking-wider text-rose-antique font-medium block">
-                  Agendamento de Vagas
-                </span>
-                <span className="text-xs text-rose-light/80 block mt-0.5">
-                  Atendimento com número restrito de clientes por mês para garantir dedicação exclusiva.
-                </span>
-              </div>
             </m.div>
           </m.div>
 
@@ -141,6 +172,7 @@ export default function Footer() {
 
             <a
               href="#main-content"
+              onClick={(e) => handleNavClick(e, "#main-content")}
               className="inline-flex items-center gap-1.5 text-rose-antique hover:text-rose-light transition-colors uppercase tracking-wider text-[11px]"
               aria-label="Voltar ao topo da página"
               style={{ touchAction: "manipulation" }}

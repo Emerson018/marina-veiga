@@ -45,6 +45,57 @@
   summary {
     touch-action: manipulation;
   }
+
+  /* Global luxury scrollbar matching Mariana Veiga's visual identity */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1A2B20;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(212, 159, 171, 0.35);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 159, 171, 0.7);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 159, 171, 0.35) #1A2B20;
+  }
+}
+
+/* Luxury Custom Scrollbar for horizontal category navigators */
+.atelier-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 159, 171, 0.45) rgba(26, 43, 32, 0.6);
+}
+
+.atelier-scrollbar::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+.atelier-scrollbar::-webkit-scrollbar-track {
+  background: rgba(26, 43, 32, 0.6);
+  border-radius: 9999px;
+  margin: 0 8px;
+}
+
+.atelier-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(212, 159, 171, 0.45);
+  border-radius: 9999px;
+  border: 1px solid rgba(26, 43, 32, 0.5);
+}
+
+.atelier-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 159, 171, 0.85);
 }
 
 @keyframes wordReveal {
@@ -127,7 +178,8 @@
 /* Dossier Interactive Video Showcase */
 .dossier-stage {
   position: relative;
-  width: min(100%, calc((100vh - 120px) * 16 / 9));
+  width: 100%;
+  max-width: 860px;
   aspect-ratio: 16/9;
   background: radial-gradient(120% 120% at 80% 0%, #2d4735, #223829);
   border-radius: 8px;
@@ -307,7 +359,8 @@
 }
 
 .dossier-bar {
-  width: min(100%, calc((100vh - 120px) * 16 / 9));
+  width: 100%;
+  max-width: 860px;
   margin: 10px auto 0;
   display: flex;
   align-items: center;
@@ -345,8 +398,10 @@
 @media (max-aspect-ratio: 1/1) {
   .dossier-stage,
   .dossier-bar {
-    width: min(100%, calc((100vh - 90px) * 9 / 16));
-    width: min(100%, calc((100dvh - 90px) * 9 / 16));
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .dossier-stage {
     aspect-ratio: 9/16;

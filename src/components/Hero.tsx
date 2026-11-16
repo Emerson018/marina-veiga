@@ -73,6 +73,22 @@ export default function Hero() {
           >
             <m.a
               href="#catalogo"
+              onClick={(e) => {
+                e.preventDefault();
+                const targetElement = document.getElementById("catalogo");
+                if (targetElement) {
+                  const headerOffset = 76;
+                  const elementPosition = targetElement.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                  window.scrollTo({
+                    top: Math.max(0, offsetPosition),
+                    behavior: "smooth",
+                  });
+                  try {
+                    window.history.pushState(null, "", "#catalogo");
+                  } catch {}
+                }
+              }}
               {...pressable}
               className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-sm bg-rose-antique text-forest-deep text-xs uppercase tracking-widest font-semibold hover:bg-rose-light transition-colors shadow-lg hover:shadow-rose-antique/10 focus-visible:outline-rose-antique"
             >

@@ -100,7 +100,7 @@ export default function DossierShowcase() {
     <section
       id="dossie"
       aria-label="Dossiê de Estilo em Movimento"
-      className="scroll-mt-4 sm:scroll-mt-0 py-3 sm:py-4 border-b border-rose-border/40 relative overflow-hidden bg-forest-deep/60 min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center w-full px-2 sm:px-4 lg:px-6"
+      className="scroll-mt-20 py-16 sm:py-20 border-b border-rose-border/40 relative overflow-hidden bg-forest-deep/60 flex flex-col justify-center items-center w-full px-4 sm:px-6"
     >
       <m.div
         data-reveal

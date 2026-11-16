@@ -43,7 +43,7 @@ export default function FaqSection() {
       id: "agendamento",
       question: "Como faço para agendar ou tirar dúvidas antes de contratar?",
       answer:
-        "Basta clicar em qualquer um dos botões do site para falar diretamente com Mariana Veiga no WhatsApp. Alinhamos sua disponibilidade, tiramos dúvidas sobre os pacotes e formalizamos a reserva da sua vaga com antecedência.",
+        "Basta clicar em qualquer um dos botões do site para falar diretamente no WhatsApp. Agendamos seu horário e tiramos suas dúvidas.",
     },
   ];
 
@@ -55,7 +55,7 @@ export default function FaqSection() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative"
+      className="scroll-mt-20 py-24 border-b border-rose-border/40 relative"
     >
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Header */}

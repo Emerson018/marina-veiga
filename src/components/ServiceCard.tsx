@@ -179,13 +179,14 @@ export default function ServiceCard({
           />
         </button>
 
-        {/* Expandable Deliverables & CTA without redundant heading */}
+        {/* Expandable Deliverables & CTA */}
         <div
           id={`deliverables-${service.id}`}
-          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out motion-reduce:transition-none ${isExpanded
+          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out motion-reduce:transition-none ${
+            isExpanded
               ? "grid-rows-[1fr] opacity-100 mt-2"
-              : "grid-rows-[0fr] opacity-0 group-hover/card:grid-rows-[1fr] group-hover/card:opacity-100 group-hover/card:mt-2 group-focus-within/card:grid-rows-[1fr] group-focus-within/card:opacity-100 group-focus-within/card:mt-2"
-            }`}
+              : "grid-rows-[0fr] opacity-0 mt-0 pointer-events-none"
+          }`}
         >
           <div className="overflow-hidden space-y-4 pt-2">
             {service.howItWorks && service.howItWorks.length > 0 && (

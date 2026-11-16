@@ -28,6 +28,51 @@ export default function Header() {
     "Olá Mariana! Gostaria de conversar sobre a consultoria de imagem."
   );
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+
+    if (href === "/" || href === "#" || href === "#inicio") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      try {
+        window.history.pushState(null, "", "/");
+      } catch {
+        // Fallback for test runners / environments
+      }
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      const targetId = href.slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerOffset = 76;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: "smooth",
+        });
+
+        try {
+          window.history.pushState(null, "", href);
+        } catch {
+          // Fallback for test runners / environments
+        }
+      } else {
+        window.location.hash = href;
+      }
+      setMobileMenuOpen(false);
+    }
+  };
+
   const solid = scrolled || mobileMenuOpen;
 
   return (
@@ -60,6 +105,7 @@ export default function Header() {
         >
           <Link
             href="/"
+            onClick={(e) => handleNavClick(e, "/")}
             className="group flex flex-col focus-visible:outline-rose-antique"
             aria-label="Mariana Veiga Consultoria - Início"
           >
@@ -81,6 +127,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="group relative py-2 text-xs uppercase tracking-widest text-rose-light/80 hover:text-rose-antique transition-colors focus-visible:outline-rose-antique"
             >
               {link.label}
@@ -140,7 +187,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="text-sm uppercase tracking-widest text-rose-light/90 hover:text-rose-antique py-1 transition-colors"
                 >
                   {link.label}

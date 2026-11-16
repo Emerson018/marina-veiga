@@ -6,6 +6,8 @@ import {
   Clock,
   MapPin,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   MessageCircle,
   Pause,
   Play,
@@ -349,7 +351,7 @@ function StepAtelierVignette({
       </g>
       {/* Linha conectora de suporte contínuo */}
       <path
-        d="M164 38 H186"
+        d="M158 38 H174"
         stroke="#D49FAB"
         strokeWidth="1.2"
         strokeDasharray="2 3"
@@ -362,30 +364,34 @@ function StepAtelierVignette({
         }`}
       >
         <rect
-          x="192"
-          y="15"
-          width="74"
-          height="46"
-          rx="8"
+          x="174"
+          y="14"
+          width="96"
+          height="48"
+          rx="6"
           fill="rgba(212, 159, 171, 0.14)"
           stroke="#D49FAB"
           strokeWidth="1.3"
         />
         <text
-          x="229"
-          y="35"
+          x="222"
+          y="32"
           textAnchor="middle"
+          dominantBaseline="central"
           fill="#D49FAB"
-          className="font-display text-[13px] font-semibold"
+          className="font-display font-semibold"
+          style={{ fontSize: "12px", letterSpacing: "0.02em" }}
         >
           +30 DIAS
         </text>
         <text
-          x="229"
-          y="49"
+          x="222"
+          y="47"
           textAnchor="middle"
+          dominantBaseline="central"
           fill="#F2DCE1"
-          className="font-sans text-[8.5px] tracking-wider uppercase"
+          className="font-sans uppercase"
+          style={{ fontSize: "7.5px", letterSpacing: "0.05em", fontWeight: 500 }}
         >
           Suporte Direto
         </text>
@@ -405,6 +411,8 @@ export default function ProcessSteps() {
   const isHoveringRef = useRef(false);
   const elapsedRef = useRef(0);
   const lastTickRef = useRef<number | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
 
   const diagnosticWhatsAppUrl = generateWhatsAppUrl(
     "Olá Mariana! Vi como funciona a metodologia e gostaria de entender qual formato faz mais sentido para a minha rotina."
@@ -416,6 +424,37 @@ export default function ProcessSteps() {
     elapsedRef.current = 0;
     lastTickRef.current = performance.now();
     setStepProgress(0);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      touchStartXRef.current = e.touches[0].clientX;
+      touchStartYRef.current = e.touches[0].clientY;
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaX = touchEndX - touchStartXRef.current;
+    const deltaY = touchEndY - touchStartYRef.current;
+
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+
+    // Detect horizontal swipe (at least 40px and dominant horizontal)
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.3) {
+      if (deltaX < 0) {
+        // Swipe left -> next step
+        const next = (activeStepRef.current + 1) % STEPS.length;
+        selectStep(next);
+      } else {
+        // Swipe right -> prev step
+        const prev = (activeStepRef.current - 1 + STEPS.length) % STEPS.length;
+        selectStep(prev);
+      }
+    }
   };
 
   const togglePause = () => {
@@ -494,7 +533,7 @@ export default function ProcessSteps() {
     <section
       id="metodologia"
       aria-labelledby="process-heading"
-      className="scroll-mt-4 sm:scroll-mt-0 py-20 sm:py-24 border-b border-rose-border/40 relative overflow-hidden"
+      className="scroll-mt-20 py-20 sm:py-24 border-b border-rose-border/40 relative overflow-hidden"
     >
       {/* Luz de ambiência sutil acompanhando a etapa em foco */}
       <div
@@ -527,13 +566,13 @@ export default function ProcessSteps() {
           </h2>
         </m.div>
 
-        {/* Interactive Progression Rail & Cadence Controller */}
-        <div className="mb-8 sm:mb-10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl mx-auto mb-5">
+        {/* Interactive Progression Rail & Cadence Controller (Desktop only) */}
+        <div className="hidden md:block mb-8 sm:mb-10">
+          <div className="flex flex-row items-center justify-between gap-4 max-w-4xl mx-auto mb-5">
             <div
               role="tablist"
               aria-label="Selecionar etapa da consultoria em destaque"
-              className="grid grid-cols-3 gap-2 sm:gap-3 w-full"
+              className="grid grid-cols-3 gap-3 w-full"
             >
               {STEPS.map((step, index) => {
                 const isActive = activeStep === index;
@@ -546,7 +585,7 @@ export default function ProcessSteps() {
                     aria-selected={isActive}
                     aria-label={`${step.phaseLabel}: ${step.title}`}
                     onClick={() => selectStep(index)}
-                    className={`group relative overflow-hidden rounded-lg border px-3 py-2.5 sm:px-4 sm:py-3 text-left transition-[border-color,background-color,transform] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique ${
+                    className={`group relative overflow-hidden rounded-lg border px-4 py-3 text-left transition-[border-color,background-color,transform] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique ${
                       isActive
                         ? "border-rose-antique bg-forest-card/95 shadow-md"
                         : isCompleted
@@ -555,7 +594,7 @@ export default function ProcessSteps() {
                     }`}
                   >
                     <div className="flex items-center justify-between gap-1.5 mb-1">
-                      <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-rose-antique font-sans font-semibold tabular-nums">
+                      <span className="text-[11px] uppercase tracking-widest text-rose-antique font-sans font-semibold tabular-nums">
                         {step.phaseLabel}
                       </span>
                       <span
@@ -570,7 +609,7 @@ export default function ProcessSteps() {
                       />
                     </div>
                     <p
-                      className={`text-xs sm:text-sm font-display truncate transition-colors duration-300 ${
+                      className={`text-sm font-display truncate transition-colors duration-300 ${
                         isActive ? "text-rose-light" : "text-rose-light/70"
                       }`}
                     >
@@ -675,51 +714,84 @@ export default function ProcessSteps() {
         </div>
 
         {/* 3 Structured Editorial Step Panels */}
-        <m.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative -mx-2 sm:mx-0 px-9 sm:px-11 md:px-0 overflow-hidden md:overflow-visible"
         >
-          {/* No celular, o fio costura as etapas empilhadas pela margem */}
-          <ThreadLine
-            orientation="vertical"
-            offset={["start 0.8", "end 0.6"]}
-            className="md:hidden absolute left-3 top-3 bottom-3 w-px z-10"
-          />
+          {/* Botões de Pular Etapa (Mobile - Posicionados para fora do card) */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              selectStep((activeStep - 1 + STEPS.length) % STEPS.length);
+            }}
+            aria-label="Voltar para etapa anterior"
+            className="md:hidden absolute left-0.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-forest-card/95 border border-rose-antique/70 text-rose-antique hover:text-rose-light hover:border-rose-antique shadow-[0_6px_22px_rgba(0,0,0,0.7),0_0_12px_rgba(212,159,171,0.25)] flex items-center justify-center active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique"
+            style={{ touchAction: "manipulation" }}
+          >
+            <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+          </button>
 
-          {STEPS.map((step, index) => {
-            const isActive = activeStep === index;
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              selectStep((activeStep + 1) % STEPS.length);
+            }}
+            aria-label="Pular para próxima etapa"
+            className="md:hidden absolute right-0.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-forest-card/95 border border-rose-antique/70 text-rose-antique hover:text-rose-light hover:border-rose-antique shadow-[0_6px_22px_rgba(0,0,0,0.7),0_0_12px_rgba(212,159,171,0.25)] flex items-center justify-center active:scale-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-antique"
+            style={{ touchAction: "manipulation" }}
+          >
+            <ChevronRight className="w-5 h-5" aria-hidden="true" />
+          </button>
 
-            return (
-              <m.article
-                key={step.number}
-                data-reveal
-                variants={cardVariants}
-                onMouseEnter={() => {
-                  isHoveringRef.current = true;
-                  selectStep(index);
-                }}
-                onMouseLeave={() => {
-                  isHoveringRef.current = false;
-                  lastTickRef.current = performance.now();
-                }}
-                onFocus={() => {
-                  isHoveringRef.current = true;
-                  selectStep(index);
-                }}
-                onBlur={() => {
-                  isHoveringRef.current = false;
-                  lastTickRef.current = performance.now();
-                }}
-                onClick={() => selectStep(index)}
-                className={`group relative rounded-xl border p-6 sm:p-7 flex flex-col justify-between cursor-pointer overflow-hidden transition-[border-color,background-color,transform,box-shadow] duration-500 motion-reduce:transition-none ${
-                  isActive
-                    ? "border-rose-antique bg-forest-card/90 -translate-y-1.5 shadow-[0_20px_45px_-15px_rgba(0,0,0,0.55),0_0_25px_rgba(212,159,171,0.14)]"
-                    : "border-rose-border/65 bg-forest-card/45 hover:border-rose-antique/60 hover:bg-forest-card/75"
-                }`}
-              >
+          <m.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
+          >
+            {STEPS.map((step, index) => {
+              const isActive = activeStep === index;
+
+              // Direção do deslocamento no mobile para transição suave de slide
+              const getMobileTranslateClass = () => {
+                if (isActive) return "!translate-x-0";
+                if (activeStep === 0 && index === STEPS.length - 1) return "-translate-x-8";
+                if (activeStep === STEPS.length - 1 && index === 0) return "translate-x-8";
+                return index < activeStep ? "-translate-x-8" : "translate-x-8";
+              };
+
+              return (
+                <m.article
+                  key={step.number}
+                  data-reveal
+                  variants={cardVariants}
+                  onMouseEnter={() => {
+                    isHoveringRef.current = true;
+                    selectStep(index);
+                  }}
+                  onMouseLeave={() => {
+                    isHoveringRef.current = false;
+                    lastTickRef.current = performance.now();
+                  }}
+                  onFocus={() => {
+                    isHoveringRef.current = true;
+                    selectStep(index);
+                  }}
+                  onBlur={() => {
+                    isHoveringRef.current = false;
+                    lastTickRef.current = performance.now();
+                  }}
+                  onClick={() => selectStep(index)}
+                  className={`group rounded-xl border p-6 sm:p-7 flex flex-col justify-between cursor-pointer overflow-hidden transition-[opacity,transform,border-color,background-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                    isActive
+                      ? "!relative z-10 !opacity-100 !translate-x-0 !scale-100 !pointer-events-auto border-rose-antique bg-forest-card/90 md:-translate-y-1.5 shadow-[0_20px_45px_-15px_rgba(0,0,0,0.55),0_0_25px_rgba(212,159,171,0.14)]"
+                      : `!absolute !inset-0 z-0 !opacity-0 ${getMobileTranslateClass()} !scale-[0.97] !pointer-events-none md:!relative md:!inset-auto md:z-auto md:!opacity-100 md:!scale-100 md:!translate-x-0 md:!pointer-events-auto border-rose-border/65 bg-forest-card/45 hover:border-rose-antique/60 hover:bg-forest-card/75`
+                  }`}
+                >
                 {/* Brilho acetinado superior quando a etapa está em foco */}
                 {isActive && (
                   <div
@@ -846,6 +918,7 @@ export default function ProcessSteps() {
             );
           })}
         </m.div>
+        </div>
 
         {/* Bottom Consultation Entry Strip */}
         <m.div

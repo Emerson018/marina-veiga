@@ -258,7 +258,7 @@ export default function CatalogGrid() {
     <section
       id="catalogo"
       aria-labelledby="catalog-heading"
-      className="scroll-mt-4 sm:scroll-mt-0 py-24 border-b border-rose-border/40 relative overflow-hidden"
+      className="scroll-mt-20 py-24 border-b border-rose-border/40 relative overflow-hidden"
       aria-roledescription="carrossel"
       aria-label="Catálogo de Serviços Mariana Veiga"
     >
@@ -287,7 +287,7 @@ export default function CatalogGrid() {
         >
           <div
             role="tablist"
-            className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 no-scrollbar scroll-smooth flex-nowrap sm:flex-wrap"
+            className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3.5 atelier-scrollbar scroll-smooth flex-nowrap sm:flex-wrap"
           >
             {SERVICES.map((service, index) => {
               const isSelected = activeIndex === index;
@@ -469,10 +469,13 @@ export default function CatalogGrid() {
                   isExpanded={isCenter && expandedServiceId === service.id}
                   onToggleExpand={() => {
                     if (isCenter && !hasDraggedRef.current) {
-                      setExpandedServiceId((prev) =>
-                        prev === service.id ? null : service.id
-                      );
-                      scrollToStage();
+                      setExpandedServiceId((prev) => {
+                        const next = prev === service.id ? null : service.id;
+                        if (next) {
+                          scrollToStage();
+                        }
+                        return next;
+                      });
                     }
                   }}
                   onSelect={() => {
